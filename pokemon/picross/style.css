@@ -331,7 +331,7 @@ html[data-style="fairy"] #type {
   #world-select #quick-select {
     position: fixed;
     top: 0;
-    left: 0;
+    left: -250px;
     transform: scale(0);
     background-color: #333;
     width: 250px;
@@ -348,7 +348,8 @@ html[data-style="fairy"] #type {
         border-color: #FFF; }
 
 .qs #world-select #quick-select {
-  transform: scale(1); }
+  transform: scale(1);
+  left: 0; }
 
 .smalltext {
   font-size: 13px;
@@ -418,7 +419,8 @@ html[data-style="fairy"] #type {
 
 #main-content {
   text-align: center;
-  margin-left: 250px; }
+  margin-left: 250px;
+  padding: 51px 0; }
   @media only screen and (max-width: 750px) {
     #main-content {
       margin-left: 0; } }
@@ -483,7 +485,8 @@ html[data-style="fairy"] #type {
       left: 0; } }
   @media only screen and (max-width: 750px) {
     #controls-wrapper {
-      width: 100%; } }
+      width: 100%;
+      right: 0; } }
   #controls-wrapper #controls {
     padding: 20px;
     display: none;
