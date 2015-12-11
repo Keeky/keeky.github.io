@@ -1,11 +1,11 @@
 <!doctype html>
-<html class="bgs anim">
+<html class="bgs anim ads">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="apple-mobile-web-app-title" content="Picross Solutions">
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-status-bar-style" content="white">
         <meta name="format-detection" content="telephone=no">
 		<title>Pokemon Picross Solutions</title>
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -13,6 +13,7 @@
 		<link href='style.css' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script type="text/javascript" src="levels.js"></script>
+		<script type="text/javascript" src="scripts.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -22,275 +23,42 @@
 			ga('create', 'UA-64320934-1', 'auto');
 			ga('send', 'pageview');
 		</script>
-		<script type="text/javascript">
-			$(document).ready(function(e) {
-				//Check for JS
-				$('body').removeClass('js-off').addClass('js-on');
-				$('.js-only').show();
-				$('.no-js').hide();
-				
-				//Properties
-				var properties = {
-					scale:20,
-					canvasWidth:10,
-					canvasHeight:10,
-					world:false,
-					level:false,
-					grid:true,
-					levelLoaded:false
-				};
-
-				function randomPixel (seed) {
-					//var min = 80;
-					//var max = 95;
-					var min = 0;
-					var max = 0.3;
-					var offset = min + (((seed * 9301 + 49297) % 233280) / 233280) * (max - min);
-
-					//console.log(offset);
-
-					//return 'hsl(199, 90%, '+offset+'%)';
-
-					return 'rgba(255, 255, 255, '+offset+')';
-				}
-				
-				//Update functions
-				var update = {
-					document: {
-						info: function(world, level) {
-							$('#name').text(solutions[properties.world][properties.level].name);
-							$('#type').text(solutions[properties.world][properties.level].type);
-							$('html').attr('data-style', solutions[properties.world][properties.level].type.toLowerCase());
-						}
-					},
-
-					canvas: {
-						initialize: function(){
-							if(properties.levelLoaded === false) {
-								update.canvas.size();
-								update.canvas.grid();
-								$('#description').hide();
-								$('#solution-wrapper').fadeIn(250);
-								$('#controls').slideDown(1000);
-								properties.levelLoaded = true;
-							}
-						},
-
-						unload: function() {
-							$('#solution-wrapper').hide();
-							$('#controls').slideUp(1000);
-							$('#description').fadeIn(250);
-							$('html').attr('data-style', '');
-							properties.levelLoaded = false;
-						},
-
-						zoom: function(zoom) {
-							properties.scale = 20 * (zoom / 20);
-							if(properties.levelLoaded)
-								update.canvas.drawLevel();
-						},
-
-						size: function(){
-							$('#solution').width(properties.canvasWidth * properties.scale);
-							$('#solution').height(properties.canvasHeight * properties.scale);
-							canvas.width = properties.canvasWidth * properties.scale;
-							canvas.height = properties.canvasHeight * properties.scale;
-						},
-
-						draw: function(x, y, rgba){
-							if(rgba)
-								context.fillStyle = rgba;
-							else
-								context.fillStyle = '#000';
-
-							//console.log((Math.floor(x / properties.scale) * properties.scale));
-							context.fillRect(x * properties.scale, y  * properties.scale, properties.scale, properties.scale);
-						},
-
-						grid: function(){
-							if(properties.grid === true) {
-								var gridWidth = properties.canvasWidth;
-								var gridHeight = properties.canvasHeight;
-
-								var gridMax = Math.max(gridHeight, gridWidth);
-
-								console.log(gridMax);
-
-								var lineDirection = 'horizontal';
-								var lineX = 0;
-								var lineY = 0;
-								var lineWidth = 1;
-								var lineHeight = 1;
-
-								for (var i = gridMax - 1; i >= 1; i--) {
-
-									if(lineDirection == 'horizontal') {
-										lineWidth = gridMax * properties.scale;
-										lineHeight = 0.5;
-										lineX = i * properties.scale;
-										lineY = 0;
-									}
-
-									if(lineDirection == 'vertical') {
-										lineWidth = 0.5;
-										lineHeight = gridMax * properties.scale;
-										lineX = 0;
-										lineY = i * properties.scale;
-									}
-
-									if(i % 5 == 0) {
-										context.fillStyle = '#FB9105';
-
-										if(lineDirection == 'horizontal') {
-											lineHeight = 1.5;
-										}
-
-										if(lineDirection == 'vertical') {
-											lineWidth = 1.5;
-										}
-									} else
-										context.fillStyle = '#888';
-
-									context.fillRect(lineX, lineY, lineHeight, lineWidth);
-
-									//console.log('(' + lineDirection + ' ' + i + ') - ' + '(' + lineX + ':' + lineY + ') - ' + lineWidth + 'x' + lineHeight);
-
-									if(i == 1 && lineDirection == 'horizontal') {
-										lineDirection = 'vertical';
-										i = gridMax;
-									}
-								};
-							}
-						},
-
-						drawLevel: function () {
-							if(properties.levelLoaded) {
-								var solution = solutions[properties.world][properties.level];
-								//console.log(solution.matrix.length);
-
-								properties.canvasWidth = solution.matrix[0].length;
-								properties.canvasHeight = solution.matrix.length;
-
-								update.canvas.size();
-
-								$.each(solution.matrix, function(key, value) {
-									$.each(value, function (k, v) {
-										//console.log(key + ':' + k + ' - ' + v);
-										if(v)
-											update.canvas.draw(k, key);
-										else
-											update.canvas.draw(k, key, randomPixel(k * key));
-									})
-								})
-
-								update.canvas.grid();
-							}
-						}
-					}
-				};
-
-				var navigation = '';
-
-				$.each(solutions, function(world, worldData) {
-					navigation += '<span class="world">World '+ (world + 1) + '</span>';
-					$.each(worldData, function(level, levelData) {
-						navigation += '<a href="#" class="level" data-world="' + world + '" data-level="' + level + '">' + (world + 1) + '-' + (level + 1) + '</a>';
-					})
-				});
-
-				$('#levels').html(navigation);
-				
-				//Initialize canvas
-				var canvas = document.getElementById('solution');
-				var context = canvas.getContext('2d');
-
-				$(document).on('click', '.level', function(e){
-					e.preventDefault()
-
-					if(properties.levelLoaded === true)
-						update.canvas.initialize();
-
-					context.clearRect(0, 0, canvas.width, canvas.height);
-
-					properties.world = $(this).data('world');
-					properties.level = $(this).data('level');
-
-					document.location.hash = '/' + (properties.world + 1) + '/' + (properties.level + 1);
-
-					update.document.info();
-					update.canvas.drawLevel();
-				})
-
-				$('#zoom').on('change', function() {
-					update.canvas.zoom($(this).val());
-				}).on('change mousemove touchmove', function() {
-					$('#zoom-level').text('x' + (
-						Math.round(($(this).val() / 2) * 100) / 100
-					).toFixed(2))
-				})
-
-				$('#grid').click(function() {
-					properties.grid = !properties.grid;
-					update.canvas.drawLevel();
-				})
-
-				$('#bg').click(function() {
-					$('html').toggleClass('bgs');
-				})
-
-				$('#anim').click(function() {
-					$('html').toggleClass('anim');
-				})
-
-				$('.toggle').click(function() {
-					$(this).toggleClass('active');
-				})
-
-				$('#mobile-nav-toggle').click(function(e) {
-					e.preventDefault();
-					$('html').toggleClass('nav-active');
-				})
-
-				$('#zoom').val('20');
-
-				function hashChange () {
-					var hash = document.location.hash.split('/');
-					console.log(hash);
-					if(hash[1] && hash[2]) {
-						properties.world = hash[1] - 1;
-						properties.level = hash[2] - 1;
-						update.canvas.initialize();
-						update.document.info();
-						update.canvas.drawLevel();
-					} else
-						update.canvas.unload();
-				}
-
-				if(document.location.hash) {
-					hashChange()
-				}
-
-				if("onhashchange" in window) {
-					$(window).bind('hashchange', function() {
-						hashChange()
-					})
-				}
-			});
-		</script>
 	</head>
 	<body class="js-off">
 		<a href='#' id="mobile-nav-toggle">Select level</a>
 		<nav id="world-select">
-			<div id="controls">
-				<input id="zoom" value="20" type="range" min="2" max="60"> <span id="zoom-level">x10.00</span><br><br><br>
-				<span id="grid" class="active toggle button">Grid</span><br><br><br>
-				<span id="bg" class="active toggle button">Background colors</span><br><br><br>
-				<span id="anim" class="active toggle button">Animations</span><br><br><br>
-			</div>
 			<div id="levels">
 
 			</div>
+			<div id="quick-select">
+
+			</div>
 		</nav>
+		<div id="controls-wrapper">
+			<div id="controls-toggle">Show options</div>
+			<div id="controls">
+				<div class="control">
+					<input id="zoom" value="20" type="range" min="2" max="60"> <span id="zoom-level">x10.00</span>
+					<span class="control-description">Increase or decrease the size of the sprite.</span>
+				</div>
+				<div class="control">
+					<span id="grid" class="active toggle button">Grid</span>
+					<span class="control-description">Displays a grid to differenciate pixels.</span>
+				</div>
+				<div class="control">
+					<span id="bg" class="active toggle button">Background colors</span>
+					<span class="control-description">Themed colors by type. Disable if they're too bright for you.</span>
+				</div>
+				<div class="control">
+					<span id="anim" class="active toggle button">Effects</span>
+					<span class="control-description">Animations and pretty effects. Disable if you have a slow computer.</span>
+				</div>
+				<div class="control">
+					<span id="ads" class="active toggle button">Ad at the bottom</span>
+					<span class="control-description">Allows me to do create more cool stuff like this. Disable if it causes problems.</span>
+				</div>
+			</div>
+		</div>
 		<div id="outer-wrapper">
 			<div id="inner-wrapper">
 				<div id="main-content">
@@ -301,7 +69,21 @@
 					</div>
 					<div id="solution-wrapper">
 						<canvas id="solution"></canvas>
-						<div id="info-box"><span id="name"></span><span id="type"></span></div>
+						<div id="info-box">
+							<table>
+								<tbody>
+									<tr><td>Level:</td><td><span id="stage"></span></td></tr>
+									<tr><td>Size:</td><td><span id="size"></span></td></tr>
+									<tr><td>Pokemon Name:</td><td><span id="name"></span></td></tr>
+									<tr><td>Pokemon Type:</td><td><span id="type"></span></td></tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					
+					<div id="ad-wrapper">
+						<div id="ad">
+						</div>
 					</div>
 				</div>
 			</div>
