@@ -255,6 +255,7 @@ $(document).ready(function(e) {
 		$('html').toggleClass('qs');
 
 		var targetWorld = $(this).data('world');
+		ga('send', 'event', 'picrossSolutions', 'worldClick', targetWorld);
 		var targetStages = $('#levels .world[data-world="' + targetWorld + '"]');
 		var targetOffset = targetStages.offset().top + $('#world-select').scrollTop() - $('#world-select').offset().top;
 		//console.log(targetStages, targetOffset);
@@ -300,6 +301,7 @@ $(document).ready(function(e) {
 
 	$('.toggle').click(function() {
 		$(this).toggleClass('active');
+		ga('send', 'event', 'picrossSolutions', 'optionsToggle', $(this).attr('id') + ' - ' + $(this).hasClass('active'));
 	})
 
 	$('#mobile-nav-toggle').click(function(e) {
@@ -321,6 +323,8 @@ $(document).ready(function(e) {
 			update.document.info();
 		} else
 			update.canvas.unload();
+
+		ga('send', 'event', 'picrossSolutions', 'levelClick', properties.world + '-' + properties.level);
 	}
 
 	if(document.location.hash) {

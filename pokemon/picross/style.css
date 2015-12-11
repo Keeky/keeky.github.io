@@ -350,6 +350,10 @@ html[data-style="fairy"] #type {
 .qs #world-select #quick-select {
   transform: scale(1); }
 
+.smalltext {
+  font-size: 13px;
+  color: #999; }
+
 #mobile-nav-toggle {
   display: none;
   z-index: 9999;
