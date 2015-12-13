@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<title></title>
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<style type="text/css">
+			*, *:before, *:after {
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			
+			html {
+				background-color: #EFEFEF;
+				font-family: "Roboto", sans-serif;
+			}
+
+			#outer-wrapper {
+				display: table;
+				position: absolute;
+				height: 100%;
+				width: 100%;
+			}
+
+			#inner-wrapper {
+				display: table-cell;
+				vertical-align: middle;
+			}
+
+			#main-content {
+				background-color: #FFF;
+				line-height: 26px;
+				max-width: 900px;
+				margin: 0 auto;
+				padding: 20px;
+				border-radius: 3px;
+				color: #333;
+			}
+
+			a {
+				color: #7CCDCD;
+			}
+
+			a:hover {
+				text-decoration: none;
+			}
+
+			span {
+				font-size: 14px;
+				color: #555;
+				padding-left: 15px;
+				display: block;
+			}
+
+			h1 {
+				font-size: 33px;
+				color: #555;
+				padding-bottom: 16px;
+				margin-bottom: 16px;
+				border-bottom: 1px solid #EFEFEF;
+			}
+
+			.smalltext {
+				font-size: 12px;
+				color: #999;
+			}
+
+			.smalltext a {
+				color: #999;
+				padding: 2px 4px;
+			}
+		</style>
+		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(e) {
+				$('body').removeClass('js-off').addClass('js-on');
+				$('.js-only').show();
+				$('.no-js').hide();
+				
+				
+			});
+		</script>
+	</head>
+	<body class="js-off">
+		<div id="outer-wrapper">
+			<div id="inner-wrapper">
+				<div id="main-content">
+					<h1>Tools</h1>
+					<a href="http://apps.keeky.net/Guild-Wars-2-API-Explorer">Guild Wars 2 API Explorer</a><span>Browse the Guild Wars 2 API. Documentation and Sandbox in one.</span><br>
+					<a href="http://apps.keeky.net/pokemon/picross">Pokemon Picross Solutions</a><span>Solutions for the 3DS puzzle game Pokemon Picross</span><br>
+					<span class="smalltext"><a href="https://github.com/Keeky/keeky.github.io">GitHub</a> | <a href="http://reddit.com/u/InD1g0">Reddit</a> | <a href="mailto:hi@keeky.net">E-Mail</a></span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
