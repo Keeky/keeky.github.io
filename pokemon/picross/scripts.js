@@ -324,7 +324,7 @@ $(document).ready(function(e) {
 		} else
 			update.canvas.unload();
 
-		ga('send', 'event', 'picrossSolutions', 'levelClick', properties.world + '-' + properties.level);
+		ga('send', 'event', 'picrossSolutions', 'levelLoaded', (properties.world + 1) + '-' + (properties.level + 1));
 	}
 
 	if(document.location.hash) {
@@ -337,7 +337,7 @@ $(document).ready(function(e) {
 		})
 	}
 
-	var adCode = '<!-- Ad --><script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script><ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2012219604925664" data-ad-slot="4985282435" data-ad-format="auto"></ins> <script>(adsbygoogle = window.adsbygoogle || []).push({});<\/script><!-- Ad end -->';
+	var adCode = '';
 	
 	setTimeout(function() {
 		$('#ad').html(adCode);
