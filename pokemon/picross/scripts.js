@@ -337,9 +337,9 @@ $(document).ready(function(e) {
 		})
 	}
 
-	var adCode = '';
+	//var adCode = '';
 	
-	setTimeout(function() {
-		$('#ad').html(adCode);
-	}, 500);
+	// setTimeout(function() {
+	// 	$('#ad').html(adCode);
+	// }, 500);
 });
