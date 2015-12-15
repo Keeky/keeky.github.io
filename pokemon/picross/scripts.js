@@ -43,13 +43,13 @@ var navigation = '';
 var quickSelect = '';
 
 $.each(solutions, function(world, worldData) {
-	navigation += '<a class="world" href="#" data-world="' + world + '">World '+ (world + 1) + '</a>';
-	quickSelect += '<a class="world" href="#" data-world="' + world + '">'+ (world + 1) + '</a>';
+	navigation += '<a class="world" href="#" data-world="' + world + '">World '+ (world) + '</a>';
+	quickSelect += '<a class="world" href="#" data-world="' + world + '">'+ (world) + '</a>';
 	navigation += '<div id="stages-' + world +'" class="world-levels">';
 	//console.log(world, worldData);
 
 	$.each(worldData, function(level, levelData) {
-		navigation += '<a href="#" class="level" data-world="' + world + '" data-level="' + level + '">' + (world + 1) + '-' + (level + 1) + '</a>';
+		navigation += '<a href="#" class="level" data-world="' + world + '" data-level="' + level + '">' + (world) + '-' + (level + 1) + '</a>';
 	});
 
 	navigation += '</div>';
@@ -71,12 +71,12 @@ $(document).ready(function(e) {
 			info: function(world, level) {
 				$('#name').text(solutions[properties.world][properties.level].name);
 				$('#type').text(solutions[properties.world][properties.level].type);
-				$('#stage').text((properties.world + 1) + '-' + (properties.level + 1));
+				$('#stage').text((properties.world) + '-' + (properties.level + 1));
 				$('#size').text(properties.canvasWidth + 'x' + properties.canvasHeight);
 				$('html').attr('data-style', solutions[properties.world][properties.level].type.toLowerCase());
 				var title = '';
 				if(properties.levelLoaded === true) {
-					title += 'Level ' + (properties.world + 1) + '-' + (properties.level + 1)
+					title += 'Level ' + (properties.world) + '-' + (properties.level + 1)
 					title +=  ' ' + solutions[properties.world][properties.level].name;
 					title += ' | ';
 				}
@@ -230,7 +230,7 @@ $(document).ready(function(e) {
 		properties.world = $(this).data('world');
 		properties.level = $(this).data('level');
 
-		document.location.hash =  (properties.world + 1) + '/' + (properties.level + 1);
+		document.location.hash =  (properties.world) + '/' + (properties.level + 1);
 
 		update.canvas.drawLevel();
 		update.document.info();
@@ -324,7 +324,7 @@ $(document).ready(function(e) {
 		} else
 			update.canvas.unload();
 
-		ga('send', 'event', 'picrossSolutions', 'levelLoaded', (properties.world + 1) + '-' + (properties.level + 1));
+		ga('send', 'event', 'picrossSolutions', 'levelLoaded', (properties.world) + '-' + (properties.level + 1));
 	}
 
 	if(document.location.hash) {
