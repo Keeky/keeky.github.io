@@ -25,6 +25,22 @@ html {
       -moz-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px); }
 
+html[data-style="n/a"].bgs {
+  background-color: #ADB0DB; }
+  html[data-style="n/a"].bgs #world-select {
+    background-color: #737780; }
+    html[data-style="n/a"].bgs #world-select #quick-select {
+      background-color: #737780; }
+      html[data-style="n/a"].bgs #world-select #quick-select .world {
+        background-color: #43444A;
+        border-color: #43444A; }
+        html[data-style="n/a"].bgs #world-select #quick-select .world:hover {
+          border-color: #FFF; }
+html[data-style="n/a"] #type {
+  background-color: #737780;
+  border-color: #43444A;
+  color: #FFF; }
+
 html[data-style="normal"].bgs {
   background-color: #969666; }
   html[data-style="normal"].bgs #world-select {
