@@ -5,7 +5,8 @@
 
 html {
   background-color: #EFEFEF;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  overflow-y: scroll; }
   html.anim {
     transition: background-color 1s ease; }
     html.anim #world-select {
@@ -20,6 +21,8 @@ html {
       transition: all 500ms ease; }
     html.anim #quick-select {
       transition: all 200ms ease; }
+    html.anim .heart {
+      animation: 1s ease 0s normal none infinite running beat; }
     html.anim #controls {
       -webkit-backdrop-filter: blur(10px);
       -moz-backdrop-filter: blur(10px);
@@ -40,9 +43,12 @@ html[data-style="normal"] #type {
   background-color: #87875c;
   border-color: #787851;
   color: #FFF; }
+html[data-style="normal"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="fire"].bgs {
-  background-color: #e46f1b; }
+  background-color: #E46F1B; }
   html[data-style="fire"].bgs #world-select {
     background-color: #cd6418; }
     html[data-style="fire"].bgs #world-select #quick-select {
@@ -56,9 +62,12 @@ html[data-style="fire"] #type {
   background-color: #cd6418;
   border-color: #b65916;
   color: #FFF; }
+html[data-style="fire"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="water"].bgs {
-  background-color: #4978ed; }
+  background-color: #4978ED; }
   html[data-style="water"].bgs #world-select {
     background-color: #3267eb; }
     html[data-style="water"].bgs #world-select #quick-select {
@@ -72,9 +81,12 @@ html[data-style="water"] #type {
   background-color: #3267eb;
   border-color: #1b56e8;
   color: #FFF; }
+html[data-style="water"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="electric"].bgs {
-  background-color: #f3c616; }
+  background-color: #F3C616; }
   html[data-style="electric"].bgs #world-select {
     background-color: #e4b80c; }
     html[data-style="electric"].bgs #world-select #quick-select {
@@ -88,9 +100,12 @@ html[data-style="electric"] #type {
   background-color: #e4b80c;
   border-color: #cca40a;
   color: #FFF; }
+html[data-style="electric"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="grass"].bgs {
-  background-color: #66b43e; }
+  background-color: #66B43E; }
   html[data-style="grass"].bgs #world-select {
     background-color: #5ba137; }
     html[data-style="grass"].bgs #world-select #quick-select {
@@ -104,9 +119,12 @@ html[data-style="grass"] #type {
   background-color: #5ba137;
   border-color: #518e31;
   color: #FFF; }
+html[data-style="grass"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="ice"].bgs {
-  background-color: #7ccdcd; }
+  background-color: #7CCDCD; }
   html[data-style="ice"].bgs #world-select {
     background-color: #6ac6c6; }
     html[data-style="ice"].bgs #world-select #quick-select {
@@ -120,9 +138,12 @@ html[data-style="ice"] #type {
   background-color: #6ac6c6;
   border-color: #57bfbf;
   color: #FFF; }
+html[data-style="ice"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="fighting"].bgs {
-  background-color: #b22c25; }
+  background-color: #B22C25; }
   html[data-style="fighting"].bgs #world-select {
     background-color: #9d2721; }
     html[data-style="fighting"].bgs #world-select #quick-select {
@@ -136,9 +157,12 @@ html[data-style="fighting"] #type {
   background-color: #9d2721;
   border-color: #88221c;
   color: #FFF; }
+html[data-style="fighting"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="poison"].bgs {
-  background-color: #913a91; }
+  background-color: #913A91; }
   html[data-style="poison"].bgs #world-select {
     background-color: #7f337f; }
     html[data-style="poison"].bgs #world-select #quick-select {
@@ -152,9 +176,12 @@ html[data-style="poison"] #type {
   background-color: #7f337f;
   border-color: #6d2b6d;
   color: #FFF; }
+html[data-style="poison"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="ground"].bgs {
-  background-color: #dab54d; }
+  background-color: #DAB54D; }
   html[data-style="ground"].bgs #world-select {
     background-color: #d6ac38; }
     html[data-style="ground"].bgs #world-select #quick-select {
@@ -168,9 +195,12 @@ html[data-style="ground"] #type {
   background-color: #d6ac38;
   border-color: #caa02a;
   color: #FFF; }
+html[data-style="ground"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="flying"].bgs {
-  background-color: #9c88d9; }
+  background-color: #9C88D9; }
   html[data-style="flying"].bgs #world-select {
     background-color: #8c75d3; }
     html[data-style="flying"].bgs #world-select #quick-select {
@@ -184,9 +214,12 @@ html[data-style="flying"] #type {
   background-color: #8c75d3;
   border-color: #7c61cd;
   color: #FFF; }
+html[data-style="flying"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="psychic"].bgs {
-  background-color: #f73871; }
+  background-color: #F73871; }
   html[data-style="psychic"].bgs #world-select {
     background-color: #f61f60; }
     html[data-style="psychic"].bgs #world-select #quick-select {
@@ -200,9 +233,12 @@ html[data-style="psychic"] #type {
   background-color: #f61f60;
   border-color: #f20a4f;
   color: #FFF; }
+html[data-style="psychic"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="bug"].bgs {
-  background-color: #9dac1e; }
+  background-color: #9DAC1E; }
   html[data-style="bug"].bgs #world-select {
     background-color: #89961a; }
     html[data-style="bug"].bgs #world-select #quick-select {
@@ -216,9 +252,12 @@ html[data-style="bug"] #type {
   background-color: #89961a;
   border-color: #758116;
   color: #FFF; }
+html[data-style="bug"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="rock"].bgs {
-  background-color: #a48f32; }
+  background-color: #A48F32; }
   html[data-style="rock"].bgs #world-select {
     background-color: #907e2c; }
     html[data-style="rock"].bgs #world-select #quick-select {
@@ -232,9 +271,12 @@ html[data-style="rock"] #type {
   background-color: #907e2c;
   border-color: #7d6d26;
   color: #FFF; }
+html[data-style="rock"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="ghost"].bgs {
-  background-color: #634e87; }
+  background-color: #634E87; }
   html[data-style="ghost"].bgs #world-select {
     background-color: #574577; }
     html[data-style="ghost"].bgs #world-select #quick-select {
@@ -248,9 +290,12 @@ html[data-style="ghost"] #type {
   background-color: #574577;
   border-color: #4b3b67;
   color: #FFF; }
+html[data-style="ghost"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="dragon"].bgs {
-  background-color: #5f22f4; }
+  background-color: #5F22F4; }
   html[data-style="dragon"].bgs #world-select {
     background-color: #4e0cf1; }
     html[data-style="dragon"].bgs #world-select #quick-select {
@@ -264,9 +309,12 @@ html[data-style="dragon"] #type {
   background-color: #4e0cf1;
   border-color: #460bd8;
   color: #FFF; }
+html[data-style="dragon"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="dark"].bgs {
-  background-color: #614c3f; }
+  background-color: #614C3F; }
   html[data-style="dark"].bgs #world-select {
     background-color: #524035; }
     html[data-style="dark"].bgs #world-select #quick-select {
@@ -280,9 +328,12 @@ html[data-style="dark"] #type {
   background-color: #524035;
   border-color: #42342b;
   color: #FFF; }
+html[data-style="dark"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="steel"].bgs {
-  background-color: #a6a6c4; }
+  background-color: #A6A6C4; }
   html[data-style="steel"].bgs #world-select {
     background-color: #9797ba; }
     html[data-style="steel"].bgs #world-select #quick-select {
@@ -296,9 +347,12 @@ html[data-style="steel"] #type {
   background-color: #9797ba;
   border-color: #8787b0;
   color: #FFF; }
+html[data-style="steel"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 html[data-style="fairy"].bgs {
-  background-color: #e27fe2; }
+  background-color: #E27FE2; }
   html[data-style="fairy"].bgs #world-select {
     background-color: #dd6add; }
     html[data-style="fairy"].bgs #world-select #quick-select {
@@ -312,6 +366,9 @@ html[data-style="fairy"] #type {
   background-color: #dd6add;
   border-color: #d955d9;
   color: #FFF; }
+html[data-style="fairy"] #support-wrapper #toggle-support {
+  color: #FFF;
+  border-color: #FFF; }
 
 #world-select {
   width: 250px;
@@ -337,12 +394,21 @@ html[data-style="fairy"] #type {
     width: 250px;
     bottom: 0;
     text-align: center;
-    padding: 10px 5px; }
+    padding: 10px 5px;
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto; }
+    @media only screen and (max-width: 750px) {
+      #world-select #quick-select {
+        overflow-y: scroll; } }
     #world-select #quick-select .world {
       background-color: #333;
       display: inline-block;
       margin: 5px;
-      padding: 18px 25px;
+      padding: 0;
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      font-size: 14px;
       border: 2px solid #333; }
       #world-select #quick-select .world:hover {
         border-color: #FFF; }
@@ -449,7 +515,7 @@ html[data-style="fairy"] #type {
   padding: 10px 18px;
   display: block;
   border-radius: 3px;
-  margin: 30px;
+  margin: 30px 30px 0 30px;
   line-height: 20px;
   text-align: left; }
   #info-box table td {
@@ -474,7 +540,6 @@ html[data-style="fairy"] #type {
   z-index: 99;
   width: 250px;
   left: 260px;
-  bottom: 0;
   top: 0;
   -webkit-overflow-scrolling: touch;
   overflow-y: auto; }
@@ -578,12 +643,92 @@ html[data-style="fairy"] #type {
       #controls-wrapper #controls-toggle {
         padding: 12px 0; } }
 
-.ads #ad-wrapper {
+@keyframes beat {
+  0% {
+    transform: scale(1.2); }
+  70% {
+    transform: scale(1); }
+  80% {
+    transform: scale(1.2); }
+  90% {
+    transform: scale(1); }
+  100% {
+    transform: scale(1.2); } }
+.heart {
+  transform-origin: center center 0px;
+  display: inline-block; }
+
+.supp #support-wrapper {
   display: block; }
 
-#ad-wrapper {
+#support-wrapper {
+  margin-top: 30px;
   display: none; }
-  #ad-wrapper #ad {
-    max-height: 300px;
-    max-width: 600px;
-    margin: 30px auto 0 auto; }
+  #support-wrapper #toggle-support {
+    color: #333;
+    font-size: 14px;
+    text-decoration: none;
+    border-bottom: 1px solid #333; }
+  #support-wrapper #support-options {
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+    margin-top: 30px;
+    padding: 30px 0;
+    background-color: #FFF;
+    font-size: 14px;
+    color: #333;
+    display: none; }
+    #support-wrapper #support-options #support-text {
+      padding: 0 10px;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 28px;
+      text-align: left; }
+    #support-wrapper #support-options .paypal-button {
+      background-color: #1189D6;
+      color: #FFF;
+      padding: 4px 12px 4px 27px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid #0d6ba7;
+      background: url("http://cdn.keeky.net/paypal/logo-small.png") 5px center no-repeat, linear-gradient(to bottom, #1189D6 0%, #0d6ba7 100%); }
+      #support-wrapper #support-options .paypal-button:hover {
+        background: url("http://cdn.keeky.net/paypal/logo-small.png") 5px center no-repeat, #0d6ba7; }
+    #support-wrapper #support-options #amazon-links {
+      padding-top: 40px; }
+      #support-wrapper #support-options #amazon-links .link-wrapper {
+        display: inline-block;
+        height: 190px;
+        width: 173px;
+        vertical-align: top;
+        margin: 0 6px; }
+      #support-wrapper #support-options #amazon-links .link {
+        border-left: 1px solid #CCC;
+        border-right: 1px solid #CCC;
+        border-bottom: 1px solid #CCC;
+        border-top: 2px solid #FF9900;
+        background-color: #EFEFEF;
+        color: #333;
+        font-size: 14px;
+        padding: 10px;
+        display: inline-block;
+        border-radius: 4px;
+        text-align: center;
+        width: 100%;
+        height: 100%; }
+        #support-wrapper #support-options #amazon-links .link:hover {
+          background-color: #FF9900;
+          color: #FFF;
+          text-decoration: none;
+          border-color: #FF9900; }
+        #support-wrapper #support-options #amazon-links .link .image-wrapper {
+          width: 100%;
+          height: 150px;
+          display: block; }
+          #support-wrapper #support-options #amazon-links .link .image-wrapper .image {
+            margin: 0 auto;
+            max-width: 100%;
+            max-height: 100%;
+            display: block; }
+
+/*# sourceMappingURL=style.css.map */

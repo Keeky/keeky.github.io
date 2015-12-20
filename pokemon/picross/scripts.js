@@ -287,8 +287,8 @@ $(document).ready(function(e) {
 		update.canvas.drawLevel();
 	})
 
-	$('#ads').click(function() {
-		$('html').toggleClass('ads');
+	$('#supp').click(function() {
+		$('html').toggleClass('supp');
 	})
 
 	$('#controls-toggle').click(function() {
@@ -337,9 +337,17 @@ $(document).ready(function(e) {
 		})
 	}
 
-	//var adCode = '';
-	
-	// setTimeout(function() {
-	// 	$('#ad').html(adCode);
-	// }, 500);
+	$('#toggle-support').click(function(e) {
+		e.preventDefault();
+		$('#support-options').stop().slideToggle();
+		ga('send', 'event', 'picrossSolutions', 'supportWrapperToggle', $('#support-options').is(':visible'));
+	})
+
+	$('.paypal-button').click(function(e) {
+		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'paypalButton');
+	})
+
+	$('#amazon-links .link').click(function(e) {
+		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'amazon "' + $('.name', this).text() + '"');
+	})
 });
