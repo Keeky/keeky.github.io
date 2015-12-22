@@ -5,7 +5,7 @@ var properties = {
 	scale:20,
 	canvasWidth:10,
 	canvasHeight:10,
-	world:false,
+	area:false,
 	level:false,
 	grid:true,
 	levelLoaded:false
@@ -42,14 +42,14 @@ function randomPixel (seed) {
 var navigation = '';
 var quickSelect = '';
 
-$.each(solutions, function(world, worldData) {
-	navigation += '<a class="world" href="#" data-world="' + world + '">World '+ (world + 1) + '</a>';
-	quickSelect += '<a class="world" href="#" data-world="' + world + '">'+ (world + 1) + '</a>';
-	navigation += '<div id="stages-' + world +'" class="world-levels">';
-	//console.log(world, worldData);
+$.each(solutions, function(area, areaData) {
+	navigation += '<a class="area" href="#" data-area="' + area + '">Area '+ (area + 1) + '</a>';
+	quickSelect += '<a class="area" href="#" data-area="' + area + '">'+ (area + 1) + '</a>';
+	navigation += '<div id="stages-' + area +'" class="area-levels">';
+	//console.log(area, areaData);
 
-	$.each(worldData, function(level, levelData) {
-		navigation += '<a href="#" class="level" data-world="' + world + '" data-level="' + level + '">' + (world + 1) + '-' + (level + 1) + '</a>';
+	$.each(areaData, function(level, levelData) {
+		navigation += '<a href="#" class="level" data-area="' + area + '" data-level="' + level + '">' + (area + 1) + '-' + (level + 1) + '</a>';
 	});
 
 	navigation += '</div>';
@@ -68,16 +68,16 @@ $(document).ready(function(e) {
 	//Update functions
 	var update = {
 		document: {
-			info: function(world, level) {
-				$('#name').text(solutions[properties.world][properties.level].name);
-				$('#type').text(solutions[properties.world][properties.level].type);
-				$('#stage').text((properties.world + 1) + '-' + (properties.level + 1));
+			info: function(area, level) {
+				$('#name').text(solutions[properties.area][properties.level].name);
+				$('#type').text(solutions[properties.area][properties.level].type);
+				$('#stage').text((properties.area + 1) + '-' + (properties.level + 1));
 				$('#size').text(properties.canvasWidth + 'x' + properties.canvasHeight);
-				$('html').attr('data-style', solutions[properties.world][properties.level].type.toLowerCase());
+				$('html').attr('data-style', solutions[properties.area][properties.level].type.toLowerCase());
 				var title = '';
 				if(properties.levelLoaded === true) {
-					title += 'Level ' + (properties.world + 1) + '-' + (properties.level + 1)
-					title +=  ' ' + solutions[properties.world][properties.level].name;
+					title += 'Level ' + (properties.area + 1) + '-' + (properties.level + 1)
+					title +=  ' ' + solutions[properties.area][properties.level].name;
 					title += ' | ';
 				}
 				title += 'Pokemon Picross Solutions';
@@ -187,7 +187,7 @@ $(document).ready(function(e) {
 
 			drawLevel: function () {
 				if(properties.levelLoaded) {
-					var solution = solutions[properties.world][properties.level];
+					var solution = solutions[properties.area][properties.level];
 					//console.log(solution.matrix.length);
 
 					properties.canvasWidth = solution.matrix[0].length;
@@ -227,10 +227,10 @@ $(document).ready(function(e) {
 
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
-		properties.world = $(this).data('world');
+		properties.area = $(this).data('area');
 		properties.level = $(this).data('level');
 
-		document.location.hash =  (properties.world + 1) + '/' + (properties.level + 1);
+		document.location.hash =  (properties.area + 1) + '/' + (properties.level + 1);
 
 		update.canvas.drawLevel();
 		update.document.info();
@@ -242,27 +242,27 @@ $(document).ready(function(e) {
 		}, 50);
 	})
 
-	$(document).on('click', '#levels .world', function(e) {
+	$(document).on('click', '#levels .area', function(e) {
 		e.preventDefault();
 
 		$('html').toggleClass('qs');
 
 	})
 
-	$(document).on('click', '#quick-select .world', function(e) {
+	$(document).on('click', '#quick-select .area', function(e) {
 		e.preventDefault();
 
 		$('html').toggleClass('qs');
 
-		var targetWorld = $(this).data('world');
-		ga('send', 'event', 'picrossSolutions', 'worldClick', targetWorld);
-		var targetStages = $('#levels .world[data-world="' + targetWorld + '"]');
-		var targetOffset = targetStages.offset().top + $('#world-select').scrollTop() - $('#world-select').offset().top;
+		var targetArea = $(this).data('area');
+		ga('send', 'event', 'picrossSolutions', 'areaClick', targetArea);
+		var targetStages = $('#levels .area[data-area="' + targetArea + '"]');
+		var targetOffset = targetStages.offset().top + $('#area-select').scrollTop() - $('#area-select').offset().top;
 		//console.log(targetStages, targetOffset);
 		if($('html').hasClass('anim'))
-			$('#world-select').animate({scrollTop: targetOffset}, 500);
+			$('#area-select').animate({scrollTop: targetOffset}, 500);
 		else
-			$('#world-select').scrollTop(targetOffset);
+			$('#area-select').scrollTop(targetOffset);
 	})
 
 	$('#zoom').on('change', function() {
@@ -316,7 +316,7 @@ $(document).ready(function(e) {
 		var hash = document.location.hash.substr(1).split('/');
 
 		if(hash[0] && hash[1]) {
-			properties.world = hash[0] - 1;
+			properties.area = hash[0] - 1;
 			properties.level = hash[1] - 1;
 			update.canvas.initialize();
 			update.canvas.drawLevel();
@@ -324,7 +324,7 @@ $(document).ready(function(e) {
 		} else
 			update.canvas.unload();
 
-		ga('send', 'event', 'picrossSolutions', 'levelLoaded', (properties.world + 1) + '-' + (properties.level + 1));
+		ga('send', 'event', 'picrossSolutions', 'levelLoaded', (properties.area + 1) + '-' + (properties.level + 1));
 	}
 
 	if(document.location.hash) {

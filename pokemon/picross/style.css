@@ -9,7 +9,7 @@ html {
   overflow-y: scroll; }
   html.anim {
     transition: background-color 1s ease; }
-    html.anim #world-select {
+    html.anim #area-select {
       transition: background-color 1s ease, left 500ms ease; }
     html.anim #solution {
       transition: width 500ms ease, height 500ms ease; }
@@ -30,14 +30,14 @@ html {
 
 html[data-style="normal"].bgs {
   background-color: #969666; }
-  html[data-style="normal"].bgs #world-select {
+  html[data-style="normal"].bgs #area-select {
     background-color: #87875c; }
-    html[data-style="normal"].bgs #world-select #quick-select {
+    html[data-style="normal"].bgs #area-select #quick-select {
       background-color: #87875c; }
-      html[data-style="normal"].bgs #world-select #quick-select .world {
+      html[data-style="normal"].bgs #area-select #quick-select .area {
         background-color: #787851;
         border-color: #787851; }
-        html[data-style="normal"].bgs #world-select #quick-select .world:hover {
+        html[data-style="normal"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="normal"] #type {
   background-color: #87875c;
@@ -49,14 +49,14 @@ html[data-style="normal"] #support-wrapper #toggle-support {
 
 html[data-style="fire"].bgs {
   background-color: #E46F1B; }
-  html[data-style="fire"].bgs #world-select {
+  html[data-style="fire"].bgs #area-select {
     background-color: #cd6418; }
-    html[data-style="fire"].bgs #world-select #quick-select {
+    html[data-style="fire"].bgs #area-select #quick-select {
       background-color: #cd6418; }
-      html[data-style="fire"].bgs #world-select #quick-select .world {
+      html[data-style="fire"].bgs #area-select #quick-select .area {
         background-color: #b65916;
         border-color: #b65916; }
-        html[data-style="fire"].bgs #world-select #quick-select .world:hover {
+        html[data-style="fire"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="fire"] #type {
   background-color: #cd6418;
@@ -68,14 +68,14 @@ html[data-style="fire"] #support-wrapper #toggle-support {
 
 html[data-style="water"].bgs {
   background-color: #4978ED; }
-  html[data-style="water"].bgs #world-select {
+  html[data-style="water"].bgs #area-select {
     background-color: #3267eb; }
-    html[data-style="water"].bgs #world-select #quick-select {
+    html[data-style="water"].bgs #area-select #quick-select {
       background-color: #3267eb; }
-      html[data-style="water"].bgs #world-select #quick-select .world {
+      html[data-style="water"].bgs #area-select #quick-select .area {
         background-color: #1b56e8;
         border-color: #1b56e8; }
-        html[data-style="water"].bgs #world-select #quick-select .world:hover {
+        html[data-style="water"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="water"] #type {
   background-color: #3267eb;
@@ -87,14 +87,14 @@ html[data-style="water"] #support-wrapper #toggle-support {
 
 html[data-style="electric"].bgs {
   background-color: #F3C616; }
-  html[data-style="electric"].bgs #world-select {
+  html[data-style="electric"].bgs #area-select {
     background-color: #e4b80c; }
-    html[data-style="electric"].bgs #world-select #quick-select {
+    html[data-style="electric"].bgs #area-select #quick-select {
       background-color: #e4b80c; }
-      html[data-style="electric"].bgs #world-select #quick-select .world {
+      html[data-style="electric"].bgs #area-select #quick-select .area {
         background-color: #cca40a;
         border-color: #cca40a; }
-        html[data-style="electric"].bgs #world-select #quick-select .world:hover {
+        html[data-style="electric"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="electric"] #type {
   background-color: #e4b80c;
@@ -106,14 +106,14 @@ html[data-style="electric"] #support-wrapper #toggle-support {
 
 html[data-style="grass"].bgs {
   background-color: #66B43E; }
-  html[data-style="grass"].bgs #world-select {
+  html[data-style="grass"].bgs #area-select {
     background-color: #5ba137; }
-    html[data-style="grass"].bgs #world-select #quick-select {
+    html[data-style="grass"].bgs #area-select #quick-select {
       background-color: #5ba137; }
-      html[data-style="grass"].bgs #world-select #quick-select .world {
+      html[data-style="grass"].bgs #area-select #quick-select .area {
         background-color: #518e31;
         border-color: #518e31; }
-        html[data-style="grass"].bgs #world-select #quick-select .world:hover {
+        html[data-style="grass"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="grass"] #type {
   background-color: #5ba137;
@@ -125,14 +125,14 @@ html[data-style="grass"] #support-wrapper #toggle-support {
 
 html[data-style="ice"].bgs {
   background-color: #7CCDCD; }
-  html[data-style="ice"].bgs #world-select {
+  html[data-style="ice"].bgs #area-select {
     background-color: #6ac6c6; }
-    html[data-style="ice"].bgs #world-select #quick-select {
+    html[data-style="ice"].bgs #area-select #quick-select {
       background-color: #6ac6c6; }
-      html[data-style="ice"].bgs #world-select #quick-select .world {
+      html[data-style="ice"].bgs #area-select #quick-select .area {
         background-color: #57bfbf;
         border-color: #57bfbf; }
-        html[data-style="ice"].bgs #world-select #quick-select .world:hover {
+        html[data-style="ice"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="ice"] #type {
   background-color: #6ac6c6;
@@ -144,14 +144,14 @@ html[data-style="ice"] #support-wrapper #toggle-support {
 
 html[data-style="fighting"].bgs {
   background-color: #B22C25; }
-  html[data-style="fighting"].bgs #world-select {
+  html[data-style="fighting"].bgs #area-select {
     background-color: #9d2721; }
-    html[data-style="fighting"].bgs #world-select #quick-select {
+    html[data-style="fighting"].bgs #area-select #quick-select {
       background-color: #9d2721; }
-      html[data-style="fighting"].bgs #world-select #quick-select .world {
+      html[data-style="fighting"].bgs #area-select #quick-select .area {
         background-color: #88221c;
         border-color: #88221c; }
-        html[data-style="fighting"].bgs #world-select #quick-select .world:hover {
+        html[data-style="fighting"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="fighting"] #type {
   background-color: #9d2721;
@@ -163,14 +163,14 @@ html[data-style="fighting"] #support-wrapper #toggle-support {
 
 html[data-style="poison"].bgs {
   background-color: #913A91; }
-  html[data-style="poison"].bgs #world-select {
+  html[data-style="poison"].bgs #area-select {
     background-color: #7f337f; }
-    html[data-style="poison"].bgs #world-select #quick-select {
+    html[data-style="poison"].bgs #area-select #quick-select {
       background-color: #7f337f; }
-      html[data-style="poison"].bgs #world-select #quick-select .world {
+      html[data-style="poison"].bgs #area-select #quick-select .area {
         background-color: #6d2b6d;
         border-color: #6d2b6d; }
-        html[data-style="poison"].bgs #world-select #quick-select .world:hover {
+        html[data-style="poison"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="poison"] #type {
   background-color: #7f337f;
@@ -182,14 +182,14 @@ html[data-style="poison"] #support-wrapper #toggle-support {
 
 html[data-style="ground"].bgs {
   background-color: #DAB54D; }
-  html[data-style="ground"].bgs #world-select {
+  html[data-style="ground"].bgs #area-select {
     background-color: #d6ac38; }
-    html[data-style="ground"].bgs #world-select #quick-select {
+    html[data-style="ground"].bgs #area-select #quick-select {
       background-color: #d6ac38; }
-      html[data-style="ground"].bgs #world-select #quick-select .world {
+      html[data-style="ground"].bgs #area-select #quick-select .area {
         background-color: #caa02a;
         border-color: #caa02a; }
-        html[data-style="ground"].bgs #world-select #quick-select .world:hover {
+        html[data-style="ground"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="ground"] #type {
   background-color: #d6ac38;
@@ -201,14 +201,14 @@ html[data-style="ground"] #support-wrapper #toggle-support {
 
 html[data-style="flying"].bgs {
   background-color: #9C88D9; }
-  html[data-style="flying"].bgs #world-select {
+  html[data-style="flying"].bgs #area-select {
     background-color: #8c75d3; }
-    html[data-style="flying"].bgs #world-select #quick-select {
+    html[data-style="flying"].bgs #area-select #quick-select {
       background-color: #8c75d3; }
-      html[data-style="flying"].bgs #world-select #quick-select .world {
+      html[data-style="flying"].bgs #area-select #quick-select .area {
         background-color: #7c61cd;
         border-color: #7c61cd; }
-        html[data-style="flying"].bgs #world-select #quick-select .world:hover {
+        html[data-style="flying"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="flying"] #type {
   background-color: #8c75d3;
@@ -220,14 +220,14 @@ html[data-style="flying"] #support-wrapper #toggle-support {
 
 html[data-style="psychic"].bgs {
   background-color: #F73871; }
-  html[data-style="psychic"].bgs #world-select {
+  html[data-style="psychic"].bgs #area-select {
     background-color: #f61f60; }
-    html[data-style="psychic"].bgs #world-select #quick-select {
+    html[data-style="psychic"].bgs #area-select #quick-select {
       background-color: #f61f60; }
-      html[data-style="psychic"].bgs #world-select #quick-select .world {
+      html[data-style="psychic"].bgs #area-select #quick-select .area {
         background-color: #f20a4f;
         border-color: #f20a4f; }
-        html[data-style="psychic"].bgs #world-select #quick-select .world:hover {
+        html[data-style="psychic"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="psychic"] #type {
   background-color: #f61f60;
@@ -239,14 +239,14 @@ html[data-style="psychic"] #support-wrapper #toggle-support {
 
 html[data-style="bug"].bgs {
   background-color: #9DAC1E; }
-  html[data-style="bug"].bgs #world-select {
+  html[data-style="bug"].bgs #area-select {
     background-color: #89961a; }
-    html[data-style="bug"].bgs #world-select #quick-select {
+    html[data-style="bug"].bgs #area-select #quick-select {
       background-color: #89961a; }
-      html[data-style="bug"].bgs #world-select #quick-select .world {
+      html[data-style="bug"].bgs #area-select #quick-select .area {
         background-color: #758116;
         border-color: #758116; }
-        html[data-style="bug"].bgs #world-select #quick-select .world:hover {
+        html[data-style="bug"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="bug"] #type {
   background-color: #89961a;
@@ -258,14 +258,14 @@ html[data-style="bug"] #support-wrapper #toggle-support {
 
 html[data-style="rock"].bgs {
   background-color: #A48F32; }
-  html[data-style="rock"].bgs #world-select {
+  html[data-style="rock"].bgs #area-select {
     background-color: #907e2c; }
-    html[data-style="rock"].bgs #world-select #quick-select {
+    html[data-style="rock"].bgs #area-select #quick-select {
       background-color: #907e2c; }
-      html[data-style="rock"].bgs #world-select #quick-select .world {
+      html[data-style="rock"].bgs #area-select #quick-select .area {
         background-color: #7d6d26;
         border-color: #7d6d26; }
-        html[data-style="rock"].bgs #world-select #quick-select .world:hover {
+        html[data-style="rock"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="rock"] #type {
   background-color: #907e2c;
@@ -277,14 +277,14 @@ html[data-style="rock"] #support-wrapper #toggle-support {
 
 html[data-style="ghost"].bgs {
   background-color: #634E87; }
-  html[data-style="ghost"].bgs #world-select {
+  html[data-style="ghost"].bgs #area-select {
     background-color: #574577; }
-    html[data-style="ghost"].bgs #world-select #quick-select {
+    html[data-style="ghost"].bgs #area-select #quick-select {
       background-color: #574577; }
-      html[data-style="ghost"].bgs #world-select #quick-select .world {
+      html[data-style="ghost"].bgs #area-select #quick-select .area {
         background-color: #4b3b67;
         border-color: #4b3b67; }
-        html[data-style="ghost"].bgs #world-select #quick-select .world:hover {
+        html[data-style="ghost"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="ghost"] #type {
   background-color: #574577;
@@ -296,14 +296,14 @@ html[data-style="ghost"] #support-wrapper #toggle-support {
 
 html[data-style="dragon"].bgs {
   background-color: #5F22F4; }
-  html[data-style="dragon"].bgs #world-select {
+  html[data-style="dragon"].bgs #area-select {
     background-color: #4e0cf1; }
-    html[data-style="dragon"].bgs #world-select #quick-select {
+    html[data-style="dragon"].bgs #area-select #quick-select {
       background-color: #4e0cf1; }
-      html[data-style="dragon"].bgs #world-select #quick-select .world {
+      html[data-style="dragon"].bgs #area-select #quick-select .area {
         background-color: #460bd8;
         border-color: #460bd8; }
-        html[data-style="dragon"].bgs #world-select #quick-select .world:hover {
+        html[data-style="dragon"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="dragon"] #type {
   background-color: #4e0cf1;
@@ -315,14 +315,14 @@ html[data-style="dragon"] #support-wrapper #toggle-support {
 
 html[data-style="dark"].bgs {
   background-color: #614C3F; }
-  html[data-style="dark"].bgs #world-select {
+  html[data-style="dark"].bgs #area-select {
     background-color: #524035; }
-    html[data-style="dark"].bgs #world-select #quick-select {
+    html[data-style="dark"].bgs #area-select #quick-select {
       background-color: #524035; }
-      html[data-style="dark"].bgs #world-select #quick-select .world {
+      html[data-style="dark"].bgs #area-select #quick-select .area {
         background-color: #42342b;
         border-color: #42342b; }
-        html[data-style="dark"].bgs #world-select #quick-select .world:hover {
+        html[data-style="dark"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="dark"] #type {
   background-color: #524035;
@@ -334,14 +334,14 @@ html[data-style="dark"] #support-wrapper #toggle-support {
 
 html[data-style="steel"].bgs {
   background-color: #A6A6C4; }
-  html[data-style="steel"].bgs #world-select {
+  html[data-style="steel"].bgs #area-select {
     background-color: #9797ba; }
-    html[data-style="steel"].bgs #world-select #quick-select {
+    html[data-style="steel"].bgs #area-select #quick-select {
       background-color: #9797ba; }
-      html[data-style="steel"].bgs #world-select #quick-select .world {
+      html[data-style="steel"].bgs #area-select #quick-select .area {
         background-color: #8787b0;
         border-color: #8787b0; }
-        html[data-style="steel"].bgs #world-select #quick-select .world:hover {
+        html[data-style="steel"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="steel"] #type {
   background-color: #9797ba;
@@ -353,14 +353,14 @@ html[data-style="steel"] #support-wrapper #toggle-support {
 
 html[data-style="fairy"].bgs {
   background-color: #E27FE2; }
-  html[data-style="fairy"].bgs #world-select {
+  html[data-style="fairy"].bgs #area-select {
     background-color: #dd6add; }
-    html[data-style="fairy"].bgs #world-select #quick-select {
+    html[data-style="fairy"].bgs #area-select #quick-select {
       background-color: #dd6add; }
-      html[data-style="fairy"].bgs #world-select #quick-select .world {
+      html[data-style="fairy"].bgs #area-select #quick-select .area {
         background-color: #d955d9;
         border-color: #d955d9; }
-        html[data-style="fairy"].bgs #world-select #quick-select .world:hover {
+        html[data-style="fairy"].bgs #area-select #quick-select .area:hover {
           border-color: #FFF; }
 html[data-style="fairy"] #type {
   background-color: #dd6add;
@@ -370,7 +370,7 @@ html[data-style="fairy"] #support-wrapper #toggle-support {
   color: #FFF;
   border-color: #FFF; }
 
-#world-select {
+#area-select {
   width: 250px;
   background-color: #333;
   position: fixed;
@@ -381,11 +381,11 @@ html[data-style="fairy"] #support-wrapper #toggle-support {
   -webkit-overflow-scrolling: touch;
   overflow-y: auto; }
   @media only screen and (max-width: 750px) {
-    #world-select {
+    #area-select {
       left: -250px;
       bottom: 56px;
       overflow-y: scroll; } }
-  #world-select #quick-select {
+  #area-select #quick-select {
     position: fixed;
     top: 0;
     left: -250px;
@@ -398,9 +398,9 @@ html[data-style="fairy"] #support-wrapper #toggle-support {
     -webkit-overflow-scrolling: touch;
     overflow-y: auto; }
     @media only screen and (max-width: 750px) {
-      #world-select #quick-select {
+      #area-select #quick-select {
         overflow-y: scroll; } }
-    #world-select #quick-select .world {
+    #area-select #quick-select .area {
       background-color: #333;
       display: inline-block;
       margin: 5px;
@@ -410,10 +410,10 @@ html[data-style="fairy"] #support-wrapper #toggle-support {
       line-height: 70px;
       font-size: 14px;
       border: 2px solid #333; }
-      #world-select #quick-select .world:hover {
+      #area-select #quick-select .area:hover {
         border-color: #FFF; }
 
-.qs #world-select #quick-select {
+.qs #area-select #quick-select {
   transform: scale(1);
   left: 0; }
 
@@ -444,18 +444,18 @@ html[data-style="fairy"] #support-wrapper #toggle-support {
     padding: 20px;
     width: 250px;
     background-color: #000; }
-  .nav-active #world-select {
+  .nav-active #area-select {
     left: 0; } }
-.world {
+.area {
   display: block;
   color: #FFF;
   margin-top: 15px;
   padding: 5px 10px;
   text-decoration: none; }
   @media only screen and (max-width: 750px) {
-    .world {
+    .area {
       padding: 16px 14px; } }
-  .world:hover {
+  .area:hover {
     color: #CCC;
     cursor: pointer; }
 
