@@ -553,7 +553,7 @@ var solutions = [
 		},
 
 		{
-			name: "Zyngarde 50% Forme",
+			name: "Zygarde 50% Forme",
 			type: "Dragon",
 			matrix: [
 				[0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1],
@@ -577,7 +577,7 @@ var solutions = [
 		},
 
 		{
-			name: "Zyngarde 10% Forme",
+			name: "Zygarde 10% Forme",
 			type: "Dragon",
 			matrix: [
 				[0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
@@ -601,7 +601,7 @@ var solutions = [
 		},
 
 		{
-			name: "Zyngarde Complete Forme",
+			name: "Zygarde Complete Forme",
 			type: "Dragon",
 			matrix: [
 				[0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 1],
@@ -1085,7 +1085,7 @@ var solutions = [
 				[1, 1, 1, 1, 0, 0, 1, 0, 0, 1],
 
 				[0, 1, 1, 1, 0, 1, 1, 0, 0, 1],
-				[0, 1, 0, 0, 0, 1, 1, 0, 0, 1],
+				[0, 1, 0, 0, 0, 0, 0, 0, 1, 1],
 				[0, 0, 1, 0, 1, 0, 0, 1, 0, 0],
 				[0, 0, 1, 1, 1, 1, 1, 1, 0, 0],
 				[0, 0, 0, 1, 0, 0, 0, 0, 1, 0]
