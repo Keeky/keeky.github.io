@@ -132,6 +132,8 @@ $(document).ready(function(e) {
 	$('#levels').html(navigation);
 
 	$('#quick-select').html(quickSelect);
+
+	FastClick.attach(document.body);
 	
 	//Update functions
 	var update = {
