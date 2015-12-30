@@ -1,6 +1,68 @@
+var options = {
+	data: {
+		grid: {
+			value: true,
+			htmlClass: false,
+		},
+		supp: {
+			value: true,
+			htmlClass: true,
+		},
+		anim: {
+			value: true,
+			htmlClass: true,
+		},
+		bgs: {
+			value: true,
+			htmlClass: true,
+		}
+	},
+	save: function() {
+		localStorage.setItem('picrossSolutionsOptions', JSON.stringify(options.data));
+	},
+	load: function() {
+		options.defaults = options.data;
 
+		if(localStorage.getItem('picrossSolutionsOptions')) {
+			options.data = JSON.parse(localStorage.getItem('picrossSolutionsOptions'));
+		}
+		$.each(options.data, function(key, data) {
+			//console.log('Loading ---', key, data);
+			options.update(key);
+		});
+	},
+	update: function(key) {
+		if(options.data[key].htmlClass === true && options.data[key].value === true) {
+			$('html').addClass(key);
+		} else {
+			$('html').removeClass(key);
+		}
 
-//Properties
+		if(options.data[key].value === true) {
+			$('.toggle[data-opt='+key+']').addClass('active');
+		} else {
+			$('.toggle[data-opt='+key+']').removeClass('active');
+		}
+	},
+	toggle: function(key, htmlClass) {
+		var val = false;
+
+		if(options.data[key].value)
+			options.data[key].value = !options.data[key].value;
+		else
+			options.data[key].value = true;
+
+		options.update(key);
+		options.save();
+	},
+	reset: function() {
+		options.data = options.defaults;
+		options.save();
+		options.load();
+	}
+};
+
+//Default properties
 var properties = {
 	scale:20,
 	canvasWidth:10,
@@ -11,6 +73,7 @@ var properties = {
 	levelLoaded:false
 };
 
+//Generates a random number with a string as seed
 function seedFromString (string) {
 	var hash = 0, i, chr, len;
 	if (string.length === 0)
@@ -21,8 +84,9 @@ function seedFromString (string) {
 		hash |= 0; // Convert to 32bit integer
 	}
 	return hash * -1;
-};
+}
 
+//Generates a random opacity pixel using a seed from seedFromString. If effects are enabled this will make the background of the canvas less bland because every transparent pixel will look slightly different.
 function randomPixel (seed) {
 	if(!$('html').hasClass('anim'))
 		return 'transparent';
@@ -39,9 +103,9 @@ function randomPixel (seed) {
 	return 'rgba(255, 255, 255, '+offset+')';
 }
 
-var navigation = '';
-var quickSelect = '';
+var navigation = '', quickSelect = '';
 
+//Generates the navigation and the area quick select with the data from levels.js
 $.each(solutions, function(area, areaData) {
 	navigation += '<a class="area" href="#" data-area="' + area + '">Area '+ (area + 1) + '</a>';
 	quickSelect += '<a class="area" href="#" data-area="' + area + '">'+ (area + 1) + '</a>';
@@ -61,6 +125,10 @@ $(document).ready(function(e) {
 	$('.js-only').show();
 	$('.no-js').hide();
 
+	options.load();
+
+	properties.grid = options.data.grid.value;
+
 	$('#levels').html(navigation);
 
 	$('#quick-select').html(quickSelect);
@@ -68,6 +136,7 @@ $(document).ready(function(e) {
 	//Update functions
 	var update = {
 		document: {
+			//Updates stuff like the box below the canvas and the document title
 			info: function(area, level) {
 				$('#name').text(solutions[properties.area][properties.level].name);
 				$('#type').text(solutions[properties.area][properties.level].type);
@@ -76,7 +145,7 @@ $(document).ready(function(e) {
 				$('html').attr('data-style', solutions[properties.area][properties.level].type.toLowerCase());
 				var title = '';
 				if(properties.levelLoaded === true) {
-					title += 'Level ' + (properties.area + 1) + '-' + (properties.level + 1)
+					title += 'Level ' + (properties.area + 1) + '-' + (properties.level + 1);
 					title +=  ' ' + solutions[properties.area][properties.level].name;
 					title += ' | ';
 				}
@@ -86,22 +155,35 @@ $(document).ready(function(e) {
 		},
 
 		canvas: {
+			//Displays canvas and hides the 'welcome' box
 			initialize: function(pageLoad){
 				if(properties.levelLoaded === false) {
 					update.canvas.size();
 					update.canvas.grid();
 					$('#description').hide();
-					$('#solution-wrapper').fadeIn(250);
-					$('#controls-toggle').slideDown();
+					if(options.data.anim.value === true) {
+						$('#solution-wrapper').fadeIn(250);
+						$('#controls-toggle').slideDown();
+					} else {
+						$('#solution-wrapper').show();
+						$('#controls-toggle').show();
+					}
 					properties.levelLoaded = true;
 				}
 			},
 
+			//Does the same as initialize, but reversed
 			unload: function() {
 				$('#solution-wrapper').hide();
-				$('#controls').slideUp();
-				$('#controls-toggle').slideUp();
-				$('#description').fadeIn(250);
+				if(options.data.anim.value === true) {
+					$('#controls').slideUp();
+					$('#controls-toggle').slideUp();
+					$('#description').fadeIn(250);
+				} else {
+					$('#controls').hide();
+					$('#controls-toggle').hide();
+					$('#description').show();
+				}
 				$('html').attr('data-style', '');
 				properties.levelLoaded = false;
 			},
@@ -160,7 +242,7 @@ $(document).ready(function(e) {
 							lineY = i * properties.scale;
 						}
 
-						if(i % 5 == 0) {
+						if(i % 5 === 0) {
 							context.fillStyle = '#FB9105';
 
 							if(lineDirection == 'horizontal') {
@@ -181,7 +263,7 @@ $(document).ready(function(e) {
 							lineDirection = 'vertical';
 							i = gridMax;
 						}
-					};
+					}
 				}
 			},
 
@@ -206,8 +288,8 @@ $(document).ready(function(e) {
 								update.canvas.draw(k, key);
 							else
 								update.canvas.draw(k, key, randomPixel(k * key * seed));
-						})
-					})
+						});
+					});
 
 					update.canvas.grid();
 				}
@@ -240,14 +322,14 @@ $(document).ready(function(e) {
 		setTimeout(function() {
 			$('html').removeClass('nav-active');
 		}, 50);
-	})
+	});
 
 	$(document).on('click', '#levels .area', function(e) {
 		e.preventDefault();
 
 		$('html').toggleClass('qs');
 
-	})
+	});
 
 	$(document).on('click', '#quick-select .area', function(e) {
 		e.preventDefault();
@@ -263,32 +345,38 @@ $(document).ready(function(e) {
 			$('#area-select').animate({scrollTop: targetOffset}, 500);
 		else
 			$('#area-select').scrollTop(targetOffset);
-	})
+	});
 
 	$('#zoom').on('change', function() {
 		update.canvas.zoom($(this).val());
 	}).on('change mousemove touchmove', function() {
 		$('#zoom-level').text('x' + (
 			Math.round(($(this).val() / 2) * 100) / 100
-		).toFixed(2))
-	})
+		).toFixed(2));
+	});
 
 	$('#grid').click(function() {
 		properties.grid = !properties.grid;
 		update.canvas.drawLevel();
-	})
+	});
 
-	$('#bg').click(function() {
-		$('html').toggleClass('bgs');
-	})
+	$('.toggle').click(function() {
+		var opt = $(this).attr('data-opt');
+
+		options.toggle(opt, true);
+
+		ga('send', 'event', 'picrossSolutions', 'optionsChange', opt + ' - ' + options.data[opt]);
+	});
 
 	$('#anim').click(function() {
-		$('html').toggleClass('anim');
 		update.canvas.drawLevel();
-	})
+	});
 
-	$('#supp').click(function() {
-		$('html').toggleClass('supp');
+	$('#reset-options').click(function(e) {
+		e.preventDefault();
+		options.reset();
+		properties.grid = options.data.grid.value;
+		update.canvas.drawLevel();
 	})
 
 	$('#controls-toggle').click(function() {
@@ -297,18 +385,13 @@ $(document).ready(function(e) {
 			$('#controls').slideToggle();
 		else
 			$('#controls').toggle();
-	})
-
-	$('.toggle').click(function() {
-		$(this).toggleClass('active');
-		ga('send', 'event', 'picrossSolutions', 'optionsToggle', $(this).attr('id') + ' - ' + $(this).hasClass('active'));
-	})
+	});
 
 	$('#mobile-nav-toggle').click(function(e) {
 		$(this).text() == 'Select level' ? $(this).text('Close menu') : $(this).text('Select level');
 		e.preventDefault();
 		$('html').toggleClass('nav-active');
-	})
+	});
 
 	$('#zoom').val('20');
 
@@ -328,26 +411,26 @@ $(document).ready(function(e) {
 	}
 
 	if(document.location.hash) {
-		hashChange()
+		hashChange();
 	}
 
 	if("onhashchange" in window) {
 		$(window).bind('hashchange', function() {
-			hashChange()
-		})
+			hashChange();
+		});
 	}
 
 	$('#toggle-support').click(function(e) {
 		e.preventDefault();
 		$('#support-options').stop().slideToggle();
 		ga('send', 'event', 'picrossSolutions', 'supportWrapperToggle', $('#support-options').is(':visible'));
-	})
+	});
 
 	$('.paypal-button').click(function(e) {
 		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'paypalButton');
-	})
+	});
 
 	$('#amazon-links .link').click(function(e) {
 		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'amazon "' + $('.name', this).text() + '"');
-	})
+	});
 });
