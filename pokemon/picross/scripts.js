@@ -1,31 +1,37 @@
-var options = {
-	data: {
-		grid: {
-			value: true,
-			htmlClass: false,
-		},
-		supp: {
-			value: true,
-			htmlClass: true,
-		},
-		anim: {
-			value: true,
-			htmlClass: true,
-		},
-		bgs: {
-			value: true,
-			htmlClass: true,
-		}
+var defaultOptions = {
+	grid: {
+		value: true,
+		htmlClass: false
 	},
+	supp: {
+		value: true,
+		htmlClass: true
+	},
+	anim: {
+		value: true,
+		htmlClass: true
+	},
+	bgs: {
+		value: true,
+		htmlClass: true
+	},
+	names: {
+		value: false,
+		htmlClass: true
+	}
+};
+
+var options = {
+	data: $.extend(true, {}, defaultOptions),
 	save: function() {
 		localStorage.setItem('picrossSolutionsOptions', JSON.stringify(options.data));
 	},
 	load: function() {
-		options.defaults = options.data;
-
 		if(localStorage.getItem('picrossSolutionsOptions')) {
-			options.data = JSON.parse(localStorage.getItem('picrossSolutionsOptions'));
-		}
+			var localOptions = JSON.parse(localStorage.getItem('picrossSolutionsOptions'));
+			for (var option in localOptions) { options.data[option] = localOptions[option]; }
+		} else
+			options.save();
 		$.each(options.data, function(key, data) {
 			//console.log('Loading ---', key, data);
 			options.update(key);
@@ -44,7 +50,7 @@ var options = {
 			$('.toggle[data-opt='+key+']').removeClass('active');
 		}
 	},
-	toggle: function(key, htmlClass) {
+	toggle: function(key) {
 		var val = false;
 
 		if(options.data[key].value)
@@ -56,7 +62,7 @@ var options = {
 		options.save();
 	},
 	reset: function() {
-		options.data = options.defaults;
+		options.data = $.extend(true, {}, defaultOptions),
 		options.save();
 		options.load();
 	}
@@ -113,7 +119,7 @@ $.each(solutions, function(area, areaData) {
 	//console.log(area, areaData);
 
 	$.each(areaData, function(level, levelData) {
-		navigation += '<a href="#" class="level" data-area="' + area + '" data-level="' + level + '">' + (area + 1) + '-' + (level + 1) + '</a>';
+		navigation += '<a href="#" class="level" data-area="' + area + '" data-level="' + level + '"><span class="level-number">' + (area + 1) + '-' + (level + 1) + '</span><span class="level-name"> - ' + levelData.name + '</span></a>';
 	});
 
 	navigation += '</div>';
@@ -365,7 +371,7 @@ $(document).ready(function(e) {
 	$('.toggle').click(function() {
 		var opt = $(this).attr('data-opt');
 
-		options.toggle(opt, true);
+		options.toggle(opt);
 
 		ga('send', 'event', 'picrossSolutions', 'optionsChange', opt + ' - ' + options.data[opt]);
 	});
@@ -381,19 +387,31 @@ $(document).ready(function(e) {
 		update.canvas.drawLevel();
 	})
 
-	$('#controls-toggle').click(function() {
-		$(this).text() == 'Show options' ? $(this).text('Hide options') : $(this).text('Show options');
+	function toggleControls () {
+		var toggleButton = $('#controls-toggle');
+		toggleButton.text() == 'Show options' ? toggleButton.text('Hide options') : toggleButton.text('Show options');
 		if($('html').hasClass('anim'))
 			$('#controls').slideToggle();
 		else
 			$('#controls').toggle();
+	}
+
+	$('#controls-toggle').click(function() {
+		toggleControls();
 	});
 
 	$('#mobile-nav-toggle').click(function(e) {
 		$(this).text() == 'Select level' ? $(this).text('Close menu') : $(this).text('Select level');
 		e.preventDefault();
 		$('html').toggleClass('nav-active');
-	});
+	});		
+
+	$('body').click(function(e) {
+		if($(e.target).closest('#controls-wrapper').length === 0 && $('#controls').is(':visible'))
+			toggleControls();
+		if($(e.target).closest('#area-select, #mobile-nav-toggle').length === 0)
+			$('html').removeClass('nav-active');
+	})
 
 	$('#zoom').val('20');
 

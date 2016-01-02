@@ -5,11 +5,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<meta name="apple-mobile-web-app-title" content="Picross Solutions">
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="white">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 		<meta name="format-detection" content="telephone=no">
 		<meta name="description" content="Solutions for Pokemon Picross areas. Stuck on a level? Fear no more!">
 		<title>Pokemon Picross Solutions</title>
         <link rel="icon" type="image/png" href="icon.png" sizes="48x48">
+        <link rel="apple-touch-icon-precomposed" href="icon.png" sizes="48x48">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
 		<link href='style.css' rel='stylesheet' type='text/css'>
@@ -49,6 +50,10 @@
 					<span class="control-description">Displays a grid to differenciate pixels.</span>
 				</div>
 				<div class="control">
+					<span id="names" class="toggle button" data-opt="names">Level Names</span>
+					<span class="control-description">Also shows the name of a pokemon in the navigation on the left.</span>
+				</div>
+				<div class="control">
 					<span id="bg" class="toggle button" data-opt="bgs">Background colors</span>
 					<span class="control-description">Themed colors by type. Disable if they're too bright for you.</span>
 				</div>
@@ -67,6 +72,7 @@
 			<div id="inner-wrapper">
 				<div id="main-content">
 					<div id="description">
+						<div id="notice"></div>
 						<img src="logo.png" alt="Pokemon Picross"><br><br>
 						Stuck? Find your level on the left side.<br>
 						<span class="smalltext">Pro tip: Click on an area instead of a level to quicky navigate up and down.</span><br><br>
@@ -117,3 +123,12 @@
 		</div>
 	</body>
 </html>
+<script type="text/javascript">
+	if(window.navigator.platform == 'Nintendo 3DS') {
+		$('#notice').text('Unfortunately all the data of the levels seems to be too much to view on a 3DS. Please visit the site on a smartphone or PC if the site doesn\'t work properly. Sorry :(').show();
+	}
+
+	if(window.navigator.standalone == true) {
+		$('html').addClass('mobile-webapp');
+	}
+</script>
