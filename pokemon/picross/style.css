@@ -3,6 +3,10 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+.area, #description, #info-box, #support-wrapper #support-options {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: #FFF; }
+
 html {
   background-color: #61646D;
   font-family: 'Roboto', sans-serif;
@@ -350,14 +354,15 @@ html[data-style="fairy"] #type {
     transform: scale(0);
     background-color: #333;
     width: 250px;
-    bottom: 57px;
+    bottom: 0;
     text-align: center;
     padding: 10px 5px;
     -webkit-overflow-scrolling: touch;
     overflow-y: auto; }
     @media only screen and (max-width: 750px) {
       #area-select #quick-select {
-        overflow-y: scroll; } }
+        overflow-y: scroll;
+        bottom: 57px; } }
     #area-select #quick-select .area {
       background-color: #333;
       display: inline-block;
@@ -378,6 +383,18 @@ html[data-style="fairy"] #type {
 .smalltext {
   font-size: 13px;
   color: #999; }
+
+#what-to-do-desktop {
+  display: inline; }
+  @media only screen and (max-width: 750px) {
+    #what-to-do-desktop {
+      display: none; } }
+
+#what-to-do-mobile {
+  display: none; }
+  @media only screen and (max-width: 750px) {
+    #what-to-do-mobile {
+      display: inline; } }
 
 #mobile-nav-toggle {
   display: none;
@@ -408,11 +425,9 @@ html[data-style="fairy"] #type {
     left: 0; } }
 .area {
   display: block;
-  color: #FFF;
   margin-top: 15px;
-  padding: 5px 10px;
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0.1); }
+  padding: 10px 12px;
+  text-decoration: none; }
   @media only screen and (max-width: 750px) {
     .area {
       padding: 16px 14px; } }
@@ -422,7 +437,7 @@ html[data-style="fairy"] #type {
 
 .level {
   display: block;
-  padding: 8px 20px;
+  padding: 10px 20px;
   text-decoration: none;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -468,20 +483,16 @@ html[data-style="fairy"] #type {
   display: none; }
 
 #description {
-  background: #FFF;
   padding: 20px 36px;
   display: inline-block;
   border-radius: 3px;
-  color: #555;
   line-height: 22px; }
   #description a {
-    color: #333; }
+    color: #FFF; }
     #description a:hover {
       text-decoration: none; }
 
 #info-box {
-  background: rgba(0, 0, 0, 0.3);
-  color: #FFF;
   padding: 10px 18px;
   display: block;
   border-radius: 3px;
@@ -504,7 +515,7 @@ html[data-style="fairy"] #type {
 #controls-wrapper {
   position: fixed;
   z-index: 9999;
-  width: 250px;
+  width: 300px;
   left: 250px;
   top: 0;
   -webkit-overflow-scrolling: touch;
@@ -656,9 +667,7 @@ html[data-style="fairy"] #type {
     border-bottom: 1px solid #CCC;
     margin-top: 30px;
     padding: 30px 0;
-    background-color: #FFF;
     font-size: 14px;
-    color: #333;
     display: none; }
     #support-wrapper #support-options #support-text {
       padding: 0 10px;
