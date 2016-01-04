@@ -24,14 +24,24 @@ var defaultOptions = {
 var options = {
 	data: $.extend(true, {}, defaultOptions),
 	save: function() {
-		localStorage.setItem('picrossSolutionsOptions', JSON.stringify(options.data));
+		try {
+			localStorage.setItem('picrossSolutionsOptions', JSON.stringify(options.data));
+		} catch(e) {
+			return false;
+		}
 	},
 	load: function() {
-		if(localStorage.getItem('picrossSolutionsOptions')) {
-			var localOptions = JSON.parse(localStorage.getItem('picrossSolutionsOptions'));
-			for (var option in localOptions) { options.data[option] = localOptions[option]; }
-		} else
-			options.save();
+		try {
+			if(localStorage.getItem('picrossSolutionsOptions')) {
+				console.log(localStorage.getItem('picrossSolutionsOptions'));
+				var localOptions = JSON.parse(localStorage.getItem('picrossSolutionsOptions'));
+				options.data = $.extend(true, {}, localOptions);
+				for (var option in localOptions) { options.data[option] = localOptions[option]; }
+			} else
+				options.save();
+		} catch(e) {
+			options.data = $.extend(true, {}, defaultOptions);
+		}
 		$.each(options.data, function(key, data) {
 			//console.log('Loading ---', key, data);
 			options.update(key);
@@ -62,7 +72,7 @@ var options = {
 		options.save();
 	},
 	reset: function() {
-		options.data = $.extend(true, {}, defaultOptions),
+		options.data = $.extend(true, {}, defaultOptions);
 		options.save();
 		options.load();
 	}
@@ -89,7 +99,7 @@ function seedFromString (string) {
 		hash  = ((hash << 5) - hash) + chr;
 		hash |= 0; // Convert to 32bit integer
 	}
-	return hash * -1;
+	return Math.abs(hash);
 }
 
 //Generates a random opacity pixel using a seed from seedFromString. If effects are enabled this will make the background of the canvas less bland because every transparent pixel will look slightly different.
@@ -373,7 +383,7 @@ $(document).ready(function(e) {
 
 		options.toggle(opt);
 
-		ga('send', 'event', 'picrossSolutions', 'optionsChange', opt + ' - ' + options.data[opt]);
+		ga('send', 'event', 'picrossSolutions', 'options', opt + ' - ' + options.data[opt].value);
 	});
 
 	$('#anim').click(function() {
@@ -442,7 +452,11 @@ $(document).ready(function(e) {
 
 	$('#toggle-support').click(function(e) {
 		e.preventDefault();
+		if(!$('#support-options').is(':visible'))
+			var scrollToSupport = true;
 		$('#support-options').stop().slideToggle();
+		if(scrollToSupport)
+			$('html, body').animate({scrollTop: $("#support-options").offset().top}, 500);
 		ga('send', 'event', 'picrossSolutions', 'supportWrapperToggle', $('#support-options').is(':visible'));
 	});
 
