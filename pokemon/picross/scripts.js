@@ -86,7 +86,8 @@ var properties = {
 	area:false,
 	level:false,
 	grid:true,
-	levelLoaded:false
+	levelLoaded:false,
+	levelEnergy: 0
 };
 
 //Generates a random number with a string as seed
@@ -160,6 +161,7 @@ $(document).ready(function(e) {
 				$('#type').text(solutions[properties.area][properties.level].type);
 				$('#stage').text((properties.area + 1) + '-' + (properties.level + 1));
 				$('#size').text(properties.canvasWidth + 'x' + properties.canvasHeight);
+				$('#energy').text(properties.levelEnergy);
 				$('html').attr('data-style', solutions[properties.area][properties.level].type.toLowerCase());
 				var title = '';
 				if(properties.levelLoaded === true) {
@@ -287,6 +289,7 @@ $(document).ready(function(e) {
 
 			drawLevel: function () {
 				if(properties.levelLoaded) {
+					properties.levelEnergy = 0;
 					var solution = solutions[properties.area][properties.level];
 					//console.log(solution.matrix.length);
 
@@ -297,14 +300,14 @@ $(document).ready(function(e) {
 
 					update.canvas.size();
 
-
 					$.each(solution.matrix, function(key, value) {
 						$.each(value, function (k, v) {
 							//console.log(key + ':' + k + ' - ' + v);
 
-							if(v)
+							if(v) {
+								properties.levelEnergy++;
 								update.canvas.draw(k, key);
-							else
+							} else
 								update.canvas.draw(k, key, randomPixel(k * key * seed));
 						});
 					});
