@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+    <head>
+        <!-- head -->
+
+        <!--Charset, Description & Title -->
+        <meta charset="utf-8">
+        <meta name="description" content="Blade and Soul Daily checklist for Moonwater Plains (Level 45 area).">
+        <title>Blade and Soul Dailies</title>
+
+        <!-- Mobile Meta Tags -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="apple-mobile-web-app-title" content="BnS Dailies">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="format-detection" content="telephone=no">
+
+        <!-- Favicons -->
+        <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
+        <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
+        <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96">
+        <link rel="icon" type="image/png" href="favicon-256.png" sizes="256x256">
+
+        <!-- iOS Home Screen Icons -->
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-256.png">
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-57.png" sizes="57x57">
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-72.png" sizes="72x72">
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-114.png" sizes="114x114">
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-144.png" sizes="144x144">
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Exo+2:300,400,500,600' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="style.css">
+
+        <!-- Libraries -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
+        <!--<script type="text/javascript" src="jquery.stickytableheaders.min.js"></script>-->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/floatthead/1.3.2/jquery.floatThead-slim.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.3/js/jquery.tablesorter.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.3/js/jquery.tablesorter.widgets.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.25.3/js/widgets/widget-grouping.min.js"></script>
+
+        <!-- Google Analytics -->
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-64320934-1', 'auto');
+            ga('send', 'pageview');
+        </script>
+
+        <!-- Underscore Templates -->
+        <script type="text/template" id="tpl-table-row">
+            <tr class="daily-row<% if(dailyDone) { %> done <% } %>" data-value="<%= dailyValue %>" data-id="<%= dailyId %>">
+                <td class="row-done dont-fade"><div class="checkbox"></div></td>
+                <td class="row-tags tags"><%= dailyTags %></td>
+                <td class="row-name"><%= dailyName %></td>
+                <td class="row-location"><%= dailyLocation %></td>
+                <td class="row-map"><%= dailyMap %></td>
+                <td class="row-gold daily-gold" data-gold="<%= dailyGold %>"><%= dailyGoldRewards %></td>
+                <!--<td class="row-misc daily-misc"><%= dailyMiscRewards %></td>-->
+            </tr>
+        </script>
+
+        <script type="text/template" id="tpl-table">
+            <table class="daily-table">
+                <thead>
+                    <tr>
+                        <th class="group-false daily-progress">0 / 40</th>
+                        <th class="group-false tags">Tags</th>
+                        <th class="group-false">Name</th>
+                        <th class="group-text">Location</th>
+                        <th class="group-text">Map</th>
+                        <th class="group-false">Money Rewards</th>
+                        <!--<th class="group-false">Misc Rewards</th>-->
+                    </tr>
+                </thead>
+                <tbody class="daily-table-content">
+                    <% $.each(rows, function(key,value) { %>
+                        <%= value %>
+                    <% }) %>
+                </tbody>
+            </table>
+        </script>
+
+        <script type="text/template" id="tpl-time-settings-edit">
+            Your local reset time: 
+            <select id="localResetTime" class="compact">
+                <% for (var i = 0; i <= 23; i++) { %>
+                    <option<% if(currentTime == i) {%> selected<%}%> value="<%=i%>"><%=i%>:00</option>
+                <% }; %>
+            </select>
+            (6:00 UTC server time) <span id="save-reset-time">save</span> | <span id="detect-reset-time">autodetect</span>
+        </script>
+
+        <!-- JavaScript -->
+        <script type="text/javascript" src="data.js"></script>
+        <script type="text/javascript" src="functions.js"></script>
+        <script type="text/javascript" src="scripts.js"></script>
+
+        <!-- /head -->
+    </head>
+    <body class="js-off">
+        <h1 id="title">Moonwater Plains Daily List</h1>
+        <div id="main-wrapper">
+            <table id="settings">
+                <tr>
+                    <td id="premium-settings">Your Premium Rank:
+                        <select id="premium-modifier">
+                            <option value="1">No premium</option>
+                            <option value="1.1">Rank 1 - 3</option>
+                            <option value="1.2">Rank 4 - 8</option>
+                            <option value="1.3">Rank 9 or 10</option>
+                        </select>
+                    </td>
+                    <td id="faction-settings">Your Faction:
+                        <select id="faction">
+                            <option value="false">Please select</option>
+                            <option value="cerulean">Cerulean Order</option>
+                            <option value="crimson">Crimson Legion</option>
+                        </select>
+                    </td>
+                    <td id="time-settings">
+                        <span class="time-wrappers" id="current-time-wrapper">Local time: <span id="current-time">calculating</span></span> -
+                        <span class="time-wrappers" id="daily-reset-wrapper">Daily reset <span id="daily-reset">calculating</span>
+                        <span class="time-wrappers" id="edit-time-wrapper"><span id="edit-time">change</span></span>
+                        <div id="time-settings-edit"></div>
+                    </td>
+                </tr>
+            </table>
+            <div id="dailies">
+                <div id="display-settings">
+                    <div id="tag-toggle" class="inline label"><div class="checkbox inline checked"></div>Show Tags</div><br><br>
+                    <div class="display-density">
+                        <div class="density-select comfortable" data-value="cozy"></div>
+                        <div class="density-select compact" data-value="dense"></div>
+                    </div>
+                </div>
+                <div id="table-wrapper"></div>
+                <div id="total-value">Total earnings: </div>
+            </div>
+        </div>
+        <footer>
+            <div id="dump"></div>
+            <span class="version"></span>
+            <span class="debug-dump">Debug dump</span>
+        </footer>
+    </body>
+</html>

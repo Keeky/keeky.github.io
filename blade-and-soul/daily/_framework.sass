@@ -1,0 +1,187 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// FUNCTIONS ///////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//Ensures that a color will be visible on a background
+//Usage:
+//color: @include safe-text-color(#F00)
+//Or:
+//color: @include safe-text-color(#F00, -10%)
+//to darken
+//
+@function safe-text-color($color, $offset:false)
+    @if (lightness($color) > 60)
+        @if ($offset)
+            @return lighten(#333, $offset)
+        @else
+            @return #333 // Lighter background, return dark color
+    @else
+        @if ($offset)
+            @return darken(#FFF, $offset)
+        @else
+            @return #FFF // Darker background, return light color
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// MIXINS //////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//Media queries
+//Usage:
+//@include mobile
+//  css: stuff
+//
+=desktop
+    @media only screen and (min-width: 1100px)
+        @content
+
+=tablet
+    @media only screen and (max-width: 1100px)
+        @content
+
+=mobile
+    @media only screen and (max-width: 750px)
+        @content
+
+=notMobile
+    @media only screen and (min-width: 751px)
+        @content
+
+//
+//Simplifies width and height for rectangular stuff
+//Usage:
+//@include size(10px)
+//
+=size($size)
+    width: $size
+    height: $size
+
+//
+//Basic background blur
+//Usage:
+//@include blur(5px)
+//
+=blur($radius)
+    +vendorize(backdrop-filter, blur($radius))
+
+//
+//Adds vendor prefixes
+//Usage:
+//@include vendorize(border-radius, 2px)
+//
+$vendors: 'webkit', 'moz', 'ms', 'o'
+=vendorize($property, $value, $noplain: false, $vendors: $vendors, $prefix:'')
+    @each $vendor in $vendors
+        #{$prefix}-#{$vendor}-#{$property}: $value
+
+    @if $noplain != true
+        #{$property}: $value
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// EXTEND MIXINS ///////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//Two clearfloats
+//Usage:
+//@extend %clearfloat / %clearfix
+//
+%clearfloat
+    overflow: hidden
+
+%clearfix
+    *zoom: 1
+
+    &:before, &:after
+        content: " "
+        display: table
+
+    &:after
+        clear: both
+
+//
+//Card style
+//
+%card
+    border: 1px solid #DDD
+    background-color: #FFF
+    @include vendorize(border-radius, 2px)
+    @include vendorize(box-shadow, -1px 2px 0 #d4d4d4)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// GRID ////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.one, .two, .three, .four, .five, .six, .seven, .eight, .nine, .ten, .eleven, .twelve, .twelfth, .sixth, .fourth, .third, .five-twelfth, .half, .seven-twelfth, .two-third, .three-fourth, .five-sixth, .eleven-twelfth
+    float: left
+
+.one, .twelfth
+    width: 8.33333%
+
+.two, .sixth
+    width: 16.6667%
+
+.three, .fourth
+    width: 25%
+
+.four, .third
+    width: 33.3334%
+
+.five, .five-twelfth
+    width: 41.6667%
+
+.six, .half
+    width: 50%
+
+.seven, .seven-twelfth
+    width: 58.3333%
+
+.eight, .two-third
+    width: 66.6667%
+
+.nine, .three-fourth
+    width: 75%
+
+.ten, .five-sixth
+    width: 83.3333%
+
+.eleven, .eleven-twelfth
+    width: 91.6667%
+
+.twelve
+    width: 100%
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// CLASS STYLES ////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+.left
+    float: left
+
+.right
+    float: right
+
+.noclick
+    text-decoration: none
+
+.loading
+    padding: 20px
+    text-align: center
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+// GLOBAL STYLE ////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//
+//Sets box-sizing to border-box
+//
+*, *:before, *:after
+    -moz-box-sizing: border-box
+    -webkit-box-sizing: border-box
+    box-sizing: border-box
+
+html
+    background-color: #EFEFEF //#A3D9F2
+    font-family: 'Roboto', sans-serif
+    overflow-y: scroll
