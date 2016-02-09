@@ -14,6 +14,10 @@ function prettyDate(date, startDate) {
     return date.toDateString();
 }
 
+function isInt(n){
+    return !isNaN(n)
+}
+
 function leadingRange(number) {
     if(number > 0)
         return '+' + number;
@@ -85,23 +89,107 @@ function echoCurrentTimezone() {
     return 'UTC' + (leadingRange(-settings.data.localTime.getTimezoneOffset() / 60));
 }
 
+function echoTimeTrackerText() {
+
+    //Debug
+    $('.d').each(function() {
+        $(this).text(settings.data[$(this).attr('data-d')])
+    });
+
+    //console.log(settings.data.resetHour, typeof settings.data.resetHour, typeof settings.data.resetHour === 'number')
+
+    if(typeof settings.data.resetHour === 'number') {
+        var toGo = prettyDate(settings.data.resetTime, settings.data.localTime)
+
+        if(!toGo) {
+            if(!alerted) {
+                alert('The dailies just reset. Reload the site to reset your data');
+                alerted = true;
+            }
+            toGo = 'the past';
+        }
+
+        //console.log(toGo);
+
+        $('#daily-reset').text('In ' + toGo  + ' (' + pad(settings.data.resetTime.getHours(), 2) + ':' + pad(settings.data.resetTime.getMinutes(), 2) + ')');
+        //$('#edit-time').show();
+    } else {
+        $('#daily-reset').text('Please select a region');
+        //$('#edit-time').hide();
+    }
+}
+
+function modified() {
+    settings.data.lastModified = new Date();
+}
+
 function findNextResetTime(date) {
+    console.log('Looking for the next reset time of ', date);
+    if(settings.data.resetHour === "not set") {
+        console.log('Skipped because no resetHour is set');
+        return false;
+    }
+
     var tmp = new Date(date);
 
     if(tmp.getUTCHours() >= settings.data.resetHour)
         tmp.setUTCDate(tmp.getUTCDate() + 1);
     tmp.setUTCHours(settings.data.resetHour,0,0,0);
 
+    console.log('Found reset time of ', date, ' : ',  tmp)
+
     return tmp;
 }
 
+function setNextResetTime() {
+    console.log('Setting a new global reset time');
+    if(settings.data.resetHour === "not set") {
+        console.log('Skipped because no resetHour is set');
+        settings.setToDefault('resetTime');
+        return false;
+    }
+
+    settings.data.resetTime = new Date(settings.data.resetTime);
+
+    if(!settings.data.editedTime) {
+        settings.data.resetTime = findNextResetTime(settings.data.localTime);
+    } else {
+        var nextReset = new Date();
+        nextReset.setHours(settings.data.resetHour);
+        settings.data.resetTime = findNextResetTime(nextReset);
+    }
+
+    console.log('New global reset time: ', settings.data.resetTime);
+}
+
 function checkIfResetHappened() {
+    console.log('Checking if a reset happened using lastModified', settings.data.lastModified);
+
+    if(settings.data.resetHour === "not set") {
+        console.log('Skipped because no resetHour is set');
+        return false;
+    }
+
     var l = settings.data.lastModified;
     var r = findNextResetTime(l);
 
-    console.log(r.getTime() < settings.data.localTime.getTime(), 'reset:', new Date(r), 'now:', settings.data.localTime);
+    var didReset = r.getTime() < settings.data.localTime.getTime();
+
+    console.log('Reset happened: ', didReset);
 
     return (r.getTime() < settings.data.localTime.getTime());
+}
+
+function setResetHour(hour, edited) {
+    var e = true;
+
+    settings.data.resetHour = hour;
+
+    if(edited == false)
+        e = false;
+    
+    settings.data.editedTime = e;
+    settings.save();
 }
 
 function changeDisplayDensity() {
@@ -129,4 +217,26 @@ function calculateCompletedDailies () {
         $('.daily-progress').removeClass('warning');
 
     $('.daily-progress').text($('.done').length + ' / 40');
+}
+
+var ui = {
+    nightMode: function() {
+        if(settings.data.nightMode == true) {
+            $('html').addClass('night');
+            $('#night-toggle > .checkbox').addClass('checked');
+        } else {
+            $('html').removeClass('night');
+            $('#night-toggle > .checkbox').removeClass('checked');
+        }
+
+    },
+    tags: function() {
+        if(settings.data.showTags == false) {
+            $('html').addClass('hide-tags')
+            $('#tag-toggle > .checkbox').removeClass('checked');
+        } else {
+            $('html').removeClass('hide-tags')
+            $('#tag-toggle > .checkbox').addClass('checked');
+        }
+    }
 }

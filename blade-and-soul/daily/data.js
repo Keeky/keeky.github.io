@@ -1,3 +1,5 @@
+var alerted = false;
+
 var dungeons = [
     {},
     {
@@ -425,7 +427,7 @@ var dailies = [
 
     {
         name: "A Recurring Nightmare",
-        moneyReward: 130,
+        moneyReward: 1300,
         location: "Spirit's Rest",
         map: 8,
         categories: ["Open World", "Boss"]
@@ -761,12 +763,14 @@ var dailies = [
 ]
 
 var defaultSettings = {
-    version: 1,
-    resetTime: new Date(),
+    version: 2,
+    resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
-    resetHour: 6,
+    resetHour: 'not set',
     editedTime: false,
+    showTags: true,
+    nightMode: false,
     goldModifier: 1,
     faction: 'false',
     displayDensity: 'cozy',
@@ -778,7 +782,7 @@ var settings = {
 
     reset: function() {
         settings.data = $.extend(true, {}, defaultSettings);
-        console.log('settings reset')
+        console.log('Reset all settings to default');
     },
 
     save: function() {
@@ -787,35 +791,40 @@ var settings = {
         } catch(e) {
             return false;
         }
-        console.log('saved', settings.data);
+        console.log('Saved settings: ', settings.data);
     },
 
     load: function() {
-        console.log('pre-load', settings.data);
+        console.log('Settings load started. Default settings: ', settings.data);
         try {
             if(localStorage.getItem('bladeAndSoulDailiesSettings')) {
                 var localOptions = JSON.parse(localStorage.getItem('bladeAndSoulDailiesSettings'));
-
-                if(localOptions.version == defaultSettings.version || localOptions.version === undefined) {
-                    for (var option in localOptions) { settings.data[option] = localOptions[option]; }
-                    settings.update('version', defaultSettings.version)
-                } else
-                    settings.reset();
+                for (var option in localOptions) { settings.data[option] = localOptions[option]; }
             } else
                 settings.save();
         } catch(e) {
             console.error(e);
             settings.reset();
         }
-        console.log('loaded', settings.data)
+        console.log('Settings load finished. New settings: ', settings.data)
     },
 
     update: function(key, value) {
         if(settings.data[key] != value) {
             settings.data[key] = value;
-            console.log('updated', key, value, settings.data);
+            console.log('Updated', key, ' to ', value, ' New settings: ', settings.data);
             settings.save();
         } else
-            console.log('skipped update for ' + key + ' (same value)')
+            console.log('Skipped update of ', key, ' (Same value)', value)
+    },
+
+    toggle: function(key) {
+        settings.data[key] = !settings.data[key];
+        settings.save();
+    },
+
+    setToDefault: function(key) {
+        console.log('Reset', key, ' to default: ', defaultSettings[key]);
+        settings.update(key, defaultSettings[key]);
     }
 }

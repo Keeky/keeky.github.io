@@ -5,6 +5,41 @@ $greyLight: #F6F7F8
 $greyHover: #81939E
 $blue: #00A7F6
 
+$nightBg: #222222
+$nightHighlight: #2D2D2D
+$nightHighlightHover: #333333
+$nightDark: #191919
+$nightText: #F8F8F2
+
+$nightshiftDelay: 2s
+
+$tagNames: ("boss", "pvp", "open.world", "dungeon", "faction")
+$tagColors: (#c0392b, #d35400, #1abc9c, #f1c40f, #9b59b6)
+
+$difficultyNames: ("easy", "normal", "challenging", "heroic")
+$difficultyColors: (#FFF, #2ecc71, #38BFE1, #A237FF)
+
+.tag
+    background-color: $nightHighlightHover
+
+@each $tag in $tagNames
+    $i: index($tagNames, $tag)
+    $color: nth($tagColors, $i)
+    .tag.#{$tag}
+        background-color: #{$color}
+
+    .night .tag.#{$tag}
+        background-color: darken($color, 20%)
+
+@each $tag in $difficultyNames
+    $i: index($difficultyNames, $tag)
+    $color: nth($difficultyColors, $i)
+    .difficulty-#{$tag}
+        color: #{$color}
+
+    .night .difficulty-#{$tag}
+        color: darken(desaturate($color, 5%), 5%)
+
 html
     background-color: #EDF1F2
     font-family: "Exo 2"
@@ -16,18 +51,78 @@ html
             #main-wrapper #dailies .daily-table td
                 padding: 10px
 
-            #main-wrapper #dailies #display-settings .display-density .density-select.compact
+            #main-wrapper #dailies #display-settings #display-density-wrapper .display-density .density-select.compact
                 background-color: $greyHover
 
         &[data-density='cozy']
             #main-wrapper #dailies .daily-table td
                 padding: 20px 10px
 
-            #main-wrapper #dailies #display-settings .display-density .density-select.comfortable
+            #main-wrapper #dailies #display-settings #display-density-wrapper .display-density .density-select.comfortable
                 background-color: $greyHover
 
     &.hide-tags .tags
         display: none
+
+    &.night
+        background-color: $nightHighlight
+        color: $nightText
+
+        .checkbox
+            background-color: $nightBg
+            border-color: $nightHighlightHover
+
+        select
+            background-color: $nightHighlightHover
+
+            &:hover
+                background-color: $nightBg
+
+        &[data-density='dense']
+            #main-wrapper #dailies #display-settings #display-density-wrapper .display-density .density-select.compact
+                background-color: $nightHighlight
+
+        &[data-density='cozy']
+            #main-wrapper #dailies #display-settings #display-density-wrapper .display-density .density-select.comfortable
+                background-color: $nightHighlight
+
+        #main-wrapper #dailies #display-settings #display-density-wrapper .display-density
+            background-color: $nightHighlight
+
+            .density-select
+                background-color: lighten($nightHighlight, 5%)
+
+                &:hover
+                    background-color: $nightHighlightHover
+
+        #main-wrapper
+
+            #dailies
+                background-color: $nightBg
+
+                .daily-table
+
+                    th
+                        background-color: $nightBg
+                        border-color: $nightDark
+
+                        &:hover
+                            background-color: $nightHighlight
+
+                    tr
+                        border-color: $nightDark
+
+                        &:hover
+                            background-color: $nightHighlight
+
+        #fixed-information
+            background-color: $nightBg
+            border-color: $nightDark
+            color: $nightText
+
+        #dump
+            background-color: $nightBg
+            border-color: $nightDark
 
 select
     background: $grey url('dropdown-arrow-down.png') no-repeat right 10px center / 16px
@@ -63,8 +158,8 @@ select
     display: inline-block
 
 %checkboxChecked
-    background: $blue url('check.png') no-repeat center center
-    background-size: 10px
+    background-image: url('check.png')
+    background-color: $blue
     border-color: $blue
     opacity: 1
 
@@ -87,6 +182,8 @@ select
 
 .checkbox
     +size(16px)
+    background: no-repeat center center
+    background-size: 10px
     border: 1px solid $greyHover
     background-color: $grey
     margin: 0 6px
@@ -119,6 +216,15 @@ select
     text-align: center
     margin: 30px 0 10px 0
 
+.link
+    color: $blue
+    padding-right: 8px
+    font-size: 12px
+
+    &:hover
+        text-decoration: underline
+        cursor: pointer
+
 #main-wrapper
     max-width: 1100px
     margin: 50px auto
@@ -133,15 +239,28 @@ select
                 padding: 10px
                 display: block
 
-        #premium-settings, #faction-settings
+        #premium-settings, #faction-settings, #region-settings
             color: #506470
             padding-left: 8px
+
+    #dailies
+        background-color: #FFF
+        padding: 30px 40px 40px 40px
+        border-radius: 5px
+        width: 100%
+
+        +mobile
+            padding: 0
 
         #time-settings
             font-size: 12px
             color: $greyHover
             text-align: right
             width: 100%
+            margin-bottom: 20px
+
+            #edit-time
+                display: none
 
             #time-settings-edit
                 margin-top: 20px
@@ -157,57 +276,46 @@ select
             +mobile
                 text-align: left
                 line-height: 18px
+                padding: 15px
 
                 .time-wrappers
                     display: block
 
-            #edit-time
-                color: $blue
-                padding-right: 8px
-                display: none
-
-                &:hover
-                    text-decoration: underline
-                    cursor: pointer
-
-    #dailies
-        background-color: #FFF
-        padding: 30px 40px 40px 40px
-        border-radius: 5px
-        width: 100%
-
-        +mobile
-            padding: 0
-
         #display-settings
-            text-align: right
             margin-bottom: 20px
+            width: 100%
 
-            +mobile
-                display: none
+            #tag-toggle, #night-toggle
+                display: block
+                margin: 20px 5px
 
-            .display-density
-                background-color: $greyHover
-                display: inline-block
-                border-radius: 4px
-                height: 30px
+            #display-density-wrapper
+                text-align: right
+                vertical-align: middle
+                padding-right: 10px
 
-                .density-select
-                    background: $grey center center no-repeat
-                    background-size: 24px
-                    +size(30px)
+                .display-density
+                    background-color: $greyHover
                     display: inline-block
                     border-radius: 4px
+                    height: 30px
 
-                    &:hover
-                        background-color: darken($grey, 5%)
-                        cursor: pointer
+                    .density-select
+                        background: $grey center center no-repeat
+                        background-size: 24px
+                        +size(30px)
+                        display: inline-block
+                        border-radius: 4px
 
-                    &.compact
-                        background-image: url('view-dense.png')
+                        &:hover
+                            background-color: darken($grey, 5%)
+                            cursor: pointer
 
-                    &.comfortable
-                        background-image: url('view-comfortable.png')
+                        &.compact
+                            background-image: url('view-dense.png')
+
+                        &.comfortable
+                            background-image: url('view-comfortable.png')
 
         .daily-table
             width: 100%
@@ -328,26 +436,10 @@ select
                             content: 'Other rewards: '
 
                 .tag
-                    background-color: $grey
                     padding: 3px 6px
                     color: #FFF
                     border-radius: 3px
                     margin-right: 5px
-
-                    &.boss
-                        background-color: #c0392b
-
-                    &.pvp
-                        background-color: #d35400
-
-                    &.open.world
-                        background-color: #1abc9c
-
-                    &.dungeon
-                        background-color: #f1c40f
-
-                    &.faction
-                        background-color: #9b59b6
 
             tbody
                 tr
@@ -385,17 +477,6 @@ select
                         background-color: $greyLight
                         cursor: pointer
 
-            .difficulty
-
-                &-normal
-                    color: #2ecc71
-
-                &-challenging
-                    color: #38BFE1
-
-                &-heroic
-                    color: #A237FF
-
         #total-value
             text-align: right
             color: $grey
@@ -403,20 +484,26 @@ select
             margin: 10px
             height: 18px
 
+#fixed-information
+    position: fixed
+    bottom: 0
+    text-align: center
+    background-color: #FFF
+    border-top: 2px solid #EFEFEF
+    width: 100%
+    color: #333
+    padding: 10px 5px
+    height: 40px
+
 footer
     color: $grey
     padding: 10px
     font-size: 14px
     max-width: 100%
+    margin-bottom: 40px
 
     .debug-dump
-        color: $blue
-        cursor: pointer
-        font-size: 12px
         margin-left: 10px
-
-        &:hover
-            text-decoration: underline
 
     #dump
         display: none

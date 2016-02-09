@@ -15,18 +15,18 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <meta name="format-detection" content="telephone=no">
 
-        <!-- Favicons -->
+        <!-- Favicons
         <link rel="icon" type="image/png" href="favicon-16.png" sizes="16x16">
         <link rel="icon" type="image/png" href="favicon-32.png" sizes="32x32">
         <link rel="icon" type="image/png" href="favicon-96.png" sizes="96x96">
-        <link rel="icon" type="image/png" href="favicon-256.png" sizes="256x256">
+        <link rel="icon" type="image/png" href="favicon-256.png" sizes="256x256"> -->
 
-        <!-- iOS Home Screen Icons -->
+        <!-- iOS Home Screen Icons
         <link rel="apple-touch-icon-precomposed" href="splashscreen-256.png">
         <link rel="apple-touch-icon-precomposed" href="splashscreen-57.png" sizes="57x57">
         <link rel="apple-touch-icon-precomposed" href="splashscreen-72.png" sizes="72x72">
         <link rel="apple-touch-icon-precomposed" href="splashscreen-114.png" sizes="114x114">
-        <link rel="apple-touch-icon-precomposed" href="splashscreen-144.png" sizes="144x144">
+        <link rel="apple-touch-icon-precomposed" href="splashscreen-144.png" sizes="144x144"> -->
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
@@ -95,7 +95,7 @@
                     <option<% if(currentTime == i) {%> selected<%}%> value="<%=i%>"><%=i%>:00</option>
                 <% }; %>
             </select>
-            (6:00 UTC server time) <span id="save-reset-time">save</span> | <span id="detect-reset-time">autodetect</span>
+            (EU: 6:00 UTC - NA: 23:00 UTC) <span id="save-reset-time">save</span> | <span id="detect-reset-time">autodetect</span>
         </script>
 
         <!-- JavaScript -->
@@ -125,30 +125,47 @@
                             <option value="crimson">Crimson Legion</option>
                         </select>
                     </td>
-                    <td id="time-settings">
-                        <span class="time-wrappers" id="current-time-wrapper">Local time: <span id="current-time">calculating</span></span> -
-                        <span class="time-wrappers" id="daily-reset-wrapper">Daily reset <span id="daily-reset">calculating</span>
-                        <span class="time-wrappers" id="edit-time-wrapper"><span id="edit-time">change</span></span>
-                        <div id="time-settings-edit"></div>
+                    <td id="region-settings">Your Region:
+                        <select id="reset-hour">
+                            <option value="not set">Please select</option>
+                            <option value="6">Europe</option>
+                            <option value="23">North America</option>
+                        </select>
                     </td>
                 </tr>
             </table>
             <div id="dailies">
-                <div id="display-settings">
-                    <div id="tag-toggle" class="inline label"><div class="checkbox inline checked"></div>Show Tags</div><br><br>
-                    <div class="display-density">
-                        <div class="density-select comfortable" data-value="cozy"></div>
-                        <div class="density-select compact" data-value="dense"></div>
-                    </div>
+                <div id="time-settings">
+                    <span class="time-wrappers" id="current-time-wrapper">Local time: <span id="current-time">calculating</span></span> -
+                    <span class="time-wrappers" id="daily-reset-wrapper">Daily reset: <span id="daily-reset">calculating</span> <span id="edit-time" class="link">change</span></span>
+                    <div id="time-settings-edit"></div>
                 </div>
+                <table id="display-settings">
+                    <tr>
+                        <td>
+                            <div id="tag-toggle" class="inline label"><div class="checkbox inline checked"></div>Show Tags</div>
+                            <div id="night-toggle" class="inline label"><div class="checkbox inline"></div>Night mode</div>
+                        </td>
+                        <td id="display-density-wrapper">
+                            <div class="display-density">
+                                <div class="density-select comfortable" data-value="cozy"></div>
+                                <div class="density-select compact" data-value="dense"></div>
+                            </div>
+                        </td>
+                </table>
                 <div id="table-wrapper"></div>
-                <div id="total-value">Total earnings: </div>
             </div>
+        </div>
+        <div id="fixed-information">
+            <div id="total-value" class="inline">Total earnings: </div><!--  - 
+            resetHour: <span class="d" data-d="resetHour"></span> - 
+            resetTime: <span class="d" data-d="resetTime"></span> -  -->
         </div>
         <footer>
             <div id="dump"></div>
             <span class="version"></span>
-            <span class="debug-dump">Debug dump</span>
+            <span class="debug-dump link">Debug dump</span>
+            <span class="reset-settings link">Reset local data</span>
         </footer>
     </body>
 </html>
