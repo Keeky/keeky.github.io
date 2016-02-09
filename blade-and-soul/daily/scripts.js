@@ -5,6 +5,11 @@ $(document).ready(function() {
     settings.data.localTime = new Date();
     settings.data.lastModified = new Date(settings.data.lastModified);
 
+    if (settings.data.version == 2) {
+        if(settings.data.resetHour == 23)
+            settings.data.resetHour = 12;
+    }
+
     if(settings.data.version < 2) {
         console.log('Detected old version, resetting resetHour and resetDate');
         settings.setToDefault('resetHour');

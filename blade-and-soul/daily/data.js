@@ -763,7 +763,7 @@ var dailies = [
 ]
 
 var defaultSettings = {
-    version: 2,
+    version: 3,
     resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
