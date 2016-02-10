@@ -33,6 +33,15 @@ var dungeons = [
     },{},{},{},{
         name: "Tomb of the Exiles",
         difficulty: 3
+    }, {
+        name: "Bloodshade Harbor",
+        difficulty: 3
+    }, {
+        name: "Nightshade Harbor",
+        difficulty: 3
+    }, {
+        name: "Mushin's Tower",
+        difficulty: 3
     }
 ]
 
@@ -77,6 +86,10 @@ maps = [
     {
         name: "Misty Woods"
     },
+
+    {
+        name: "Mushin's Tower"
+    }
 ]
 
 var items = [
@@ -91,7 +104,7 @@ var items = [
 var dailies = [
 
     //////////////////////////
-    //Blackram Shipyard
+    //Blackram Supply
     //////////////////////////
 
     {
@@ -759,6 +772,122 @@ var dailies = [
         location: "1v1 Arena",
         map: 0,
         categories: ["PvP"]
+    },
+
+    //////////////////////////
+    // Mushin's Tower
+    //////////////////////////
+
+    {
+        name: "The Final Training",
+        moneyReward: 11500,
+        location: "Mushin's Tower 7F",
+        dungeon: 16,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Monsters and Mayhem",
+        moneyReward: 6700,
+        location: "Mushin's Tower 5F",
+        dungeon: 16,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "The Trial of the Tower",
+        moneyReward: 5800,
+        location: "Mushin's Tower 1F",
+        dungeon: 16,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    //////////////////////////
+    // Blood/Nightshade Harbor
+    //////////////////////////
+
+    {
+        name: "Blood on the Water",
+        moneyReward: 8700,
+        location: "Blackram Shipyard",
+        dungeon: 14,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Dead Reckoning",
+        moneyReward: 3800,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "A Shadey Alliance",
+        moneyReward: 4400,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Officers of the Blackram Marauders",
+        moneyReward: 4700,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "A Shadey Alliance",
+        moneyReward: 4400,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Poaching the Poachers",
+        moneyReward: 4000,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Where the Dark is Deepest",
+        moneyReward: 4400,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "The Man Behind the Mystery",
+        moneyReward: 5300,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon", "Boss"]
+    },
+
+    {
+        name: "Bashing Buccaneers",
+        moneyReward: 4000,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
     }
 ]
 

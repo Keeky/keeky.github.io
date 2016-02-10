@@ -105,7 +105,7 @@ html
                 #tabs
 
                     .tab
-                        background-color: darken($nightHighlight, 4%)
+                        background-color: $nightBg
                         border-color: $nightDark
 
                         &.active
@@ -271,6 +271,19 @@ select
 #main-wrapper
     max-width: 1100px
     margin: 50px auto
+
+    #notice
+        text-align: center
+        margin: 20px 0 35px
+        color: $greyHover
+
+        a
+            text-decoration: none
+            color: $blue
+
+            &:hover
+                cursor: pointer
+                text-decoration: underline
 
     #settings
         margin-bottom: 12px
