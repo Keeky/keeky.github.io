@@ -41,7 +41,8 @@ $difficultyColors: (#FFF, #2ecc71, #38BFE1, #A237FF)
         color: darken(desaturate($color, 5%), 5%)
 
 html
-    background-color: #EDF1F2
+    //background-color: #EDF1F2
+    background-color: #EEE
     font-family: "Exo 2"
     -webkit-text-size-adjust: 100%
 
@@ -61,7 +62,7 @@ html
             #main-wrapper #dailies #display-settings #display-density-wrapper .display-density .density-select.comfortable
                 background-color: $greyHover
 
-    &.hide-tags .tags
+    &.hide-tags #main-wrapper #dailies #table-wrapper .tags
         display: none
 
     &.night
@@ -97,8 +98,27 @@ html
 
         #main-wrapper
 
+            #tab-wrapper
+                //background-color: darken($nightHighlight, 2%)
+                border-color: $nightDark
+
+                #tabs
+
+                    .tab
+                        background-color: darken($nightHighlight, 4%)
+                        border-color: $nightDark
+
+                        &.active
+                            border-bottom-color: $nightBg
+                            border-top-color: $blue
+                            color: #FFF
+
+                #add-tab:hover
+                    color: #FFF
+
             #dailies
                 background-color: $nightBg
+                border-color: $nightDark
 
                 .daily-table
 
@@ -139,7 +159,7 @@ select
     &.compact
         padding: 0 24px 0 4px
 
-    +mobile
+    +tablet
         display: block
         width: 100%
         margin: 10px 0
@@ -225,6 +245,29 @@ select
         text-decoration: underline
         cursor: pointer
 
+.donate-button
+    color: #FFF
+    padding: 4px 12px 4px 27px
+    border-radius: 6px
+    text-decoration: none
+    margin: 0 4px
+
+    &.paypal
+        border: 1px solid darken(#1189D6, 10%)
+        background-color: #1189D6
+        background: url('http://cdn.keeky.net/paypal/logo-small.png') center center no-repeat, linear-gradient(to bottom, #1189D6 0%,darken(#1189D6, 10%) 100%)
+
+        &:hover
+            background: url('http://cdn.keeky.net/paypal/logo-small.png') center center no-repeat, darken(#1189D6, 10%)
+
+    &.bitcoin
+        border: 1px solid darken(#F7931A, 10%)
+        background-color: #F7931A
+        background: url('http://cdn.keeky.net/bitcoin/logo-small.png') center center no-repeat, linear-gradient(to bottom, #F7931A 0%,darken(#F7931A, 10%) 100%)
+    
+        &:hover
+            background: url('http://cdn.keeky.net/bitcoin/logo-small.png') center center no-repeat, darken(#F7931A, 10%)
+
 #main-wrapper
     max-width: 1100px
     margin: 50px auto
@@ -234,7 +277,7 @@ select
         white-space: nowrap
         width: 100%
 
-        +mobile
+        +tablet
             td
                 padding: 10px
                 display: block
@@ -242,11 +285,114 @@ select
         #premium-settings, #faction-settings, #region-settings
             color: #506470
             padding-left: 8px
+    
+    #tab-wrapper
+        padding: 12px 20px 0 20px
+        //border: 1px solid #CCC
+        //background-color: #F5F5F5
+        //border-radius: 5px 5px 0 0
+
+        +tablet
+            display: none
+
+        #tabs
+            display: inline-block
+
+            .tab
+                background-color: #FCFCFC
+                position: relative
+                top: 1px
+                display: inline-block
+                padding: 12px 18px
+                border-radius: 5px 5px 0 0
+                border-right: 1px solid #DDD
+                border-top: 1px solid #DDD
+                border-bottom: 1px solid #DDD
+                color: $grey
+                height: 42px
+                width: 160px
+
+                .tab-name-edit
+                    border: none
+                    font-size: 14px
+                    color: #FFF
+                    padding: 4px 0 0
+                    margin: 0 0 1px 0
+                    width: 100%
+                    border-bottom: 1px solid #CCC
+                    font-family: "Exo 2"
+                    color: $greyHover
+                    background-color: transparent
+
+                .tab-name
+                    max-width: 100px
+                    display: inline-block
+                    overflow: hidden
+                    text-overflow: ellipsis
+                    white-space: nowrap
+                    font-size: 14px
+                    padding-bottom: 4px
+
+                .tab-icon
+                    opacity: 0.7
+                    +size(12px)
+                    display: inline-block
+                    background: no-repeat center center
+                    background-size: 10px
+                    margin: 2px 3px 0 3px
+                    float: right
+
+                    &:hover
+                        cursor: default
+                        opacity: 1
+
+                    &.edit-tab
+                        display: none
+                        background-image: url('edit.png')
+
+                    &.close-tab
+                        background-image: url('close.png')
+
+                &:first-child
+                    border-left: 1px solid #DDD
+
+                &:hover
+                    background-color: #FFF
+                    cursor: pointer
+                    color: $greyHover
+
+                &.active
+                    color: #333
+                    border-bottom: 1px solid #FFF
+                    background-color: #FFF
+                    border-top: 1px solid $blue
+                    background-color: #FFF
+
+                    .close-tab
+                        display: none
+
+                    .edit-tab
+                        display: inline-block
+
+        #add-tab
+            position: relative
+            top: 1px
+            display: inline-block
+            padding: 6px 18px 0px 18px
+            color: $grey
+            font-size: 24px
+            vertical-align: top
+
+            &:hover
+                color: #333
+                cursor: pointer
+
 
     #dailies
         background-color: #FFF
         padding: 30px 40px 40px 40px
         border-radius: 5px
+        border: 1px solid #CCC
         width: 100%
 
         +mobile
@@ -286,13 +432,15 @@ select
             width: 100%
 
             #tag-toggle, #night-toggle
-                display: block
-                margin: 20px 5px
+                margin: 10px 5px
 
             #display-density-wrapper
                 text-align: right
                 vertical-align: middle
                 padding-right: 10px
+
+                +mobile
+                    display: none
 
                 .display-density
                     background-color: $greyHover
@@ -316,6 +464,9 @@ select
 
                         &.comfortable
                             background-image: url('view-comfortable.png')
+
+        #table-wrapper
+            overflow: auto
 
         .daily-table
             width: 100%
@@ -444,10 +595,6 @@ select
             tbody
                 tr
                     border-top: 2px solid $greyLight
-
-                    +mobile
-                        &:first-child
-                            border-top: none
 
                     &.group-header
                         td

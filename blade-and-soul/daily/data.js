@@ -763,7 +763,7 @@ var dailies = [
 ]
 
 var defaultSettings = {
-    version: 3,
+    version: 4,
     resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
@@ -774,7 +774,12 @@ var defaultSettings = {
     goldModifier: 1,
     faction: 'false',
     displayDensity: 'cozy',
-    done: []
+    done: [
+        {
+            name: "Default",
+            done: [0]
+        }
+    ],
 };
 
 var settings = {

@@ -103,7 +103,7 @@ function echoTimeTrackerText() {
 
         if(!toGo) {
             if(!alerted) {
-                alert('The dailies just reset. Reload the site to reset your data');
+                alert('The dailies just reset. Reload the site or swith to another daily tab to clear the data');
                 alerted = true;
             }
             toGo = 'the past';
@@ -230,6 +230,7 @@ var ui = {
         }
 
     },
+
     tags: function() {
         if(settings.data.showTags == false) {
             $('html').addClass('hide-tags')
@@ -238,5 +239,11 @@ var ui = {
             $('html').removeClass('hide-tags')
             $('#tag-toggle > .checkbox').addClass('checked');
         }
+    },
+
+    selects: function() {
+        $('#premium-modifier').val(settings.data.goldModifier);
+        $('#faction').val(settings.data.faction);
+        $('#reset-hour').val(settings.data.resetHour);
     }
 }
