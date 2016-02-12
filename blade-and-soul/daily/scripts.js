@@ -25,6 +25,11 @@ $(document).ready(function() {
         settings.save();
     }
 
+    if(settings.data.version < 5) {
+        console.log('Detected old version, notifying the user about the removed duplicate.');
+        alert('Due to the removal of a duplicate daily, four of your saved quests might have been shifted by one.'+"\n"+''+"\n"+'Specifically "Poaching the Poachers", "Where the Dark is Deepest", "The Man Behind the Mystery" or "Bashing Buccaneers".'+"\n"+''+"\n"+'This fix itself after the next reset. Sorry for that.')
+    }
+
     settings.update('version', defaultSettings.version);
 
     setNextResetTime();

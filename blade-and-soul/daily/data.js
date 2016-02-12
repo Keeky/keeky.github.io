@@ -69,7 +69,7 @@ maps = [
         name: "Hogshead Hamlet"
     },
 
-    //5
+    // 5
 
     {
         name: "Sapphire Basin"
@@ -399,7 +399,7 @@ var dailies = [
         moneyReward: 1500,
         location: "Soul Ward",
         map: 8,
-        categories: ["Open World"]
+        categories: ["Dungeon"]
     },
 
     {
@@ -562,7 +562,7 @@ var dailies = [
         location: "Greenhollow",
         dungeon: 13,
         map: 2,
-        categories: ["Dungeon"]
+        categories: ["Dungeon", "Boss"]
     },
 
     {
@@ -635,7 +635,7 @@ var dailies = [
         location: "Monkeystone",
         dungeon: 5,
         map: 2,
-        categories: ["Dungeon"]
+        categories: ["Dungeon", "Boss"]
     },
 
     //////////////////////////
@@ -837,6 +837,15 @@ var dailies = [
     },
 
     {
+        name: "A Shadey Alliance",
+        moneyReward: 4400,
+        location: "Blackram Shipyard",
+        dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
         name: "Officers of the Blackram Marauders",
         moneyReward: 4700,
         location: "Blackram Shipyard",
@@ -845,14 +854,7 @@ var dailies = [
         categories: ["Dungeon"]
     },
 
-    {
-        name: "A Shadey Alliance",
-        moneyReward: 4400,
-        location: "Blackram Shipyard",
-        dungeon: 15,
-        map: 4,
-        categories: ["Dungeon"]
-    },
+    //Removed A Shadey Alliance duplicate
 
     {
         name: "Poaching the Poachers",
@@ -892,7 +894,7 @@ var dailies = [
 ]
 
 var defaultSettings = {
-    version: 4,
+    version: 5,
     resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
