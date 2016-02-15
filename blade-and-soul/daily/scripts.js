@@ -8,12 +8,14 @@ $(document).ready(function() {
     if (settings.data.version == 2) {
         if(settings.data.resetHour == 23)
             settings.data.resetHour = 12;
+        ga('send', 'event', 'bnsDaily', 'legacy', '=2');
     }
 
     if(settings.data.version < 2) {
         console.log('Detected old version, resetting resetHour and resetDate');
         settings.setToDefault('resetHour');
         settings.setToDefault('resetDate');
+        ga('send', 'event', 'bnsDaily', 'legacy', '2');
     }
 
     if(settings.data.version < 4) {
@@ -23,11 +25,13 @@ $(document).ready(function() {
             done: settings.data.done
         }]
         settings.save();
+        ga('send', 'event', 'bnsDaily', 'legacy', '4');
     }
 
     if(settings.data.version < 5) {
         console.log('Detected old version, notifying the user about the removed duplicate.');
         alert('Due to the removal of a duplicate daily, four of your saved quests might have been shifted by one.'+"\n"+''+"\n"+'Specifically "Poaching the Poachers", "Where the Dark is Deepest", "The Man Behind the Mystery" or "Bashing Buccaneers".'+"\n"+''+"\n"+'This fix itself after the next reset. Sorry for that.')
+        ga('send', 'event', 'bnsDaily', 'legacy', '5');
     }
 
     settings.update('version', defaultSettings.version);

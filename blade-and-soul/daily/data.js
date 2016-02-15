@@ -837,15 +837,6 @@ var dailies = [
     },
 
     {
-        name: "A Shadey Alliance",
-        moneyReward: 4400,
-        location: "Blackram Shipyard",
-        dungeon: 15,
-        map: 4,
-        categories: ["Dungeon"]
-    },
-
-    {
         name: "Officers of the Blackram Marauders",
         moneyReward: 4700,
         location: "Blackram Shipyard",
