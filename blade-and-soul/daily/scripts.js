@@ -217,7 +217,7 @@ $(document).ready(function() {
 
             if(daily.dungeon) {
                 d = echoDungeon(daily.dungeon);
-                dungeon = '<br><span class="difficulty-'+echoDifficulty(d.difficulty)+'">'+d.name+'</span>';
+                dungeon = '<span class="difficulty-'+echoDifficulty(d.difficulty)+'">'+d.name+'</span>';
             }
 
             var dailyName = daily.name;
@@ -239,13 +239,16 @@ $(document).ready(function() {
                 categories += '<span class="tag ' + val.toLowerCase() + '">' + val + '</span>'
             });
 
+            if(dungeon)
+                daily.location = dungeon
+
             rows.push(templates.tableRow({
                 dailyDone: settings.data.done[activeTab].done[index],
                 dailyValue: daily.moneyReward,
                 dailyGold: daily.moneyReward,
                 dailyId: index,
                 dailyTags: categories,
-                dailyName: dailyName + dungeon,
+                dailyName: dailyName,
                 dailyLocation: daily.location,
                 dailyMap: echoMap(daily.map).name,
                 dailyGoldRewards: echoGold(Math.round(daily.moneyReward * settings.data.goldModifier)),
