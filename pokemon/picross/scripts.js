@@ -16,7 +16,7 @@ var defaultOptions = {
 		htmlClass: true
 	},
 	names: {
-		value: false,
+		value: true,
 		htmlClass: true
 	}
 };
