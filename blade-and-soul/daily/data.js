@@ -2,45 +2,90 @@ var alerted = false;
 
 var dungeons = [
     {},
-    {
+
+    {//1
         name: "Blackram Supply Chain",
         difficulty: 3
     },
 
-    {
+    {//2
         name: "E. Fleet Supply Chain",
         difficulty: 3
     },
-    {
+
+    {//3
         name: "Skittering Tunnels",
         difficulty: 2
-    },{
+    },
+
+    {//4
         name: "Brightstone Ruins",
         difficulty: 2
-    },{
+    },
+
+    {//5
         name: "Hall of Ogong",
         difficulty: 2
-    },{
+    },
+
+    {//6
         name: "The Pigstry",
         difficulty: 2
-    },{
+    },
+
+    {//7
         name: "Skyhaven Stockade",
         difficulty: 1
     },
-    {},{
+
+    {//8
+
+    },
+
+    {//9
         name: "Agurite Cavern",
         difficulty: 1
-    },{},{},{},{
+    },
+
+    {//10
+
+    },
+
+    {//11
+
+    },
+
+    {//12
+
+    },
+
+    {//13
         name: "Tomb of the Exiles",
         difficulty: 3
-    }, {
+    },
+
+    {//14
         name: "Bloodshade Harbor",
         difficulty: 3
-    }, {
+    },
+
+    {//15
         name: "Nightshade Harbor",
         difficulty: 3
-    }, {
-        name: "Mushin's Tower",
+    },
+
+    {//16
+        name: "Mushin's Tower 1F-7F",
+        difficulty: 3
+    },
+
+    {//17
+        name: "Mushin's Tower 8F",
+        difficulty: 3
+    },
+
+    {//18
+        name: "Naryu Labyrinth",
         difficulty: 3
     }
 ]
@@ -879,6 +924,68 @@ var dailies = [
         moneyReward: 4000,
         location: "Blackram Shipyard",
         dungeon: 15,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    //////////////////////////
+    // Mushin's Tower 8F
+    //////////////////////////
+
+    {
+        name: "Lingering Pain",
+        moneyReward: 6200,
+        location: "Mushin's Tower 8F",
+        dungeon: 17,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Enduring Fury",
+        moneyReward: 6600,
+        location: "Mushin's Tower 8F",
+        dungeon: 17,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Unending Darkness",
+        moneyReward: 7100,
+        location: "Mushin's Tower 8F",
+        dungeon: 17,
+        map: 10,
+        categories: ["Dungeon"]
+    },
+
+    //////////////////////////
+    // Naryu Labyrinth
+    //////////////////////////
+
+    {
+        name: "The Horn Identity",
+        moneyReward: 6200,
+        location: "Blackram Shipyard",
+        dungeon: 18,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Down with the Clown",
+        moneyReward: 6200,
+        location: "Blackram Shipyard",
+        dungeon: 18,
+        map: 4,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Lightning in a Bottle",
+        moneyReward: 7100,
+        location: "Blackram Shipyard",
+        dungeon: 18,
         map: 4,
         categories: ["Dungeon"]
     }
