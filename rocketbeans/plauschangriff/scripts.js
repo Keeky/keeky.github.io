@@ -115,11 +115,8 @@ $(document).ready(function(){
 			if(data.results[0]){
 				//data = filterData(data.results[0]);
 				var result = $.xml2json(data.results[0]);
-				var podcasts = result.rss.channel.image.item;
-
-				console.log(result);
-
-				$()
+				var podcasts = result.rss.channel.subtitle.image.item;
+				//console.log(result, podcasts);
 
 				playlist = new jPlayerPlaylist({
 					jPlayer: "#jquery_jplayer_1",
@@ -128,11 +125,17 @@ $(document).ready(function(){
 
 				for (var id = podcasts.length - 1; id >= 0; id--) {
 					var podcast = podcasts[id];
-					podcast.data = podcast['enclosure'];
+					//console.log(id, podcast.enclosure, podcast.summary);
+
+					if(podcast.enclosure)
+						var data = podcast.enclosure;
+
+					if(podcast.summary.enclosure)
+						var data = podcast.summary.enclosure;
 
 					playlist.add({
-						title: podcast.toString(),
-						mp3: podcast.data.url
+						title: podcast.toString() + ' - ' + podcast.subtitle,
+						mp3: data.url
 					});
 
 					// $('#podcasts').append(
