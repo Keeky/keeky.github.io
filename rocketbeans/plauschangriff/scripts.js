@@ -144,7 +144,10 @@ $(document).ready(function(){
 
 	function hashUpdate() {
 		var hash = document.location.hash.slice(1);
-		console.log(hash, urls[hash]);
+
+		if(!hash)
+			hash = 'plauschangriff';
+
 		var activeCast = urls['plauschangriff'];
 		if(urls[hash])
 			activeCast = urls[hash];
