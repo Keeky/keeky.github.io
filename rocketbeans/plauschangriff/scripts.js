@@ -10,7 +10,12 @@ $(document).ready(function(){
 			return 'Der Podcast wird unterbrochen wenn du die Seite jetzt verlässt.';
 	});
 
-	var xmlUrl = 'http://www.rocketbeans.tv/plauschangriff.xml',
+	var urls = {
+		"almost-daily": 'http://www.rocketbeans.tv/almost_daily.xml',
+		"plauschangriff": 'http://www.rocketbeans.tv/plauschangriff.xml',
+		"bohndesliga": 'http://www.rocketbeans.tv/bohndesliga.xml',
+		"press-select": 'http://www.rocketbeans.tv/press_select.xml'
+	},
 	player = $('#jquery_jplayer_1'),
 	playerData,
 	podcastArray,
@@ -107,16 +112,15 @@ $(document).ready(function(){
 		return data;
 	}
 
-	$.getJSON("http://query.yahooapis.com/v1/public/yql?" +
-		"q=select%20*%20from%20html%20where%20url%3D%22" +
-		encodeURIComponent(xmlUrl)+
-		"%22&format=json'&callback=?",
-		function(data){
-			if(data.results[0]){
-				//data = filterData(data.results[0]);
-				var result = $.xml2json(data.results[0]);
-				var podcasts = result.rss.channel.subtitle.image.item;
-				//console.log(result, podcasts);
+	function loadPodcastsFromUrl(xmlUrl) {
+		$('html').addClass('podcast-loading');
+
+		$.getJSON("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss%20where%20url%3D%22" + encodeURIComponent(xmlUrl) + "%22&format=json", function(data){
+			$('html').removeClass('podcast-loading');
+
+			if(data.query.results.item){
+
+				var podcasts = data.query.results.item;
 
 				playlist = new jPlayerPlaylist({
 					jPlayer: "#jquery_jplayer_1",
@@ -125,34 +129,37 @@ $(document).ready(function(){
 
 				for (var id = podcasts.length - 1; id >= 0; id--) {
 					var podcast = podcasts[id];
-					//console.log(id, podcast.enclosure, podcast.summary);
-
-					if(podcast.enclosure)
-						var data = podcast.enclosure;
-
-					if(podcast.summary.enclosure)
-						var data = podcast.summary.enclosure;
 
 					playlist.add({
-						title: podcast.toString() + ' - ' + podcast.subtitle,
-						mp3: data.url
+						title: 'Episode #' + (id + 1) + ' - ' + podcast.title,
+						mp3: podcast.enclosure.url
 					});
-
-					// $('#podcasts').append(
-					// '<a id="podcast-'+id+'" data-podcast-url="'+podcast.data.url+'" data-media-type="'+podcast.data.type+'" data-podcast-id="'+id+'" class="podcast">' +
-					// 	'<h1>'+podcast+'</h1>' +
-					// 	'<h2>'+podcast['subtitle']+'</h2>' +
-					// 	'<span class="metadata">' +
-					// 		'<span class="date">' + podcast.data.pubdate + '</span>' +
-					// '</a>'
-					// )
 				};
 			} else {
 				var errormsg = '<p>Fehler beim Laden der Daten.</p>';
 				$('html').html(errormsg);
 			}
-		}
-	);
+		})
+	}
+
+	function hashUpdate() {
+		var hash = document.location.hash.slice(1);
+		console.log(hash, urls[hash]);
+		var activeCast = 'plauschangriff';
+		if(urls[hash])
+			activeCast = urls[hash];
+
+		$('.active-podcast').removeClass('active-podcast');
+		console.log('a[href="#' + hash + '"]', $('a[href="#' + hash + '"]'))
+		$('a[href="#' + hash + '"]').addClass('active-podcast');
+		loadPodcastsFromUrl(activeCast);
+	}
+
+	hashUpdate();
+
+	$(window).on('hashchange', function() {
+		hashUpdate();
+	})
 
 	$(document).on('click', '.jp-playlist-item', function() {
 		ga('send', 'event', 'plauschangriff', 'loadPodcast', $(this).text());

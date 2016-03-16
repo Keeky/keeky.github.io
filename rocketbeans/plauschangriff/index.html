@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 		<title>Rocketbeans Plauschangriff Player</title>
-		<meta name="description" content="Hör dir den Rocketbeans Plauschangriff Podcast direkt im Browser an.">
+		<meta name="description" content="Hör dir den Plauschangriff und andere Rocketbeans Podcasts direkt im Browser an.">
 
 		<!-- Meta Tags -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -50,12 +50,21 @@
 		</script>
 	</head>
 	<body class="js-off">
+		<div id="loading-overlay">
+			<div id="spinner"></div>
+		</div>
 		<div id="preload">
 			<img src="img/shuffle-icon-64-blue.png">
 			<img src="img/repeat-icon-64-blue.png">
 			<img src="img/load-icon-64-grey.png">
 		</div>
 		<div id="podcasts">
+			<div id="select">
+				<a href="#plauschangriff">Plauschangriff</a>
+				<a href="#almost-daily">Almost Daily</a>
+				<a href="#press-select">Press Select</a>
+				<a href="#bohndesliga">Bohndesliga</a>
+			</div>
 			<div class="jp-playlist">
 				<ul>
 					<li></li>
