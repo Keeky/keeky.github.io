@@ -130,8 +130,12 @@ $(document).ready(function(){
 				for (var id = podcasts.length - 1; id >= 0; id--) {
 					var podcast = podcasts[id];
 
+					var castTitle = '<span class="podcast-title">Episode #' + (id + 1) + ' - ' + podcast.title + '</span>';
+					var castLength = '<span class="podcast-length">[' + podcast.duration + ']</span>';
+					var castDescription = '<span class="podcast-description">' + castLength + podcast.summary + '</span>';
+
 					playlist.add({
-						title: 'Episode #' + (id + 1) + ' - ' + podcast.title,
+						title: castTitle + castDescription,
 						mp3: podcast.enclosure.url
 					});
 				};
@@ -163,6 +167,12 @@ $(document).ready(function(){
 	$(window).on('hashchange', function() {
 		hashUpdate();
 	})
+
+	$('#compact-toggle').click(function(e) {
+		e.preventDefault();
+
+		$('html').toggleClass('compact-view');
+	});
 
 	$(document).on('click', '.jp-playlist-item', function() {
 		ga('send', 'event', 'plauschangriff', 'loadPodcast', $(this).text());
