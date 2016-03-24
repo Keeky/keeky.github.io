@@ -77,8 +77,23 @@ function echoDungeon(id) {
     return dungeons[id];
 }
 
+function echoContinent(id) {
+    var r = continents[id];
+    if(r)
+        return r;
+}
+
 function echoMap(id) {
     return maps[id];
+}
+
+function echoMapWithContinent(id) {
+    var m = echoMap(id);
+    var c = echoContinent(m.continent);
+
+    console.log(m, c);
+
+    return '<span title="' + c.name + '" class="continent-icon ' + c.name + '"></span>' + m.name;
 }
 
 function echoCurrentTime() {
@@ -245,5 +260,15 @@ var ui = {
         $('#premium-modifier').val(settings.data.goldModifier);
         $('#faction').val(settings.data.faction);
         $('#reset-hour').val(settings.data.resetHour);
+    },
+
+    continents: function() {
+        if(settings.data.showContinents == false) {
+            $('html').addClass('hide-continents')
+            $('#continent-toggle > .checkbox').removeClass('checked');
+        } else {
+            $('html').removeClass('hide-continents')
+            $('#continent-toggle > .checkbox').addClass('checked');
+        }
     }
 }

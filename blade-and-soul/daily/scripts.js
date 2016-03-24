@@ -28,18 +28,13 @@ $(document).ready(function() {
         ga('send', 'event', 'bnsDaily', 'legacy', '4');
     }
 
-    if(settings.data.version < 5) {
-        console.log('Detected old version, notifying the user about the removed duplicate.');
-        alert('Due to the removal of a duplicate daily, four of your saved quests might have been shifted by one.'+"\n"+''+"\n"+'Specifically "Poaching the Poachers", "Where the Dark is Deepest", "The Man Behind the Mystery" or "Bashing Buccaneers".'+"\n"+''+"\n"+'This fix itself after the next reset. Sorry for that.')
-        ga('send', 'event', 'bnsDaily', 'legacy', '5');
-    }
-
     settings.update('version', defaultSettings.version);
 
     setNextResetTime();
     echoTimeTrackerText();
 
     ui.tags();
+    ui.continents();
     ui.nightMode();
 
     //settings.data.localTime = new Date(2016, 1, 10, 18, 55, 0, 0);
@@ -250,7 +245,7 @@ $(document).ready(function() {
                 dailyTags: categories,
                 dailyName: dailyName,
                 dailyLocation: daily.location,
-                dailyMap: echoMap(daily.map).name,
+                dailyMap: echoMapWithContinent(daily.map),
                 dailyGoldRewards: echoGold(Math.round(daily.moneyReward * settings.data.goldModifier)),
                 dailyMiscRewards: '&nbsp;'
             }))
@@ -327,6 +322,11 @@ $(document).ready(function() {
         $('.daily-table').trigger('reflow');
     })
 
+    $('#continent-toggle').click(function() {
+        settings.toggle('showContinents')
+        ui.continents();
+    })
+
     $('#night-toggle').click(function() {
         settings.update('nightMode', !$('html').hasClass('night'))
         ui.nightMode();
@@ -394,6 +394,7 @@ $(document).ready(function() {
         settings.reset();
         settings.save();
         ui.tags();
+        ui.continents();
         ui.nightMode();
         ui.selects();
         tabs.load();

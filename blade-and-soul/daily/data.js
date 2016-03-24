@@ -1,5 +1,21 @@
 var alerted = false;
 
+var continents = [
+    {},
+
+    {},
+
+    {},
+
+    {
+        name: "Moonwater Plains"
+    },
+
+    {
+        name: "Silverfrost Mountains"
+    }
+]
+
 var dungeons = [
     {},
 
@@ -87,53 +103,118 @@ var dungeons = [
     {//18
         name: "Naryu Labyrinth",
         difficulty: 3
+    },
+
+    {//19
+        name: "Awakened Necropolis",
+        difficulty: 3
+    },
+
+    {//20
+        name: "Avalanche Den",
+        difficulty: 3
+    },
+
+    {//21
+        name: "Lair of the Frozen Fang",
+        difficulty: 3
+    },
+
+    {//22
+        name: "Frostscale Basin",
+        difficulty: 3
+    },
+
+    {//23
+        name: "The Shrieking Caverns",
+        difficulty: 2
+    },
+
+    {//23
+        name: "Chuanka Frost Cavern",
+        difficulty: 2
+    },
+
+    {//24
+        name: "Ogong's Folley",
+        difficulty: 2
+    },
+
+    {//25
+        name: "Talus Dungeon",
+        difficulty: 2
     }
 ]
 
 maps = [
-    {
-        name: "Arena Match"
-    },
-    {
-        name: "Brightstone Village"
+    {//0
+        name: "Arena Match",
+        continent: 0
     },
 
-    {
-        name: "Lycandi Foothills"
+    {//1
+        name: "Brightstone Village",
+        continent: 3
     },
 
-    {
-        name: "Greenhollow"
+    {//2
+        name: "Lycandi Foothills",
+        continent: 3
     },
 
-    {
-        name: "Hogshead Pastures"
+    {//3
+        name: "Greenhollow",
+        continent: 3
     },
 
-    {
-        name: "Hogshead Hamlet"
+    {//4
+        name: "Hogshead Pastures",
+        continent: 3
     },
 
-    // 5
-
-    {
-        name: "Sapphire Basin"
+    {//5
+        name: "Hogshead Hamlet",
+        continent: 3
     },
 
-    {
-        name: "Fishbelly Pub"
+    {//6
+        name: "Sapphire Basin",
+        continent: 3
     },
 
-    {
-        name: "The Highland Necropolis"
+    {//7
+        name: "Fishbelly Pub",
+        continent: 3
     },
 
-    {
-        name: "Misty Woods"
+    {//8
+        name: "The Highland Necropolis",
+        continent: 3
     },
 
-    {
-        name: "Mushin's Tower"
+    {//9
+        name: "Misty Woods",
+        continent: 3
+    },
+
+    {//10
+        name: "Mushin's Tower",
+        continent: 3
+    },
+
+    {//11
+        name: "Zaiwei",
+        continent: 4
+    },
+
+    {//12
+        name: "Shiverstone Range",
+        continent: 4
+    },
+
+    {//13
+        name: "Primeval Forest",
+        continent: 4
     }
 ]
 
@@ -988,6 +1069,200 @@ var dailies = [
         dungeon: 18,
         map: 4,
         categories: ["Dungeon"]
+    },
+
+    {
+        name: "Stopping the Rebirth...",
+        moneyReward: 32275,
+        location: "The Cardinal Gates",
+        dungeon: 19,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Frozen Phantasm",
+        moneyReward: 18700,
+        location: "The Cardinal Gates",
+        dungeon: 20,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Ice in Their Veins",
+        moneyReward: 18700,
+        location: "The Cardinal Gates",
+        dungeon: 21 ,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Two Tribes, Three Chiefs",
+        moneyReward: 18700,
+        location: "Frontier's Edge",
+        dungeon: 22 ,
+        map: 12,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Dajapa's Daily Delivery",
+        moneyReward: 6300,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Captain Carnage",
+        moneyReward: 5800,
+        location: "North Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Bird Hunt",
+        moneyReward: 5200,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Carrots and Sticks",
+        moneyReward: 5200,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Shifting Beneath the Snow",
+        moneyReward: 5000,
+        location: "South Shiverstone",
+        dungeon: 22,
+        map: 12,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Slavery in the North",
+        moneyReward: 4900,
+        location: "South Shiverstone",
+        dungeon: 22,
+        map: 12,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Hot Couture",
+        moneyReward: 4900,
+        location: "North Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Put a Fire In Your Belly",
+        moneyReward: 4400,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Freeze Out",
+        moneyReward: 4400,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "In Defense of the Weak",
+        moneyReward: 4400,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Cold-Blooded Revenge",
+        moneyReward: 4200,
+        location: "South Shiverstone",
+        map: 12,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Let Him Go!",
+        moneyReward: 4200,
+        location: "Frostbite Canyon",
+        dungeon: 23,
+        map: 12,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Snowed In",
+        moneyReward: 4200,
+        location: "Frozen Ruins",
+        dungeon: 24,
+        map: 12,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Monkey Buisness",
+        moneyReward: 3700,
+        location: "Wild Springs",
+        dungeon: 25,
+        map: 13,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Jailhouse Rock",
+        moneyReward: 3700,
+        location: "Main Courtyard",
+        dungeon: 26,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Beast Hunt",
+        moneyReward: 4600,
+        location: "Primeval Forest",
+        map: 13,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "For Want of a Rice Cake",
+        moneyReward: 4600,
+        location: "Primeval Forest",
+        map: 13,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Every End is a New Beginning",
+        moneyReward: 3900,
+        location: "Primeval Forest",
+        map: 13,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "No Monk Left Behind",
+        moneyReward: 2800,
+        location: "Primeval Forest",
+        map: 13,
+        categories: ["Open World"]
     }
 ]
 
@@ -999,6 +1274,7 @@ var defaultSettings = {
     resetHour: 'not set',
     editedTime: false,
     showTags: true,
+    showContinents: true,
     nightMode: false,
     goldModifier: 1,
     faction: 'false',

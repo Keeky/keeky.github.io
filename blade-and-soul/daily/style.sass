@@ -65,6 +65,9 @@ html
     &.hide-tags #main-wrapper #dailies #table-wrapper .tags
         display: none
 
+    &.hide-continents #main-wrapper #dailies .daily-table td .continent-icon
+        display: none
+
     &.night
         background-color: $nightHighlight
         color: $nightText
@@ -612,6 +615,34 @@ select
                     color: #FFF
                     border-radius: 3px
                     margin-right: 5px
+
+                .continent-icon
+                    width: 16px
+                    height: 16px
+                    display: inline-block
+                    background: center center
+                    background-size: 16px
+                    padding: 4px
+                    margin-right: 6px
+                    position: relative
+                    top: 3px
+
+                    &.Silverfrost.Mountains
+                        background-image: url('silverfrost.png')
+
+                    &.Moonwater.Plains
+                        background-image: url('moonwater.png')
+
+                    &:hover:before
+                        content: attr(title)
+                        background-color: rgba(#000, 0.5)
+                        border-radius: 4px
+                        color: #fff
+                        content: attr(title)
+                        left: 10px
+                        padding: 5px
+                        position: absolute
+                        top: -30px
 
             tbody
                 tr
