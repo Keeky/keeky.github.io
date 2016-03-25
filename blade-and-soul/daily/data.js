@@ -1100,7 +1100,7 @@ var dailies = [
 
     {
         name: "Two Tribes, Three Chiefs",
-        moneyReward: 18700,
+        moneyReward: 7100,
         location: "Frontier's Edge",
         dungeon: 22 ,
         map: 12,
