@@ -39,7 +39,7 @@ $(document).ready(function() {
 
     //settings.data.localTime = new Date(2016, 1, 10, 18, 55, 0, 0);
 
-    FastClick.attach(document.body);
+    //FastClick.attach(document.body);
 
     var templates = {
         tableRow: _.template($('#tpl-table-row').html()),
