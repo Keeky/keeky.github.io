@@ -13,8 +13,8 @@ $nightText: #F8F8F2
 
 $nightshiftDelay: 2s
 
-$tagNames: ("boss", "pvp", "open.world", "dungeon", "faction")
-$tagColors: (#c0392b, #d35400, #1abc9c, #f1c40f, #9b59b6)
+$tagNames: ("boss", "pvp", "open.world", "dungeon", "faction", "time.gated")
+$tagColors: (#c0392b, #d35400, #1abc9c, #f1c40f, #9b59b6, #3498db)
 
 $difficultyNames: ("easy", "normal", "challenging", "heroic")
 $difficultyColors: (#FFF, #2ecc71, #38BFE1, #A237FF)
@@ -632,6 +632,9 @@ select
 
                     &.Moonwater.Plains
                         background-image: url('moonwater.png')
+
+                    &.Arena
+                        background-image: url('arena.png')
 
                     &:hover:before
                         content: attr(title)

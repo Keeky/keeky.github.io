@@ -1,7 +1,9 @@
 var alerted = false;
 
 var continents = [
-    {},
+    {
+        name: "Arena"
+    },
 
     {},
 
@@ -214,6 +216,11 @@ maps = [
 
     {//13
         name: "Primeval Forest",
+        continent: 4
+    },
+
+    {//14
+        name: "Skypetal Plains",
         continent: 4
     }
 ]
@@ -1263,11 +1270,87 @@ var dailies = [
         location: "Primeval Forest",
         map: 13,
         categories: ["Open World"]
-    }
+    },
+
+    //////////////////////////
+    // Skypetal Plains
+    //////////////////////////
+
+    {
+        name: "Calling In the Big Guns",
+        moneyReward: 10600,
+        location: "Grand Harvest Square",
+        map: 14,
+        categories: ["Open World", "Time Gated"]
+    },
+
+    {
+        name: "The Big, The Bad, and The Ugly",
+        moneyReward: 7100,
+        location: "Grand Harvest Square",
+        map: 14,
+        categories: ["Open World", "Time Gated"]
+    },
+
+    {
+        name: "Suspicious Merchants",
+        moneyReward: 4900,
+        location: "Grand Harvest Square",
+        map: 14,
+        categories: ["Open World", "Time Gated"]
+    },
+
+    {
+        name: "Beastbog Down",
+        moneyReward: 4900,
+        location: "Beastbog",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Brigand Blitz",
+        moneyReward: 7100,
+        location: "Beastbog",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Beetle Beatdown",
+        moneyReward: 10600,
+        location: "Beastbog",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Slouching Towards Plog Sanctuary, Waiting to Be Born",
+        moneyReward: 10600,
+        location: "Plog Sanctum",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Three of a Kind",
+        moneyReward: 7100,
+        location: "Plog Sanctum",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Croaked",
+        moneyReward: 4900,
+        location: "Plog Sanctum",
+        map: 14,
+        categories: ["Open World"]
+    },
 ]
 
 var defaultSettings = {
-    version: 5,
+    version: 6,
     resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
