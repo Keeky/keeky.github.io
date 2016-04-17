@@ -499,7 +499,7 @@ var dailies = [
         },
         location: "Talus Forward Base",
         map: 9,
-        categories: ["Open World", "PvP"]
+        categories: ["Open World", "Faction"]
 
     },
 
@@ -1223,7 +1223,7 @@ var dailies = [
     },
 
     {
-        name: "Monkey Buisness",
+        name: "Monkey Business",
         moneyReward: 3700,
         location: "Wild Springs",
         dungeon: 25,
@@ -1347,10 +1347,110 @@ var dailies = [
         map: 14,
         categories: ["Open World"]
     },
+
+    //////////////////////////
+    // Soulstone Plains
+    //////////////////////////
+
+
+    {
+        name: "Regional Warfare",
+        moneyReward: 4900,
+        location: "Soulstone Plains",
+        map: 14,
+        categories: ["Open World", "Faction"]
+    },
+
+    {
+        name: "In Too Deep",
+        moneyReward: 3300,
+        location: "Soulstone Plains",
+        map: 14,
+        categories: ["Open World", "Faction"]
+    },
+
+    {
+        name: "Battle for the Soulstones",
+        moneyReward: 3300,
+        location: "Soulstone Plains",
+        map: 14,
+        categories: ["Open World", "Faction"]
+    },
+
+    {
+        name: "Quarry Worries",
+        moneyReward: 3300,
+        location: "Soulstone Plains",
+        map: 14,
+        categories: ["Open World", "Faction"]
+    },
+
+    //////////////////////////
+    // Misc Silverfrost Quests
+    //////////////////////////
+
+    {
+        name: "The Angry Orchard",
+        moneyReward: 1875,
+        location: "The Cardinal Gates",
+        dungeon: 19,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Wandering Shadow",
+        moneyReward: 2650,
+        location: "The Cardinal Gates",
+        dungeon: 19,
+        map: 11,
+        categories: ["Dungeon"]
+    },
+
+    {
+        name: "Big Game Hunting",
+        moneyReward: 8300,
+        location: "Grand Harvest Sqare",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Wild As the Wind",
+        moneyReward: 7100,
+        location: "Grand Harvest Sqare",
+        map: 14,
+        categories: ["Open World"]
+    },
+
+    {
+        name: "Well Versed",
+        moneyReward: 1400,
+        location: "Plog Sanctum",
+        map: 14,
+        categories: ["Time Gated"]
+    },
+
+    {
+        name: "Poetic License",
+        moneyReward: 1400,
+        location: "Plog Sanctum",
+        map: 14,
+        categories: ["Time Gated"]
+    },
+
+    {
+        name: "Progress Marches On",
+        moneyReward: 2700,
+        location: "The Granary",
+        dungeon: 26,
+        map: 14,
+        categories: ["Dungeon"]
+    },
 ]
 
 var defaultSettings = {
-    version: 6,
+    version: 7,
     resetTime: null,
     localTime: new Date(),
     lastModified: new Date(),
