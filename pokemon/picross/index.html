@@ -12,7 +12,7 @@
         <link rel="icon" type="image/png" href="icon.png" sizes="48x48">
         <link rel="apple-touch-icon-precomposed" href="icon.png" sizes="48x48">
 		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500' rel='stylesheet' type='text/css'>
 		<link href='style.css' rel='stylesheet' type='text/css'>
 		<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js"></script>
@@ -31,8 +31,13 @@
 	<body class="js-off">
 		<a href='#' id="mobile-nav-toggle">Select level</a>
 		<nav id="area-select">
-			<div id="levels">
+			<div id="search">
+				<input id="query" placeholder="Search Pokemon...">
+			</div>
+			<div id="scroll-nav">
+				<div id="levels">
 
+				</div>
 			</div>
 			<div id="quick-select">
 
@@ -88,6 +93,7 @@
 						<div id="info-box">
 							<table>
 								<tbody>
+									<tr id="quicknav"><td><a id="prev" class="level" href="#">< Previous</a></td><td><span><a id="next" class="level" href="#">Next ></a></span></td></tr>
 									<tr><td>Level:</td><td><span id="stage"></span></td></tr>
 									<tr><td>Size:</td><td><span id="size"></span></td></tr>
 									<tr><td>Pokemon Name:</td><td><span id="name"></span></td></tr>
@@ -115,26 +121,7 @@
 					<div id="support-wrapper">
 						<a id="toggle-support" href="#">Donate & Support <span class="heart">&#10084;</span></a>
 						<div id="support-options">
-							<div id="support-text">If you want to support me you can buy something on Amazon using the links below with no extra cost to you. I'll get a small share of the price. Or just donate something via <a class="bitcoin donate-button" href="bitcoin:36Xi294dSZCphBU7uNNTXNoAB1jMd1GYpr">BitCoin</a> or <a class="paypal donate-button" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5G9LGPSEGQ5Q4">PayPal</a> Every penny is appreciated, but completely optional.</div>
-							<div id="amazon-links">
-								<img src="http://cdn.keeky.net/amazon/logo.png" width="100"><br><br>
-								<div class="link-wrapper">
-									<a target="_blank" class="link" rel="nofollow" href="http://www.amazon.com/gp/product/B00U6DTA9S/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00U6DTA9S&linkCode=as2&tag=keeky-20&linkId=LUKABBFDFVGN2PA2">
-										<span class="image-wrapper">
-											<img class="image" src="http://cdn.keeky.net/amazon/20-eshop.png">
-										</span>
-										<span class="name">$20 eShop Card</span>
-									</a>
-								</div>
-								<div class="link-wrapper">
-									<a target="_blank" class="link" rel="nofollow" href="http://www.amazon.com/gp/product/B00U6DTA9S/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B00U6DTA9S&linkCode=as2&tag=keeky-20&linkId=LUKABBFDFVGN2PA2">
-										<span class="image-wrapper">
-											<img class="image" src="http://cdn.keeky.net/amazon/super-mystery-dungeon.jpg">
-										</span>
-										<span class="name">Super Mystery Dungeon</span>
-									</a>
-								</div>
-							</div>
+							<div id="support-text">If you want to support me you can donate something via <a class="bitcoin donate-button" href="bitcoin:36Xi294dSZCphBU7uNNTXNoAB1jMd1GYpr">BitCoin</a> or <a class="paypal donate-button" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5G9LGPSEGQ5Q4">PayPal</a> Every penny is appreciated, but completely optional.</div>
 						</div>
 					</div>
 				</div>

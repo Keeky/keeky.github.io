@@ -120,6 +120,41 @@ function randomPixel (seed) {
 	return 'rgba(255, 255, 255, '+offset+')';
 }
 
+//Toggle class helper
+function tog(v) {return v?'addClass':'removeClass';} 
+
+//Fuzzy match function
+function fuzzyMatch(text, search) {
+	/*
+	Parameter text is a title, search is the user's search
+	*/
+	// remove spaces, lower case the search so the search
+	// is case insensitive
+	search = search.replace(/\ /g, '').toLowerCase();
+	var tokens = [];
+	var search_position = 0;
+
+	// Go through each character in the text
+	for (var n=0; n<text.length; n++) {
+		var text_char = text[n];
+		// if we match a character in the search, highlight it
+		if(search_position < search.length &&
+			text_char.toLowerCase() == search[search_position])
+		{
+			text_char = '<strong>' + text_char + '</strong>';
+			search_position += 1;
+		}
+		tokens.push(text_char);
+	}
+	// If are characters remaining in the search text,
+	// return an empty string to indicate no match
+	if (search_position != search.length)
+	{
+		return text;
+	}
+	return tokens.join('');
+}
+
 var navigation = '', quickSelect = '';
 
 //Generates the navigation and the area quick select with the data from levels.js
@@ -171,6 +206,38 @@ $(document).ready(function(e) {
 				}
 				title += 'Pokemon Picross Solutions';
 				document.title = title;
+
+				$('#prev, #next').show();
+
+				var prev = false;
+
+				if(solutions[properties.area][properties.level - 1])
+					prev = [properties.area, properties.level - 1];
+				else if(solutions[properties.area - 1])
+					prev = [properties.area - 1, solutions[properties.area - 1].length - 1];
+				else {
+					console.log('Else');
+					$('#prev').hide();
+				}
+
+				$('#prev').attr({
+					"data-area": prev[0],
+					"data-level": prev[1],
+				});
+
+				var next = false;
+
+				if(solutions[properties.area][properties.level + 1])
+					next = [properties.area, properties.level + 1];
+				else if(solutions[properties.area + 1])
+					next = [properties.area + 1, 0];
+				else
+					$('#next').hide();
+				
+				$('#next').attr({
+					"data-area": next[0],
+					"data-level": next[1],
+				});
 			}
 		},
 
@@ -330,18 +397,21 @@ $(document).ready(function(e) {
 
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
-		properties.area = $(this).data('area');
-		properties.level = $(this).data('level');
+		properties.area = parseInt($(this).attr('data-area'));
+		properties.level = parseInt($(this).attr('data-level'));
+
+		console.log('Click Level: ', properties.area + 1, properties.level + 1);
 
 		document.location.hash =  (properties.area + 1) + '/' + (properties.level + 1);
 
 		update.canvas.drawLevel();
-		update.document.info();
 		
 		$('#mobile-nav-toggle').text() == 'Select level' ? $('#mobile-nav-toggle').text('Close menu') : $('#mobile-nav-toggle').text('Select level');
 	
 		setTimeout(function() {
 			$('html').removeClass('nav-active');
+			$('#query').val('');
+			find();
 		}, 50);
 	});
 
@@ -360,12 +430,12 @@ $(document).ready(function(e) {
 		var targetArea = $(this).data('area');
 		ga('send', 'event', 'picrossSolutions', 'areaClick', targetArea);
 		var targetStages = $('#levels .area[data-area="' + targetArea + '"]');
-		var targetOffset = targetStages.offset().top + $('#area-select').scrollTop() - $('#area-select').offset().top;
+		var targetOffset = targetStages.offset().top + $('#scroll-nav').scrollTop() - $('#scroll-nav').offset().top;
 		//console.log(targetStages, targetOffset);
 		if($('html').hasClass('anim'))
-			$('#area-select').animate({scrollTop: targetOffset}, 500);
+			$('#scroll-nav').animate({scrollTop: targetOffset}, 500);
 		else
-			$('#area-select').scrollTop(targetOffset);
+			$('#scroll-nav').scrollTop(targetOffset);
 	});
 
 	$('#zoom').on('change', function() {
@@ -453,6 +523,48 @@ $(document).ready(function(e) {
 		});
 	}
 
+	function find() {
+		var query = $('#query').val();
+
+		$('#query')[tog(query)]('x');
+
+		if(query)
+			$('.area').hide();
+		else
+			$('.area').show();
+
+		$('#levels .level').each(function(index, el) {
+			var level = $('.level-name', el);
+			var levelName = level.text();
+
+			var $el = $(el);
+
+			if(query) {
+				var result = fuzzyMatch(levelName, query);
+				if(result == levelName) {
+					$el.hide();
+				} else {
+					level.html(result);
+					$el.show();
+				}
+			} else {
+				level.html(levelName);
+				$el.show()
+			}
+		});
+	}
+
+	$(document).on('input', '#query', function() {
+		find();
+	}).on('mousemove', '.x', function( e ){
+		$(this)[tog(this.offsetWidth-38 < e.clientX-this.getBoundingClientRect().left)]('onX');   
+	}).on('click', '.onX', function(){
+		$(this).removeClass('x onX').val('');
+		find();
+	});
+
+	find();
+
 	$('#toggle-support').click(function(e) {
 		e.preventDefault();
 		if(!$('#support-options').is(':visible'))
@@ -465,9 +577,5 @@ $(document).ready(function(e) {
 
 	$('.paypal-button').click(function(e) {
 		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'paypalButton');
-	});
-
-	$('#amazon-links .link').click(function(e) {
-		ga('send', 'event', 'picrossSolutions', 'supportOptionClicked', 'amazon "' + $('.name', this).text() + '"');
 	});
 });
