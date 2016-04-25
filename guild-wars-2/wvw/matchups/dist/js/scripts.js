@@ -31,7 +31,7 @@ var regions = {
 
 function fetchNewData() {
     $.ajax({
-        url: "proxy-cache.php",
+        url: "https://api.keeky.net/proxy-cache",
         method: "POST",
         data: {resource: "gw2-wvw-matchups"},
         dataType: "json"
