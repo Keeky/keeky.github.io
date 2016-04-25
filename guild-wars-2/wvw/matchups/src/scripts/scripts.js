@@ -1,3 +1,5 @@
+var proxyUrl = 'https://api.keeky.net/proxy-cache';
+
 function percentage(part, full) {
     return Math.floor(part / full * 100);
 }
@@ -31,7 +33,7 @@ var regions = {
 
 function fetchNewData() {
     $.ajax({
-        url: "https://api.keeky.net/proxy-cache",
+        url: proxyUrl,
         method: "POST",
         data: {resource: "gw2-wvw-matchups"},
         dataType: "json"
@@ -68,7 +70,7 @@ function updateTime() {
     if(lastUpdate >= 300)
         fetchNewData();
 
-    $('#last-update-label').html(prettyTime(lastUpdate));
+    $('#last-update-label').html(prettyTime(lastUpdate, false, ' ago'));
 
     lastUpdate++;
 }
@@ -91,7 +93,7 @@ $(document).ready(function () {
     updateTime();
 
     $.ajax({
-        url: "https://api.keeky.net/proxy-cache",
+        url: proxyUrl,
         method: "POST",
         data: {resource: "gw2-wvw-matchups"},
         dataType: "json"
