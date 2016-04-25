@@ -10,3 +10,6 @@ blade-and-soul/daily/.tags
 blade-and-soul/daily/.tags_sorted_by_file
 blade-and-soul/daily/daily.sublime-project
 blade-and-soul/daily/daily.sublime-workspace
+*.sublime-workspace
+*.sublime-project
+*.psd

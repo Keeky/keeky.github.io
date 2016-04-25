@@ -1,0 +1,184 @@
+$redTeam: #e74c3c
+$blueTeam: #2980b9
+$greenTeam: #27ae60
+
+html
+    background-color: #eaeaea
+
+    *
+        box-sizing: border-box
+        font-family: 'Lato', sans-serif
+
+#outer-container, #loader
+    display: table
+    position: absolute
+    height: 100%
+    width: 100%
+
+#inner-container, #spinner
+    display: table-cell
+    vertical-align: middle
+
+#main-wrapper
+    padding: 10px
+    max-width: 1385px
+    margin: 0 auto
+    text-align: center
+
+#loader
+    z-index: 999
+    background-color: #eaeaea
+    overflow: hidden
+
+#spinner
+    background: url('../img/gear.png') no-repeat center center
+    -webkit-animation: spin 4s linear infinite
+    -moz-animation: spin 4s linear infinite
+    animation: spin 4s linear infinite
+
+#status
+    text-align: right
+    color: #999
+    font-size: 12px
+
+@-moz-keyframes spin
+    100%
+        -moz-transform: rotate(360deg)
+
+@-webkit-keyframes spin
+    100%
+        -webkit-transform: rotate(360deg)
+
+@keyframes spin
+    100%
+        -webkit-transform: rotate(360deg)
+        transform: rotate(360deg)
+
+#ad
+    position: relative
+    margin: 20px 10px
+    display: inline-block
+    max-width: 600px
+    max-height: 250px
+    width: 100%
+
+    #ad-headline
+        display: inline-block
+        padding: 7px 12px
+        border-radius: 4px 4px 0 0
+        font-size: 14px
+        color: #333
+        background-color: #FFF8E6
+
+
+    #ad-content
+        background-color: #FFF8E6
+        border-radius: 0 4px 4px 4px
+        padding: 7px
+
+    #testad
+        background-color: #FFF
+        width: 728px
+        height: 90px
+        margin: 0 auto
+
+.matchup
+    background-color: #fff
+    box-shadow: -1px 2px 0 #d4d4d4
+    border-radius: 4px
+    display: inline-block
+    padding: 20px
+    width: 250px
+    height: 230px
+    margin: 10px
+    vertical-align: bottom
+    position: relative
+
+    .server-points
+
+        &:first-child
+            .server-points-name
+                margin-top: 0
+
+        &-name
+            font-size: 12.5px
+            margin-top: 12px
+            line-height: 16px
+            text-align: left
+
+            .points
+                font-weight: 700
+                padding-left: 8px
+                float: right
+
+        &-progress-wrapper
+            background-color: #E8E8E8
+
+        &-progress
+            height: 4px
+            margin-top: 5px
+            transition: width 500ms ease
+
+        &.red
+            .server-points
+
+                &-name
+                    color: $redTeam
+
+                &-progress
+                    background-color: $redTeam
+
+        &.blue
+            .server-points
+
+                &-name
+                    color: $blueTeam
+
+                &-progress
+                    background-color: $blueTeam
+
+        &.green
+            .server-points
+
+                &-name
+                    color: $greenTeam
+
+                &-progress
+                    background-color: $greenTeam
+
+
+    .tick-score
+        margin-top: 10px
+        padding-top: 10px
+        border-top: 1px solid #EFEFEF
+        position: absolute
+        bottom: 20px
+        left: 20px
+        right: 20px
+
+        .server-tick
+            height: 20px
+            float: left
+            text-align: center
+            font-size: 11px
+            position: relative
+            transition: width ease 500ms
+
+            .tick
+                position: absolute
+                top: 24px
+                left: 0
+                right: 0
+                text-align: center
+
+            &.red
+                background-color: $redTeam
+                color: $redTeam
+
+            &.blue
+                background-color: $blueTeam
+                color: $blueTeam
+
+            &.green
+                background-color: $greenTeam
+                color: $greenTeam
