@@ -21,7 +21,7 @@ var couterData = {
             weak: ['bastion', 'reinhardt', 'zarya', 'roadhog']
         },
         tracer: {
-            strong: ['bastion', 'mercy', 'widowmaker', 'torbjorn', 'reinhardt', 'genji', 'zenyatta', 'hanzo'],
+            strong: ['bastion', 'mercy', 'widowmaker', 'torbjorn', 'reinhardt', 'genji', 'hanzo'],
             weak: ['mei', 'soldier76', 'junkrat', 'pharah', 'symmetra', 'mccree', 'reaper', 'roadhog', 'winston']
         }
     },
