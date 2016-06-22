@@ -105,7 +105,7 @@ $(document).ready(function() {
 
         console.log($target);
 
-        $('html').stop().animate({scrollTop: scrollPos}, 500, 'swing', function() {
+        $('html, body').stop().animate({scrollTop: scrollPos}, 500, 'swing', function() {
             $target.attr('id', 'defused');
 
             var $phantom = $('<div></div>')
