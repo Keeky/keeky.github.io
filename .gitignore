@@ -13,3 +13,6 @@ blade-and-soul/daily/daily.sublime-workspace
 *.sublime-workspace
 *.sublime-project
 *.psd
+overwatch/hero-counters/orig/
+overwatch/hero-counters/img/orig/
+.css.map

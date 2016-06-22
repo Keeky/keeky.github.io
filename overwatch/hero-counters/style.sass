@@ -1,0 +1,442 @@
+//
+
+@font-face
+    font-family: 'Overwatch'
+    src: url('font/BigNoodleTitling.eot?#iefix') format('embedded-opentype'),  url('font/BigNoodleTitling.woff') format('woff'), url('font/BigNoodleTitling.ttf')  format('truetype'), url('font/BigNoodleTitling.svg#BigNoodleTitling') format('svg')
+    font-weight: normal
+    font-style: normal
+
+$vendors: 'webkit', 'moz', 'ms', 'o'
+=vendorize($property, $value, $noplain: false, $vendors: $vendors, $prefix:'')
+    @each $vendor in $vendors
+        #{$prefix}-#{$vendor}-#{$property}: $value
+
+    @if $noplain != true
+        #{$property}: $value
+
+=tablet
+    @media only screen and (max-width: 1250px)
+        @content
+
+=mobile
+    @media only screen and (max-width: 1000px)
+        @content
+
+$overblue: #2891C7
+$overteal: #00E8FD
+$overwhite: #F8F9FA
+$overyellow: #FFCD00
+$overorange: #D99820
+
+$navWidth: 250px
+$navOffset: 40px
+$navTransitionDuration: 700ms
+
+html, body
+    min-height: 100%
+
+html
+    min-height: 100%
+    background: url('back.jpg') fixed no-repeat center center
+    +vendorize(background-size, cover)
+
+    *
+        +vendorize(box-sizing, border-box)
+
+    strong
+        color: $overteal
+
+    &.nav-active
+        +tablet
+            #profile-nav
+                left: -$navOffset
+                background-color: rgba(#000, 0.9)
+
+                &-toggle
+                    left: $navWidth - $navOffset
+                    +vendorize(transform, rotateY(-180deg))
+                    background-color: $overteal
+
+#info
+    font-size: 18px
+    padding: 20px 28px
+    font-family: "Roboto", "Helvetica Neue", "Helvetica", sans-serif
+    line-height: 28px
+    max-width: 730px
+    margin: 0 auto
+
+    a
+        color: $overyellow
+
+        &:hover
+            color: $overorange
+            text-decoration: none
+
+    .contact
+        text-align: center
+        display: block
+        font-size: 12px
+        margin-top: 9px
+
+#ad
+    max-width: 900px
+    width: 100%
+    margin: 30px auto
+    max-height: 400px
+    text-align: center
+
+#profile-wrapper
+    max-width: 1200px
+    margin: 100px auto 300px
+    +vendorize(transition, all 600ms ease)
+    padding: 10px 10px 10px $navWidth + 10px
+
+    +tablet
+        padding-left: 10px
+
+#profile-nav
+    width: $navWidth + $navOffset
+    background-color: rgba(#000, 0.6)
+    position: fixed
+    left: -$navOffset
+    top: 0
+    bottom: 0
+    max-height: 100%
+    overflow-y: auto
+    padding: 16px 20px 16px $navOffset + 20px
+    border-right: 3px solid $overwhite
+    +vendorize(border-radius, 0 6px 6px 0)
+    +vendorize(transition, all $navTransitionDuration ease)
+    +vendorize(transition-timing-function, cubic-bezier(0.5, -0.5, 0.5, 1))
+    z-index: 999
+
+    +tablet
+        overflow-y: scroll
+        -webkit-overflow-scrolling: touch
+
+    &-toggle
+        position: fixed
+        width: 54px
+        height: 54px
+        background-color: $overorange
+        bottom: 10px
+        left: 10px
+        z-index: 9999
+        text-align: center
+        line-height: 54px
+        font-size: 18px
+        text-decoration: none
+        color: $overwhite
+        +vendorize(transition, all $navTransitionDuration ease)
+        +vendorize(transition-timing-function, cubic-bezier(0.5, -0.5, 0.5, 1))
+        +vendorize(transform-style, preserve-3d)
+        +vendorize(transform-origin, right center)
+        +vendorize(transform, rotateY(0deg))
+        display: none
+        border: 1px solid #FFF
+        border-radius: 6px
+
+        +tablet
+            display: block
+
+        &:hover
+            background-color: $overyellow
+
+    +tablet
+        left: -$navWidth - $navOffset
+
+    span.category
+        color: $overyellow
+        font-family: "Overwatch"
+        font-size: 22px
+        display: block
+        margin: 10px 4px 1px
+
+        +tablet
+            margin: 16px 4px 8px
+
+    a
+        font-family: "Overwatch"
+        font-size: 26px
+        color: #D7D7D7
+        text-decoration: none
+        display: block
+        padding: 4px 10px 6px
+        margin: 2px 5px
+        +vendorize(border-radius, 6px)
+        font-style: italic
+
+        +tablet
+            padding: 8px 12px
+            font-size: 32px
+
+        &:hover
+            background-color: $overorange
+            color: #271500
+
+h1.category
+    color: $overyellow
+    font-size: 46px
+    font-family: "Overwatch"
+    text-align: center
+    margin: 50px 20px 20px
+
+.over
+
+    &-container
+        border-top: 3px solid $overwhite
+        border-bottom: 3px solid $overwhite
+        +vendorize(border-radius, 6px)
+        background-color: rgba(#000, 0.6)
+        color: #FFF
+
+    &-button
+        font-family: "Overwatch"
+        background-color: rgba($overblue, 0.8)
+        color: $overwhite
+        border: 2px solid transparent
+        +vendorize(border-radius, 2px)
+        padding: 4px 12px
+        font-size: 18px
+        margin: 10px 0
+        display: inline-block
+        font-weight: 600
+        letter-spacing: .04em
+
+        &:hover
+            border-color: $overwhite
+            cursor: pointer
+
+    &-profile
+        margin: 5px 0
+        width: 100%
+        min-height: 70px
+        overflow: hidden
+        display: inline-block
+        +vendorize(transition, all 1s ease)
+        font-size: 22px
+        font-family: "Overwatch", sans-serif
+
+        &.active
+            background-color: rgba($overorange, 0.8)
+
+            .hero-container
+                h1
+                    color: #FFF
+
+                h2
+                    color: #333
+
+        .hero
+
+            &-aside
+                max-width: 300px
+                width: 100%
+                background-position: 50px center
+                height: 350px
+                float: left
+
+                +mobile
+                    max-width: 70px
+                    height: 70px
+                    +vendorize(background-size, contain)
+                    background-position: center center
+                    margin: 20px 20px 0
+
+            &-container
+                height: 100%
+                padding: 20px
+
+                h1
+                    font-family: "Overwatch", sans-serif
+                    font-size: 32px
+                    margin-bottom: 8px
+                    color: $overyellow
+
+                    +mobile
+                        font-size: 42px
+                        margin: 15px 0 20px
+
+                h2
+                    font-family: "Overwatch", sans-serif
+                    margin: 5px 0
+                    color: $overteal
+                    font-size: 26px
+
+                    +mobile
+                        font-size: 30px
+
+                p
+                    font-family: "Open Sans", sans-serif
+                    line-height: 22px
+                    font-size: 18px
+                    margin: 6px 0
+                    color: #FFF
+                    max-width: 600px
+
+    &-image
+        background-repeat: no-repeat
+        height: 100%
+        +vendorize(transition, all 600ms ease)
+        background-position: top left
+
+        &[data-hero=bastion]
+            background-image: url('img/Bastion.png')
+
+        &[data-hero=dva]
+            background-image: url('img/DVa.png')
+
+        &[data-hero=genji]
+            background-image: url('img/Genji.png')
+
+        &[data-hero=hanzo]
+            background-image: url('img/Hanzo.png')
+
+        &[data-hero=junkrat]
+            background-image: url('img/Junkrat.png')
+
+        &[data-hero=lucio]
+            background-image: url('img/Lucio.png')
+
+        &[data-hero=mccree]
+            background-image: url('img/Mccree.png')
+
+        &[data-hero=mei]
+            background-image: url('img/Mei.png')
+
+        &[data-hero=mercy]
+            background-image: url('img/Mercy.png')
+
+        &[data-hero=pharah]
+            background-image: url('img/Pharah.png')
+
+        &[data-hero=reaper]
+            background-image: url('img/Reaper.png')
+
+        &[data-hero=reinhardt]
+            background-image: url('img/Reinhardt.png')
+
+        &[data-hero=roadhog]
+            background-image: url('img/Roadhog.png')
+
+        &[data-hero=soldier76]
+            background-image: url('img/Soldier76.png')
+
+        &[data-hero=symmetra]
+            background-image: url('img/Symmetra.png')
+
+        &[data-hero=torbjorn]
+            background-image: url('img/Torbjorn.png')
+
+        &[data-hero=tracer]
+            background-image: url('img/Tracer.png')
+
+        &[data-hero=widowmaker]
+            background-image: url('img/Widowmaker.png')
+
+        &[data-hero=winston]
+            background-image: url('img/Winston.png')
+
+        &[data-hero=zarya]
+            background-image: url('img/Zarya.png')
+
+        &[data-hero=zenyatta]
+            background-image: url('img/Zenyatta.png')
+
+    &-portrait
+        width: 70px
+        height: 90px
+        border-top: 6px
+        display: inline-block
+        margin: 5px
+        font-size: 22px
+        font-family: "Overwatch", sans-serif
+        position: relative
+        overflow: hidden
+
+        &.hero-link
+            &:hover
+                background-color: $overyellow
+                border-color: $overorange
+
+                .over-name
+                    background-color: $overyellow
+                    color: #FFF
+
+        .over-image
+            width: 90px
+            position: relative
+            left: -10px
+
+        .over-name
+            position: absolute
+            bottom: 0
+            color: #444
+            background-color: #FFF
+            font-size: 14px
+            width: 100%
+            text-align: center
+            padding: 4px 0
+
+        [data-hero=bastion]
+            background-position: -39px -1px
+
+        [data-hero=dva]
+            background-position: -74px -102px
+
+        [data-hero=genji]
+            background-position: -61px -1px
+
+        [data-hero=hanzo]
+            background-position: -61px -1px
+
+        [data-hero=junkrat]
+            background-position: -51px -41px
+
+        [data-hero=lucio]
+            background-position: -55px -18px
+
+        [data-hero=mccree]
+            background-position: -41px -9px
+
+        [data-hero=mei]
+            background-position: -33px -15px
+
+        [data-hero=mercy]
+            background-position: -24px -5px
+
+        [data-hero=pharah]
+            background-position: -76px 3px
+
+        [data-hero=reaper]
+            background-position: -48px -13px
+
+        [data-hero=reinhardt]
+            background-position: -84px -2px
+
+        [data-hero=roadhog]
+            background-position: -57px -1px
+
+        [data-hero=soldier76]
+            background-position: -51px -4px
+
+        [data-hero=symmetra]
+            background-position: -91px 4px
+
+        [data-hero=torbjorn]
+            background-position: -33px -21px
+
+        [data-hero=tracer]
+            background-position: -62px -3px
+
+        [data-hero=widowmaker]
+            background-position: -30px -15px
+
+        [data-hero=winston]
+            background-position: -15px -14px
+
+        [data-hero=zarya]
+            background-position: -61px -6px
+
+        [data-hero=zenyatta]
+            background-position: -63px 5px
