@@ -1,0 +1,950 @@
+// @import pokemon
+// @import spritesheet
+
+$accent: rgba(0, 0, 0, 0.12)
+$divider: $accent 1px solid
+$timing: 500ms
+$col: #e74c3c
+
+=card
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2)
+    border-radius: 2px
+
+=down
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.14), 0 0 0 0 rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 0, 0, 0.2)
+
+=anim($dur: $timing, $attr: all, $anim: ease, $gpu: false)
+    transition: $attr $dur $anim
+    @if($gpu) 
+        will-change: $attr
+
+=mobile
+    @media (max-width: 666px)
+        @content
+
+=typeCompact
+    display: block
+    width: 16px
+    height: 16px
+    padding: 0
+    color: rgba(255, 255, 255, 0)
+    border-radius: 200%
+
+html
+    background-color: #EEE
+
+    *
+        font-family: 'Saira Extra Condensed', sans-serif
+        box-sizing: border-box
+
+body
+    position: relative
+    top: 0
+    +anim
+    overflow-y: scroll
+
+    &.content
+        #intro
+            display: none
+        
+        &:not(.results)
+            #empty
+                display: block
+    
+    &.show-notice
+        #whitelist-me
+            display: block
+    
+    &.searchfocus
+        #search-wrapper .search-result
+            &.focussed, &.focussed:hover
+                background-color: #EFEFEF
+
+
+html, body, #main-wrapper
+    min-height: 100%
+
+.flex-wrapper
+    display: flex
+
+    &.between
+        justify-content: space-between
+
+    &.evenly
+        justify-content: space-evenly
+
+
+
+.sprite
+    background-repeat: no-repeat
+    display: block
+    width: 40px
+    height: 30px
+
+.pokemon
+    background-repeat: no-repeat;
+    display: block;
+    width: 100px
+    height: 100px
+    background-size: 100px
+
+.card
+    +card
+    background-color: #FFF
+    padding: 16px
+    margin: 16px 0
+
+    &.borderless
+        padding: 0
+
+.card-wrap
+    padding: 0 16px
+
+    &.first
+        padding-top: 16px
+    
+    &.last
+        padding-bottom: 16px
+
+.space
+    &.below
+        padding-bottom: 16px
+
+    &.before
+        padding-top: 16px
+
+.start
+
+    #search-wrapper
+        position: absolute
+        z-index: -1
+
+    #detail-wrapper
+        +anim
+        transition-property: left, height, transform
+
+    &.mid
+
+        #search-results
+            .search-result
+                +down
+        
+        #header
+
+        // #header
+        //     .sprite
+        //         background-image: url('icons/arrow.png')
+        //         background-size: 16px
+        //         background-position: center
+        //         transform: rotate(180deg)
+
+        &.end
+            
+            #detail-wrapper
+                position: static
+
+                #header
+                    position: sticky
+                    top: 0
+            
+            #search-wrapper
+                opacity: 0
+
+.show-details
+    #details
+        transform: scaleY(1)
+
+    #header
+        .type:after
+            +typeCompact
+
+        #back
+            width: 30px
+            height: 30px
+
+            +mobile
+                background-size: 24px
+    
+    #FAB
+        box-shadow: 0 -3px 6px rgba(0,0,0,0.16), 0 -3px 6px rgba(0,0,0,0.23);
+        background-image: url('./icons/arrow-white.png')
+        transform: rotate(180deg)
+    
+.spacer
+    margin-bottom: 24px
+
+.label
+    margin-bottom: 4px
+    color: #666
+
+    &.value
+        color: #333
+        font-size: 22px
+        font-weight: 700
+
+.bar
+    width: 100%
+    background-color: $accent
+    margin-top: 5px
+    margin-bottom: 8px
+    position: relative
+
+    .progress
+        background-color: #333
+        height: 4px
+        background: $col
+        +anim
+
+    &.middle
+        position: relative
+        height: 16px
+
+        .progress
+            position: absolute
+            left: 50%
+            height: 100%
+            // border-right: 2px solid $col
+        
+            &:after
+                left: 100%
+                top: 50%
+                border: solid transparent
+                content: " "
+                height: 0
+                width: 0
+                position: absolute
+                pointer-events: none
+                // border-color: rgba(136, 183, 213, 0)
+                border-left-color: $col
+                border-width: 8px
+                margin-top: -8px
+
+    &:before
+        content: ''
+        width: 2px
+        height: 100%
+        position: absolute
+        left: 50%
+        left: calc(50% - 1px)
+        background-color: #FFF
+        display: block
+        z-index: 999
+
+    &.direction-0
+        .progress
+            display: none
+
+    &.direction-1, &.direction--1
+        .progress
+            background: $col
+            // background: transparent url('./icons/direction.png') repeat-x left center / contain
+
+    &.direction-1
+        .progress
+
+    &.direction--1
+        .progress
+            transform: rotate(180deg)
+
+#search
+    width: 100%
+    font-size: 22px
+    padding: 6px 16px 6px 32px
+    margin: 8px 0 16px
+    border: none
+    background: url('./icons/magnifier.png') no-repeat left 10px center / 16px #FFF;
+    border-bottom: 4px solid $col
+    +card
+    +anim
+
+    &:focus
+        padding: 14px 16px
+        margin: 0 0 8px
+        outline: none
+        background-position-x: -32px
+        +down
+
+
+
+#main-wrapper
+    margin: 0 auto
+    padding-bottom: 50px
+    max-width: 900px
+    position: relative
+
+
+#search-wrapper
+    opacity: 1
+    width: 100%
+    +anim
+
+#search-results
+    margin-top: 16px
+
+.search
+
+    &-result
+        padding: 8px 16px
+        align-items: center
+        display: flex
+        flex-wrap: nowrap
+        background-color: #FFF
+        border-bottom: $divider
+        text-transform: capitalize
+        +card
+        border-radius: 0
+        height: 43px
+
+        &.loading-data .sprite-wrapper
+            background: url('./icons/loading.png') center center / 30px no-repeat
+            animation: spin 2000ms infinite linear reverse
+            border-right: 0
+
+            .sprite
+                opacity: 0
+
+        +mobile
+            padding: 32px 16px
+        
+        .sprite-wrapper
+            width: 50px
+            padding-right: 12px
+            margin-right: 8px
+            border-right: 1px solid $accent
+
+        .sprite
+            margin: 0 auto
+
+        .dex-num
+            font-family: "Monospace"
+            background-color: #FAFAFA
+            border: 1px solid #EEE
+            padding: 2px 4px
+            color: #555
+            border-radius: 2px
+            font-size: 14px
+
+
+        .label
+            flex: 1
+            font-size: 22px
+            margin-left: 8px
+            color: #333
+
+        .attributes
+
+#search-wrapper .search-result
+    cursor: pointer
+
+    &:hover
+        background-color: #f5f5f5
+
+#detail-wrapper
+    position: fixed
+    width: 100%
+    background-color: #EEE
+    max-width: 900px
+    margin: 0 auto
+    height: 0
+    z-index: 99
+    top: 0
+
+#header
+    z-index: 9999
+
+#back
+    width: 0
+    height: 0
+    background: url("./icons/arrow.png") no-repeat center center / 16px
+    transform: rotate(180deg)
+    cursor: pointer
+    +anim($timing / 2)
+
+#details
+    width: 100%
+    transform: scaleY(0)
+    transform-origin: top
+    height: 0
+    +anim($timing / 2)
+
+    section
+        margin: 32px 0
+
+        &:first-child
+            margin-top: 0
+
+        &:last-child
+            margin-bottom: 0
+
+.weakness-chart
+    display: flex
+    justify-content: center
+
+    +mobile
+        flex-direction: column
+
+    .weakness-wrapper
+        text-align: center
+    
+        +mobile
+            display: inline-block
+            text-align: left
+
+    .col
+        // border-right: $divider
+
+        // &:nth-child(2n-1)
+        //     background-color: #FAFAFA
+
+        +mobile
+            display: flex
+            border-right: 0
+
+        // &:first-child
+        //     border: none
+        
+        &.efficiency-
+
+            &400
+                order: 0
+
+                .chart-header
+                    background-color: #2ecc71
+            
+            &200
+                order: 1
+
+                .chart-header
+                    background-color: #1abc9c
+
+            &100
+                order: 2
+
+                .chart-header
+                    background-color: #3498db
+
+            &50
+                order: 3
+
+                .chart-header
+                    background-color: #e67e22
+
+            &25
+                order: 4
+
+                .chart-header
+                    background-color: #e74c3c
+
+            &0
+                order: 5
+
+                .chart-header
+                    background-color: #34495e
+
+    .chart-header
+        background-color: #333333
+        color: #ffffff
+        padding: 8px 16px
+        margin-bottom: 8px
+        text-align: center
+        display: inline-block
+        width: 100%
+        
+        +mobile
+            flex-basis: 60px
+            flex-shrink: 0
+            margin: 0 8px 0 0
+
+
+.forms-wrapper
+    display: block
+    overflow-x: auto
+    overflow-y: hidden
+    white-space: nowrap
+    margin-top: 16px
+
+    .form
+        display: inline-block
+    
+        .form-title
+            text-align: center
+            text-transform: uppercase
+            font-size: 18px
+            padding-bottom: 6px 
+        
+        &:hover
+            background-color: #EFEFEF
+            cursor: pointer
+
+        &.active
+            background-color: $col
+
+            .form-title
+                color: #FFF
+
+.stat-table
+
+
+.abilities
+    padding: 0 16px
+
+    .ability-wrapper
+        border-bottom: $divider
+        margin: 16px 0
+        padding: 16px 0
+
+        &:last-child
+            border-bottom: 0
+
+        .ability-name
+            font-size: 22px
+
+            &.hidden-1:after
+                content: "[Hidden Ability]"
+
+        .ability-description
+            padding: 16px
+            color: #333
+            line-height: 24px
+
+        .show-details
+            border: none
+            background-color: $col
+            color: #FFF
+            font-size: 14px
+            padding: 4px 16px
+            margin-left: 16px
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5)
+            border: 1px solid $col
+            border-radius: 4px
+            
+            &:hover
+                cursor: pointer
+                background-color: darken($col, 5%)
+
+    .ability-details-wrapper
+        margin-bottom: 16px
+        margin-left: 16px
+        display: none
+        flex-direction: column
+        background-color: #FAFAFA
+
+        &:last-child
+            border-bottom: 0
+
+        .ability-translation-wrapper
+            padding: 8px 16px
+            display: flex
+            border-top: 1px solid #FFF
+
+            .ability-language
+
+            .ability-translated-name
+                font-weight: 700
+                min-width: 100px
+
+            .ability-translated-description
+                margin-left: 8px
+
+            &[data-country="en"]
+                order: 1
+
+            &[data-country="fr"]
+                order: 2
+
+            &[data-country="de"]
+                order: 3
+
+            &[data-country="ja"]
+                order: 4
+
+            &[data-country="ja-Hrkt"]
+                order: 5
+
+            &[data-country="roomaji"]
+                order: 6
+
+            &[data-country="ko"]
+                order: 7
+
+            &[data-country="it"]
+                order: 8
+
+            &[data-country="es"]
+                order: 9
+
+            &[data-country="zh-Hant"]
+                order: 10
+
+            &[data-country="zh-Hans"]
+                order: 11
+
+            &[data-country="cs"]
+                order: 12
+
+#stats-wrapper
+    display: flex
+
+    +mobile
+        display: block
+
+    .main
+        order: 1
+        flex-basis: 80%
+        margin-right: 16px
+
+        +mobile
+            margin-right: 0
+
+    aside
+        order: 2
+        flex-basis: 20%
+
+#FAB
+    position: fixed
+    bottom: 14px
+    right: 14px
+    width: 64px
+    height: 64px
+    background: $col url('./icons/magnifier-white.png') no-repeat center center / 24px
+    z-index: 9999
+    +anim(200ms)
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    border-radius: 200%
+
+    &:active
+        box-shadow: 0 0 0 rgba(0,0,0,0.16), 0 0 0 rgba(0,0,0,0.23);
+
+
+#intro
+    background-color: #FFF
+    padding: 16px 24px
+    font-size: 20px
+    line-height: 26px
+    +card
+
+#empty
+    background-color: #FFF
+    padding: 16px 24px
+    font-size: 20px
+    line-height: 26px
+    display: none
+    +card
+
+#ad
+    max-height: 130px
+    max-width: 900px
+
+#whitelist-me
+    background: url('icons/sad.png') center left 24px / 60px no-repeat
+    padding: 12px 12px 12px 118px
+    border: 2px dotted $col
+    background-color: #FFF
+    display: none
+
+    #petty-message
+        font-family: 'Oxygen', sans-serif
+        font-size: 16px
+        line-height: 24px
+        margin-bottom: 16px
+
+#preload
+    display: none
+
+body
+
+    .left
+        float: left
+
+    h2
+        font-size: 32px
+        padding-bottom: 12px
+        margin-bottom: 12px
+        margin-top: 32px
+        color: #2c3e50
+        border-bottom: 1px solid #CCC
+
+    h3
+        font-size: 26px
+        margin-bottom: 16px
+        color: #2c3e50
+
+    li
+        list-style-type: disc
+        margin-left: 32px
+
+    p, li
+        font-family: 'Oxygen', sans-serif
+        font-size: 16px
+        color: #666
+        margin: 12px
+    
+    li
+        margin: 4px 16px 4px 32px
+
+    a
+        font-family: 'Oxygen', sans-serif
+        color: $col
+        font-weight: 700
+        text-decoration: none
+
+        &:hover
+            text-decoration: underline
+    
+    table
+        width: 100%
+
+        tr
+            background-color: #fafafa
+
+            &:nth-child(2n - 1)
+                background-color: #F2F2F2
+
+        td
+            padding: 8px 16px
+
+.type
+    
+    &.icon
+        display: inline-block
+        
+        &:after
+            display: inline-block
+            padding: 4px 8px
+            border-radius: 4px
+            font-size: 14px
+            color: #FFF
+            margin: 4px
+            width: 50px
+            text-align: center
+            +anim
+        
+        &.shrink:after
+            +mobile
+                +typeCompact
+    
+    &.icon--Normal:after
+        content: "Normal"
+        background-color: #A8A77A
+    
+    &.text--Normal
+        color: #A8A77A
+
+    &.background--Normal
+        background-color: #A8A77A
+
+
+
+    &.icon--Fire:after
+        content: "Fire"
+        background-color: #EE8130
+    
+    &.text--Fire
+        color: #EE8130
+
+    &.background--Fire
+        background-color: #EE8130
+
+
+
+    &.icon--Water:after
+        content: "Water"
+        background-color: #6390F0
+    
+    &.text--Water
+        color: #6390F0
+
+    &.background--Water
+        background-color: #6390F0
+
+
+
+    &.icon--Electric:after
+        content: "Electric"
+        background-color: #F7D02C
+    
+    &.text--Electric
+        color: #F7D02C
+
+    &.background--Electric
+        background-color: #F7D02C
+
+
+
+    &.icon--Grass:after
+        content: "Grass"
+        background-color: #7AC74C
+    
+    &.text--Grass
+        color: #7AC74C
+
+    &.background--Grass
+        background-color: #7AC74C
+
+
+
+    &.icon--Ice:after
+        content: "Ice"
+        background-color: #96D9D6
+    
+    &.text--Ice
+        color: #96D9D6
+
+    &.background--Ice
+        background-color: #96D9D6
+
+
+
+    &.icon--Fighting:after
+        content: "Fighting"
+        background-color: #C22E28
+    
+    &.text--Fighting
+        color: #C22E28
+
+    &.background--Fighting
+        background-color: #C22E28
+
+
+
+    &.icon--Poison:after
+        content: "Poison"
+        background-color: #A33EA1
+    
+    &.text--Poison
+        color: #A33EA1
+
+    &.background--Poison
+        background-color: #A33EA1
+
+
+
+    &.icon--Ground:after
+        content: "Ground"
+        background-color: #E2BF65
+    
+    &.text--Ground
+        color: #E2BF65
+
+    &.background--Ground
+        background-color: #E2BF65
+
+
+
+    &.icon--Flying:after
+        content: "Flying"
+        background-color: #A98FF3
+    
+    &.text--Flying
+        color: #A98FF3
+
+    &.background--Flying
+        background-color: #A98FF3
+
+
+
+    &.icon--Psychic:after
+        content: "Psychic"
+        background-color: #F95587
+    
+    &.text--Psychic
+        color: #F95587
+
+    &.background--Psychic
+        background-color: #F95587
+
+
+
+    &.icon--Bug:after
+        content: "Bug"
+        background-color: #A6B91A
+    
+    &.text--Bug
+        color: #A6B91A
+
+    &.background--Bug
+        background-color: #A6B91A
+
+
+
+    &.icon--Rock:after
+        content: "Rock"
+        background-color: #B6A136
+    
+    &.text--Rock
+        color: #B6A136
+
+    &.background--Rock
+        background-color: #B6A136
+
+
+
+    &.icon--Ghost:after
+        content: "Ghost"
+        background-color: #735797
+    
+    &.text--Ghost
+        color: #735797
+
+    &.background--Ghost
+        background-color: #735797
+
+
+
+    &.icon--Dragon:after
+        content: "Dragon"
+        background-color: #6F35FC
+    
+    &.text--Dragon
+        color: #6F35FC
+
+    &.background--Dragon
+        background-color: #6F35FC
+
+
+
+    &.icon--Dark:after
+        content: "Dark"
+        background-color: #705746
+    
+    &.text--Dark
+        color: #705746
+
+    &.background--Dark
+        background-color: #705746
+
+
+
+    &.icon--Steel:after
+        content: "Steel"
+        background-color: #B7B7CE
+    
+    &.text--Steel
+        color: #B7B7CE
+
+    &.background--Steel
+        background-color: #B7B7CE
+
+
+
+    &.icon--Fairy:after
+        content: "Fairy"
+        background-color: #D685AD
+
+    &.text--Fairy
+        color: #D685AD
+
+    &.background--Fairy
+        background-color: #D685AD
+
+
+
+
+
+
+
+@keyframes spin
+    from
+        transform: rotate(0deg)
+    to
+        transform: rotate(360deg)

@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js'></script>
+    <script src="assets/data/names.min.js"></script>
+    <script src="assets/data/search-index.min.js"></script>
+    <!-- <script src="assets/data/details.js"></script> -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css' />
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+    <title>Pokecalc</title>
+    <script id="tpl-form" type="text/template">
+        <div class="main">
+            <!-- <section>
+                <h3>Summary</h3>
+                <p>Venusaur is weakest against <span class="type icon icon--Fire"></span></p>
+                <p>It has high HP</p>
+                <p>Its Attack is 10% (50 Points) higher than Special Attack</p>
+                <p>Its Defense is 10% (50 Points) higher than Special Defense</p>
+                <p>It is relatively slow</p>
+            </section> -->
+            <div class="card borderless">
+                <h3 class="card-wrap first">Weakness Overview</h3>
+                <div class="weakness-chart space below">
+                    {{ for(var mod in it.efficiencies) { }} {{? it.efficiencies[mod].length }}
+                    <div class="col efficiency-{{=mod}}">
+                        <div class="chart-header">{{=mod / 100}}x</div>
+                        <div class="weakness-wrapper">
+                            {{ for(var t in it.efficiencies[mod]) { }}
+                            <div class="type block icon icon--{{= it.efficiencies[mod][t] }}"></div>
+                            {{ } }}
+                        </div>
+                    </div>
+                    {{?}} {{ } }}
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>Abilities</h3>
+                <div class="abilities">
+                    {{ for(var abilitySlot in it.abilities) { }} {{? it.abilities[abilitySlot]}}
+                    <div class="ability-wrapper">
+                        <div class="ability-name hidden-{{=it.abilities[abilitySlot].isHidden}}">
+                            {{=it.abilities[abilitySlot].translations.en.name}}
+                        </div>
+                        <div class="ability-description">
+                            {{=it.abilities[abilitySlot].translations.en.description}}
+                        </div>
+                        <button class="show-details" data-ability="{{=abilitySlot}}">Show translations</button>
+
+                        <div class="ability-details-wrapper" data-ability="{{=abilitySlot}}">
+                            {{ for(var languageID in it.abilities[abilitySlot].translations) { }} {{? it.abilities[abilitySlot].translations[languageID].name
+                            && it.abilities[abilitySlot].translations[languageID].description}}
+                            <div class="ability-translation-wrapper" data-country="{{=languageID}}">
+                                <div class="ability-language">
+                                    <i class="country-flag country-{{=it.abilities[abilitySlot].translations[languageID].language}}"></i>
+                                </div>
+                                <div class="ability-translated-name">
+                                    {{=it.abilities[abilitySlot].translations[languageID].name}}
+                                </div>
+                                <div class="ability-translated-description">
+                                    {{=it.abilities[abilitySlot].translations[languageID].description}}
+                                </div>
+                            </div>
+                            {{?}} {{ } }}
+                        </div>
+                    </div>
+                    {{?}} {{ } }}
+                </div>
+            </div>
+        </div>
+
+
+        <aside>
+            <div class="card">
+                <section>
+                    <h3>Health</h3>
+                    <div class="bar">
+                        <div class="progress" style="width:{{=it.percentages.health}}%"></div>
+                    </div>
+                    <div class="flex-wrapper between">
+                        <div class="label">Squishy</div>
+                        <div class="label">Average</div>
+                        <div class="label">Tanky</div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Attack</h3>
+
+                    <div class="spacer">
+                        <div class="bar">
+                            <div class="progress" style="width:{{=it.percentages.strength}}%"></div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label">Low</div>
+                            <div class="label">Average</div>
+                            <div class="label">High</div>
+                        </div>
+                    </div>
+
+
+                    <div class="spacer">
+                        <div class="flex-wrapper">
+                            <div class="bar middle direction-{{=it.percentages.atk.direction}}">
+                                <div class="progress" style="width:{{=it.percentages.atk.width}}%; left:{{=it.percentages.atk.offset}}%"></div>
+                            </div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label">Physical</div>
+                            <div class="label">Special</div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label value">{{=it.stats.atk}}</div>
+                            <div class="label value">{{=it.stats.spAtk}}</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Defense</h3>
+                    <div class="spacer">
+                        <div class="bar">
+                            <div class="progress" style="width:{{=it.percentages.defense}}%"></div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label">Low</div>
+                            <div class="label">Average</div>
+                            <div class="label">High</div>
+                        </div>
+                    </div>
+
+                    <div class="spacer">
+                        <div class="flex-wrapper">
+                            <div class="bar middle direction-{{=it.percentages.def.direction}}">
+                                <div class="progress" style="width:{{=it.percentages.def.width}}%; left:{{=it.percentages.def.offset}}%"></div>
+                            </div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label">Physical</div>
+                            <div class="label">Special</div>
+                        </div>
+                        <div class="flex-wrapper between">
+                            <div class="label value">{{=it.stats.def}}</div>
+                            <div class="label value">{{=it.stats.spDef}}</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <h3>Speed</h3>
+                    <div class="bar">
+                        <div class="progress" style="width:{{=it.percentages.speed}}%"></div>
+                    </div>
+                    <div class="flex-wrapper between">
+                        <div class="label">Slow</div>
+                        <div class="label">Average</div>
+                        <div class="label">Fast</div>
+                    </div>
+                </section>
+            </div>
+
+            <div class="card borderless">
+                <section>
+                    <h3 class="card-wrap first">Stats</h3>
+                    <table class="stat-table">
+                        <tr>
+                            <td>HP</td>
+                            <td>{{=it.stats.hp}}</td>
+                        </tr>
+                        <tr>
+                            <td>Atk</td>
+                            <td>{{=it.stats.atk}}</td>
+                        </tr>
+                        <tr>
+                            <td>Def</td>
+                            <td>{{=it.stats.def}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sp. Atk</td>
+                            <td>{{=it.stats.spAtk}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sp. Def</td>
+                            <td>{{=it.stats.spDef}}</td>
+                        </tr>
+                        <tr>
+                            <td>Speed</td>
+                            <td>{{=it.stats.speed}}</td>
+                        </tr>
+                    </table>
+                </section>
+            </div>
+        </aside>
+    </script>
+    <script id="tpl-details" type="text/template">
+        {{? Object.keys(it.forms).length > 1}}
+        <div class="forms card borderless">
+            <h3 class="card-wrap first">Forms</h3>
+            <div class="forms-wrapper">
+                {{ for(var i in it.forms) { }}
+                <div class="form{{? i == 'default'}} active{{?}}" data-species="{{=it.species}}" data-form="{{=i}}">
+                    <div
+                        class="pokemon pokemon-{{=it.species}}{{? i != 'default'}}-{{=i}}{{?}}"
+                        style="background-image: url(./media/pokemon/main-sprites/{{=it.species}}{{? i != 'default'}}-{{=i}}{{?}}.png)"
+                    ></div>
+                    <div class="form-title">{{=i}}</div>
+                </div>
+                {{ } }}
+            </div>
+        </div>
+        {{?}}
+
+        <div id="stats-wrapper">
+            {{=it.details}}
+        </div>
+    </script>
+</head>
+
+<body>
+    <div id="main-wrapper">
+
+
+
+        <div id="search-wrapper">
+            <input type="text" name="query" id="search" autofocus placeholder="Pokemon or dex number" autocomplete="off">
+            <div id="ad"></div>
+            <div id="whitelist-me">
+                <div id="petty-message">I get it, ads are annoying. And so is this message. But I've spent quite a bit of my spare time on this tool
+                    and made it freely available. So if you like what I made please consider whitelisting this site. Sounds
+                    cliche, but it actually helps out a lot. I'm only using a single Google AdSense ad right here. Promise!</div>
+                <a id="considering" href="#">I'll consider it, hide this message though!</a>
+            </div>
+            <div id="search-results"></div>
+        </div>
+
+
+
+        <div id="detail-wrapper">
+            <div id="header"></div>
+            <div id="details"></div>
+        </div>
+
+
+
+        <div id="intro">
+            <h2>Pokecalc</h2>
+            <!-- <i class="form pokemon pokemon-25 left"></i> -->
+            <p>This site is intended as a companion app while playing Pokemon. Open it on your phone and when you're facing
+                a tough enemy just enter their Pokemon's name in the search bar. You'll get some strategic information on how to beat your oponent.
+                Super helpful in online battles.</p>
+            <p>The main reason I created this site is for the fast multi-language search and battle-relevant information.
+                You can search in any of the following languages.</p>
+
+            <h2>Supported languages</h2>
+            <ul>
+                <li>English</li>
+                <li>French</li>
+                <li>German</li>
+                <li>Spanish</li>
+                <li>Italian</li>
+                <li>Japanese</li>
+                <li>Roomaji</li>
+                <li>Korean</li>
+                <li>Chinese</li>
+                <li>Czech</li>
+            </ul>
+
+            <h2>Shortcuts</h2>
+            <p>A big part of this tool is usability. I've added various aids to make navigation as quick and easy as possible.</p>
+            <p>You don't ever need to reach for the upper part of the screen on your phone. Tap the button with the magnifying
+                glass at the bottom right to set the focus to the search bar and start typing. You can directly open the
+                first result by clicking the 'send' or 'new line' button on your phones keybard. (Usually at the bottom right)</p>
+            <p>When viewing details of a pokemon, the button at the bottom right becomes your back button to close the popup and go back to the results list.</p>
+            <p>On PC you can have the ability to navigate the search results with your up and down arrow keys and view the selected one by pressing enter. You can also use the spacebar or escape key to focus the search bar and close the popup.</p>
+
+            <h2>Contact me</h2>
+            <p>I always appreciate feedback or bug reports. Feel free to send me a mail to
+                <a href="mailto:hi@keeky.net">hi@keeky.net</a> or a message on
+                <a target="_blank" href="https://www.reddit.com/message/compose/?to=InD1g0">Reddit</a>.</p>
+
+            <h2>Technologies</h2>
+            <p>Pokecalc relies on a bunch of awesome open source projects.</p>
+            <ul>
+                <li>Datasets are provided by
+                    <a target="_blank" href="https://github.com/veekun/pokedex/tree/master/pokedex/data/csv">Veekun</a> and slightly adapted by me.</li>
+                <li>Search is implemented with
+                    <a target="_blank" href="http://fusejs.io/">Fuse.js</a> for lightweight querying and
+                    <a target="_blank" href="http://olado.github.io/doT/index.html">doT</a> as a super fast templating engine.</li>
+                <li>Creating a spritesheet for all 800+ Pokemon would have been a pain without
+                    <a target="_blank" href="https://draeton.github.io/stitches/">Stitches</a>.</li>
+                <li>Probably no surprise that
+                    <a target="_blank" href="https://material.io/guidelines/">Google's Material Design</a> was the main reference for the sites design.</li>
+            </ul>
+        </div>
+
+
+
+        <div id="empty">
+            <h2>Whoops</h2>
+            <p>Sorry, but I couldn't find anything related to your search. Maybe you have a typo somewhere? Think you found
+                a bug?
+                <a href="mailto:hi@keeky.net">Contact me</a>!</p>
+        </div>
+
+
+        <div id="FAB"></div>
+
+
+    </div>
+</body>
+<script>
+    document.whitelisted = false;
+</script>
+<script src="assets/adframe.js"></script>
+<script src="assets/scripts.js"></script>
+
+</html>
