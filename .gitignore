@@ -16,3 +16,4 @@ blade-and-soul/daily/daily.sublime-workspace
 overwatch/hero-counters/orig/
 overwatch/hero-counters/img/orig/
 *.css.map
+node_modules
