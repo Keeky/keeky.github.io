@@ -2,14 +2,27 @@
 <html lang="en">
 
 <head>
+    <!-- Meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="description" content="Multi-language Pokemon weakness calculator. Never use a type chart again.">
+    <meta name="description" content="Never use a type chart again. Find the weaknesses of all Pokemon including USUM.">
     <meta name="keywords" content="Pokemon, Weakness, Calculator, Chart">
     <meta property="og:url" content="http://apps.keeky.net/pokemon/weakness-calculator/">
     <meta property="og:site_name" content="Pokecalc">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta property="og:image" content="./media/pokemon/main-sprites/25-rock-star.png">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png?v=RyMbOyJO4k">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png?v=RyMbOyJO4k">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png?v=RyMbOyJO4k">
+    <link rel="manifest" href="./manifest.json?v=RyMbOyJO4k">
+    <link rel="mask-icon" href="./safari-pinned-tab.svg?v=RyMbOyJO4k" color="#e74c3c">
+    <link rel="shortcut icon" href="./favicon.ico?v=RyMbOyJO4k">
+    <meta name="apple-mobile-web-app-title" content="Pokecalc">
+    <meta name="application-name" content="Pokecalc">
+    <meta name="theme-color" content="#e74c3c">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.0/fuse.min.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/dot/1.1.2/doT.min.js'></script>
@@ -20,7 +33,7 @@
     <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Oxygen:400,700" rel="stylesheet">
     <link rel="stylesheet" href="assets/styles.css">
-    <title>Pokecalc</title>
+    <title>Pokecalc | Multi-language Pokemon weakness calculator.</title>
     <script id="tpl-form" type="text/template">
         <div class="main">
             <!-- <section>
@@ -245,9 +258,8 @@
 
         <div id="search-wrapper">
             <input type="text" name="query" id="search" autofocus placeholder="Pokemon or dex number" autocomplete="off">
-            <div id="ad">
+            <!-- <div id="ad">
                 <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <!-- Pokecalc -->
                 <ins class="adsbygoogle"
                      style="display:block"
                      data-ad-client="ca-pub-2012219604925664"
@@ -262,7 +274,7 @@
                     and made it freely available. So if you like what I made please consider whitelisting this site. Sounds
                     cliche, but it actually helps out a lot. I'm only using a single Google AdSense ad right here. Promise!</div>
                 <a id="considering" href="#">I'll consider it, hide this message though!</a>
-            </div>
+            </div> -->
             <div id="search-results"></div>
         </div>
 
@@ -277,7 +289,7 @@
 
         <div id="intro">
             <h2>Pokecalc</h2>
-            <!-- <i class="form pokemon pokemon-25 left"></i> -->
+            <i class="pokemon left" style="background-image: url(./media/pokemon/main-sprites/25-rock-star.png); margin-right: 10px"></i>
             <p>This site is intended as a companion app while playing Pokemon. Open it on your phone and when you're facing
                 a tough enemy just enter their Pokemon's name in the search bar. You'll get some strategic information on how to beat your oponent.
                 Super helpful in online battles.</p>
