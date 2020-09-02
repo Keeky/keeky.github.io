@@ -5671,7 +5671,7 @@ var solutions = [
 
 	[
 		{
-			name: "Rilou",
+			name: "Riolu",
 			type: "Fighting",
 			matrix: [
 				[0, 0, 1, 1, 0, 0, 0, 1, 0, 1],
@@ -5935,7 +5935,7 @@ var solutions = [
 		},
 
 		{
-			name: "Moltress",
+			name: "Moltres",
 			type: "Fire",
 			matrix: [
 				[0, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 1],
@@ -5989,7 +5989,7 @@ var solutions = [
 		},
 
 		{
-			name: "Abamasnow",
+			name: "Abomasnow",
 			type: "Grass",
 			matrix: [
 				[0, 1, 0, 0, 1, 1, 1, 0, 1, 0],
@@ -6007,7 +6007,7 @@ var solutions = [
 		},
 
 		{
-			name: "Mega Abamasnow",
+			name: "Mega Abomasnow",
 			type: "Grass",
 			matrix: [
 				[0, 0, 0, 1, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0],
